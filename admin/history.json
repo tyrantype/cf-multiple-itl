@@ -1,0 +1,26 @@
+[
+    {
+        "id": "H0003",
+        "Waktu": "2 min ago",
+        "Nama": "Aldi Kurniawan",
+        "Tipe": "Linguistik",
+        "Nilai CF": 0.332,
+        "avatarId": 1
+    },
+    {
+        "id": "H0002",
+        "Waktu": "5 min ago",
+        "Nama": "Nur Kholis",
+        "Tipe": "Linguistik",
+        "Nilai CF": 0.332,
+        "avatarId": 2
+    },
+    {
+        "id": "H0001",
+        "Waktu": "3 hours ago",
+        "Nama": "Anonymous",
+        "Tipe": "Linguistik",
+        "Nilai CF": 0.332,
+        "avatarId": 0
+    }
+]

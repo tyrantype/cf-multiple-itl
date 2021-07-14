@@ -1,0 +1,34 @@
+RewriteEngine on
+
+RewriteRule ^api/user$   api/users.php [NC,QSA,L]
+RewriteRule ^api/users$   api/users.php?view=all [NC,QSA,L]
+RewriteRule ^api/user/(.*)$   api/users.php?view=single&username=$1 [NC,QSA,L]
+
+RewriteRule ^api/password-reset/(.*)$   api/password-reset.php?username=$1 [NC,QSA,L]
+
+RewriteRule ^api/type$   api/types.php [NC,QSA,L]
+RewriteRule ^api/types$   api/types.php?view=all [NC,QSA,L]
+RewriteRule ^api/type/(.*)$   api/types.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/interest$   api/interests.php [NC,QSA,L]
+RewriteRule ^api/interests$   api/interests.php?view=all [NC,QSA,L]
+RewriteRule ^api/interest/(.*)$   api/interests.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/field$   api/fields.php [NC,QSA,L]
+RewriteRule ^api/fields$   api/fields.php?view=all [NC,QSA,L]
+RewriteRule ^api/field/(.*)$   api/fields.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/rule$   api/rules.php [NC,QSA,L]
+RewriteRule ^api/rules$   api/rules.php?view=all [NC,QSA,L]
+RewriteRule ^api/rule/(.*)$   api/rules.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/result$   api/results.php [NC,QSA,L]
+RewriteRule ^api/results$   api/results.php?view=all [NC,QSA,L]
+RewriteRule ^api/result/(.*)$   api/results.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/results-details$   api/results-details.php?view=all [NC,QSA,L]
+RewriteRule ^api/result-detail?(.*)$   api/results-details.php?view=single&$1 [NC,QSA,L]
+
+RewriteRule ^api/certainty-factor$   api/certainty-factor.php [NC,QSA,L]
+RewriteRule ^api/certainty-factor$   api/certainty-factor.php?view=all [NC,QSA,L]
+RewriteRule ^api/certainty-factor/(.*)$   api/certainty-factor.php?view=single&id=$1 [NC,QSA,L]

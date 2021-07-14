@@ -1,0 +1,41 @@
+[
+    {
+        "id": "T0001",
+        "Nama": "Kinestetik",
+        "Detail": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu",
+        "illustrations": [
+            "kinestetik-1.svg",
+            "kinestetik-2.svg",
+            "kinestetik-3.svg"
+        ]
+    },
+    {
+        "id": "T0002",
+        "Nama": "Linguistik",
+        "Detail": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu",
+        "illustrations": [
+            "linguistik-1.svg",
+            "linguistik-2.svg",
+            "linguistik-3.svg"
+        ]
+    },
+    {
+        "id": "T0003",
+        "Nama": "Intra-personal",
+        "Detail": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu",
+        "illustrations": [
+            "intra-personal-1.svg",
+            "intra-personal-2.svg"
+        ]
+    },
+    {
+        "id": "T0004",
+        "Nama": "Inter-personal",
+        "Detail": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu",
+        "illustrations": [
+            "inter-personal-1.svg",
+            "inter-personal-2.svg",
+            "inter-personal-3.svg"
+        ]
+    }
+]
