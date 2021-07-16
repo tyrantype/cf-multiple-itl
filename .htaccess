@@ -10,6 +10,9 @@ RewriteRule ^api/type$   api/types.php [NC,QSA,L]
 RewriteRule ^api/types$   api/types.php?view=all [NC,QSA,L]
 RewriteRule ^api/type/(.*)$   api/types.php?view=single&id=$1 [NC,QSA,L]
 
+RewriteRule ^api/types-pictures$   api/types-pictures.php?view=all [NC,QSA,L]
+RewriteRule ^api/type-picture/(.*)$   api/types-pictures.php?view=single&id=$1 [NC,QSA,L]
+
 RewriteRule ^api/interest$   api/interests.php [NC,QSA,L]
 RewriteRule ^api/interests$   api/interests.php?view=all [NC,QSA,L]
 RewriteRule ^api/interest/(.*)$   api/interests.php?view=single&id=$1 [NC,QSA,L]

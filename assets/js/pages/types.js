@@ -2,6 +2,15 @@
 let typesDataTable;
 refreshTypesDataTable();
 
+FilePond.registerPlugin(
+    FilePondPluginImagePreview,
+    FilePondPluginImageExifOrientation,
+    FilePondPluginFileValidateSize,
+    FilePondPluginFileValidateType,
+    FilePondPluginFileRename,
+    FilePondPluginFileMetadata
+);
+
 function refreshTypesDataTable() {
     fetch("../api/types")
         .then(response => response.json())
@@ -21,11 +30,20 @@ function refreshTypesDataTable() {
             for (let i = 0; i < result.data.length; i++) {
                 obj.data[i] = [i + 1];
                 for (let p in result.data[i]) {
-                    if (result.data[i].hasOwnProperty(p)) {
+                    if (result.data[i].hasOwnProperty(p) && p !== "pictures") {
                         obj.data[i].push(result.data[i][p]);
                     }
                 }
                 obj.data[i].push("");
+            }
+
+            for (let v of obj.data) {
+                if (v[3].length > 50) {
+                    v[3] = v[3].substring(0, 50) + "...";
+                }
+                if (v[4].length > 50) {
+                    v[4] = v[4].substring(0, 50) + "...";
+                }
             }
 
             typesDataTable = new simpleDatatables.DataTable(typesTable, {
@@ -46,12 +64,12 @@ function refreshTypesDataTable() {
             });
             typesDataTable.on('datatable.init', initOptionButton);
             typesDataTable.on('datatable.update', initOptionButton);
+            typesDataTable.on('datatable.page', initOptionButton);
         });
 }
 
 function initOptionButton() {
     initPopoverEvent();
-    // initHistoryModalEvent();
 }
 
 function initPopoverEvent() {
@@ -64,8 +82,9 @@ function initPopoverEvent() {
             sanitize: false,
             content: `
                 <div class="d-flex flex-column">
-                    <button class="btn btn-light-warning d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#editTypeModal" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Ubah</button>
-                    <button id="btnRemoveType" class="btn btn-light-danger d-grid place-items-center m-1 pt-2 pb-2" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}">Hapus</i></button>
+                    <button class="btn btn-light-warning d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#editTypeModal" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Ubah</button>
+                    <button id="btnRemoveType" class="btn btn-light-danger d-grid place-items-center m-1 pt-2 pb-2" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Hapus</i></button>
+                    <button id="btnPreview" class="btn btn-light-info d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#previewModal" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Preview</i></button>
                 </div>
             `
         })
@@ -115,37 +134,30 @@ function initDeleteTypeEvent() {
     });
 }
 
-// function initHistoryModalEvent() {
-//     let editUserModal = document.getElementById('historyModal')
-//     editUserModal.addEventListener('show.bs.modal', function (event) {
-//         let button = event.relatedTarget
-//         let username = button.getAttribute('data-bs-username')
-//         let modalTitle = editUserModal.querySelector('.modal-title')
-
-//         modalTitle.textContent = 'Riwayat identifikasi ' + username
-//     })
-// }
-
-// End simple data table ---------------------------------------------------------------------------
-
-
-// Add user +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-let addTypeModal = new bootstrap.Modal(document.querySelector('#addTypeModal'), {
+// Add type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+const addTypeModal = new bootstrap.Modal(document.querySelector('#addTypeModal'), {
     backdrop: "static",
     keyboard: false
 });
-let addTypeForm = document.forms["addTypeForm"];
 
-$(document).keypress(
-    function(event){
-      if (event.which == '13' || event.which == '44') {
-        event.preventDefault();
-      }
-  });
+const addTypeForm = document.forms["addTypeForm"];
 
-  $('.tags-input').tagsinput({
+const filepondAddTypeForm = FilePond.create(document.querySelector('#filepondAddTypeForm'), {
+    acceptedFileTypes: ['image/*'],
+    required: true,
+    instantUpload: false,
+    allowRevert: false,
+    allowProcess: false,
+    labelIdle: "Drag & Drop your files or Browse",
+    maxParallelUploads: 1,
+    server: {
+        process: "../api/types-pictures"
+    },
+});
+
+$('#tagsInputAdd').tagsinput({
     confirmKeys: [13, 44]
-  });
+});
 
 document.querySelector("#addTypeButton").addEventListener("click", evt => {
     addTypeModal.show();
@@ -157,15 +169,18 @@ document.querySelector("#addTypeModal").addEventListener("hide.bs.modal", evt =>
 
 addTypeForm.addEventListener("reset", evt => {
     $('.tags-input').tagsinput('removeAll');
+    filepondAddTypeForm.removeFiles();
 })
 
 addTypeForm.addEventListener("submit", evt => {
     evt.preventDefault();
 
     const formData = new FormData(addTypeForm);
-    const data = JSON.stringify(Object.fromEntries(formData))
+    let data = Object.fromEntries(formData);
+    delete data.images;
+    data = JSON.stringify(data);
 
-    fetch("../api/types", {
+    fetch("../api/type", {
         method: "POST",
         headers: {
             "ContentType": "application/json;charset=utf-8"
@@ -174,11 +189,21 @@ addTypeForm.addEventListener("submit", evt => {
     })
         .then(response => response.json())
         .then(result => {
-            showToast(result.statusCode, result.message);
             if (result.statusCode === 200) {
-                refreshTypesDataTable();
-                addTypeForm.reset();
-                addTypeModal.hide();
+                const length = filepondAddTypeForm.getFiles().length;
+                for (let i = 0; i < length; i++) {
+                    filepondAddTypeForm.getFile(i).setMetadata("typeId", result.insertId);
+                    filepondAddTypeForm.getFile(i).setMetadata("deleteAll", i === 0);
+                }
+                
+                filepondAddTypeForm.processFiles()
+                    .then(file => {
+                        refreshTypesDataTable();
+                        addTypeForm.reset();
+                        addTypeModal.hide();
+                        
+                        showToast(result.statusCode, result.message);
+                    })
             }
         })
         .catch(error => {
@@ -186,70 +211,173 @@ addTypeForm.addEventListener("submit", evt => {
         })
 
 });
-// End add user ---------------------------------------------------------------------------
+// End add type ---------------------------------------------------------------------------
 
-// // Edit user +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// let editTypeModal = new bootstrap.Modal(document.querySelector('#editTypeModal'), {
-//     backdrop: "static",
-//     keyboard: false
-// });
-// let editTypeForm = document.forms["editTypeForm"];
 
-// document.querySelector("#editTypeModal").addEventListener("show.bs.modal", evt => {
-//     const button = evt.relatedTarget
-//     const fullname = button.getAttribute('data-bs-fullname')
-//     const username = button.getAttribute('data-bs-username')
-//     const modalTitle = editTypeModal._element.querySelector('.modal-title')
 
-//     modalTitle.textContent = 'Ubah data ' + fullname
 
-//     fetch("../api/user/" + username, {
-//         headers: {
-//             "ContentType": "application/json;charset=utf-8;"
-//         }
-//     })
-//         .then(response => response.json())
-//         .then(result => {
-//             const editForm = document.forms["editTypeForm"]
-//             editForm["fullName"].value = result.data[0]["Nama Lengkap"]
-//             editForm["oldId"].value = result.data[0]["id"]
-//             editForm["username"].value = result.data[0]["Username"]
-//             editForm["privilege"].value = result.data[0]["Hak Akses"]
-//             editForm["avatarId"].value = result.data[0]["avatarId"]
-//         })
 
-// });
 
-// document.querySelector("#editTypeModal").addEventListener("hide.bs.modal", evt => {
-//     editTypeForm.reset();
-// });
+// Edit type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+let editTypeModal = new bootstrap.Modal(document.querySelector('#editTypeModal'), {
+    backdrop: "static",
+    keyboard: false
+});
 
-// editTypeForm.addEventListener("submit", evt => {
-//     evt.preventDefault();
+const editTypeForm = document.forms["editTypeForm"];
 
-//     const formData = new FormData(editTypeForm);
-//     const data = JSON.stringify(Object.fromEntries(formData));
-//     const username = editTypeForm["oldId"].value;
+const filepondEditTypeForm = FilePond.create(document.querySelector('#filepondEditTypeForm'), {
+    acceptedFileTypes: ['image/*'],
+    required: true,
+    instantUpload: false,
+    allowRevert: false,
+    allowProcess: false,
+    labelIdle: "Drag & Drop your files or Browse",
+    maxParallelUploads: 1,
+    server: {
+        process: "../api/types-pictures"
+    },
+});
 
-//     fetch("../api/type/" + username, {
-//         method: "PATCH",
-//         headers: {
-//             "ContentType": "application/json;charset=utf-8"
-//         },
-//         body: data
-//     })
-//         .then(response => response.json())
-//         .then(result => {
-//             showToast(result.statusCode, result.message);
-//             if (result.statusCode === 200) {
-//                 refreshTypesDataTable();
-//                 editTypeForm.reset();
-//                 editTypeModal.hide();
-//             }
-//         })
-//         .catch(error => {
-//             console.error(error);
-//         })
-// });
+$('#tagsInputEdit').tagsinput({
+    confirmKeys: [13, 44]
+});
 
-// End edit user ---------------------------------------------------------------------------
+document.querySelector("#editTypeModal").addEventListener("show.bs.modal", evt => {
+    const button = evt.relatedTarget
+    const id = button.getAttribute('data-bs-id')
+    const name = button.getAttribute('data-bs-name')
+    const modalTitle = editTypeModal._element.querySelector('.modal-title')
+
+    modalTitle.textContent = 'Ubah data ' + name
+
+    fetch("../api/type/" + id, {
+        headers: {
+            "ContentType": "application/json;charset=utf-8;"
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            const form = document.forms["editTypeForm"]
+            form["id"].value = id;
+            form["name"].value = result.data[0].name;
+            form["detail"].value = result.data[0].detail;
+            form["advice"].value = result.data[0].advice;
+            const arr = result.data[0].fields.split(",");
+            arr.forEach(item => {
+                $('#tagsInputEdit').tagsinput('add', item);
+            });
+            if (result.data[0].pictures != null) {
+                result.data[0].pictures.forEach(item => {
+                    filepondEditTypeForm.addFile("../assets/images/types/" + item.fileName)
+                });
+            }
+        })
+
+});
+
+document.querySelector("#editTypeModal").addEventListener("hide.bs.modal", evt => {
+    editTypeForm.reset();
+});
+
+editTypeForm.addEventListener("reset", evt => {
+    $('.tags-input').tagsinput('removeAll');
+    filepondEditTypeForm.removeFiles();
+})
+
+editTypeForm.addEventListener("submit", evt => {
+    evt.preventDefault();
+
+    const formData = new FormData(editTypeForm);
+    let data = Object.fromEntries(formData);
+    delete data.images;
+    data = JSON.stringify(data);
+
+    fetch("../api/type/" + editTypeForm["id"].value, {
+        method: "PUT",
+        headers: {
+            "ContentType": "application/json;charset=utf-8"
+        },
+        body: data
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.statusCode === 200) {
+                const length = filepondEditTypeForm.getFiles().length;
+                for (let i = 0; i < length; i++) {
+                    filepondEditTypeForm.getFile(i).setMetadata("typeId", result.id);
+                    filepondEditTypeForm.getFile(i).setMetadata("deleteAll", i === 0);
+                }
+                
+                filepondEditTypeForm.processFiles()
+                    .then(file => {
+                        refreshTypesDataTable();
+                        editTypeForm.reset();
+                        editTypeModal.hide();
+                        
+                        showToast(result.statusCode, result.message);
+                    })
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+
+});
+
+// End edit type ---------------------------------------------------------------------------
+
+document.querySelector("#previewModal").addEventListener("show.bs.modal", evt => {
+    const button = evt.relatedTarget
+    const id = button.getAttribute('data-bs-id')
+    const name = button.getAttribute('data-bs-name')
+
+    fetch("../api/type/" + id, {
+        headers: {
+            "ContentType": "application/json;charset=utf-8"
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        document.querySelector("#namePreview").textContent = result.data[0].name
+        document.querySelector("#fieldsPreview").textContent = result.data[0].fields
+        document.querySelector("#detailPreview").textContent = result.data[0].detail
+        document.querySelector("#advicePreview").textContent = result.data[0].advice
+
+        const carouselIndicators = document.querySelector(".carousel-indicators");
+        const carouselInner = document.querySelector(".carousel-inner");
+
+        carouselIndicators.innerHTML= "";
+        carouselInner.innerHTML = "";
+
+        document.querySelectorAll(".carousel-indicators :not(template)").forEach(child => carouselIndicators.remove(child));
+        document.querySelectorAll(".carousel-inner :not(template)").forEach(child => carouselInner.remove(child));
+        
+        for (let i = 0; i < result.data[0].pictures.length; i++) {
+            const clone = createElementFromHTML(`
+                <button type="button" data-bs-target="#carouselDetail">
+            `);
+            const clone2 = createElementFromHTML(`
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="" class="d-block w-100" alt="...">
+                </div>
+            `);
+
+            if (i === 0) {
+                clone.classList.add("active");
+                clone2.classList.add("active");
+            }
+
+            clone2.querySelector("img").src = "../assets/images/types/" + result.data[0].pictures[i].fileName ;
+
+            carouselIndicators.appendChild(clone);
+            carouselInner.appendChild(clone2);
+        }
+    });
+})
+
+function createElementFromHTML(htmlString) {
+    let div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+    return div.firstChild; 
+  }

@@ -65,6 +65,7 @@ function refreshUsersDataTable() {
             });
             usersDataTable.on('datatable.init', initOptionButton);
             usersDataTable.on('datatable.update', initOptionButton);
+            typesDataTable.on('datatable.page', initOptionButton);
         });
 }
 

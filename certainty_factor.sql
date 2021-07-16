@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 03:52 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Waktu pembuatan: 16 Jul 2021 pada 23.21
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,88 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fields`
---
-
-CREATE TABLE `fields` (
-  `id` varchar(5) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `type_id` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `fields`
---
-
-INSERT INTO `fields` (`id`, `name`, `type_id`) VALUES
-('F0001', 'Atlet Olahraga', 'T0001'),
-('F0002', 'Model / Aktor', 'T0001'),
-('F0003', 'Penari', 'T0001'),
-('F0004', 'Penulis', 'T0002'),
-('F0005', 'Wartawan', 'T0002'),
-('F0006', 'Motivator', 'T0003'),
-('F0007', 'Pelatih / Trainer', 'T0003'),
-('F0008', 'Psikolog', 'T0004'),
-('F0009', 'Pengusaha', 'T0004'),
-('F0010', 'Desain Grafis', 'T0005'),
-('F0011', 'Arsitek', 'T0005'),
-('F0012', 'Pelukis', 'T0005'),
-('F0013', 'Musisi Musik', 'T0006'),
-('F0014', 'Budayawan', 'T0006'),
-('F0015', 'Programmer', 'T0007'),
-('F0016', 'Guru Matematika', 'T0007'),
-('F0017', 'Teknisi', 'T0007'),
-('F0018', 'Antropolog', 'T0008'),
-('F0019', 'Arkeolog', 'T0008'),
-('F0020', 'Meteorolog', 'T0008'),
-('F0021', 'Aktifis alam', 'T0008');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `illustrations`
---
-
-CREATE TABLE `illustrations` (
-  `id` int(11) NOT NULL,
-  `type_id` varchar(5) NOT NULL,
-  `file_name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `illustrations`
---
-
-INSERT INTO `illustrations` (`id`, `type_id`, `file_name`) VALUES
-(1, 'T0001', 'kinesketik-1.svg'),
-(2, 'T0001', 'kinesketik-3.svg'),
-(3, 'T0001', 'kinesketik-2.svg'),
-(4, 'T0002', 'linguistik-1.svg'),
-(5, 'T0002', 'linguistik-2.svg'),
-(6, 'T0002', 'linguistik-3.svg'),
-(7, 'T0003', 'intra-personal-1.svg'),
-(8, 'T0003', 'intra-personal-2.svg'),
-(9, 'T0004', 'inter-personal-1.svg'),
-(10, 'T0004', 'inter-personal-2.svg'),
-(11, 'T0004', 'inter-personal-3.svg'),
-(12, 'T0005', 'visual-spasial-1.svg'),
-(13, 'T0005', 'visual-spasial-2.svg'),
-(14, 'T0005', 'visual-spasial-3.svg'),
-(15, 'T0005', 'visual-spasial-4.svg'),
-(16, 'T0006', 'musikal-1.svg'),
-(17, 'T0006', 'musikal-2.svg'),
-(18, 'T0007', 'matematika-logika-1.svg'),
-(19, 'T0007', 'matematika-logika-2.svg'),
-(20, 'T0007', 'matematika-logika-3.svg'),
-(21, 'T0008', 'naturalis-1.svg'),
-(22, 'T0008', 'naturalis-2.svg'),
-(23, 'T0008', 'naturalis-3.svg'),
-(24, 'T0008', 'naturalis-4.svg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `interests`
+-- Struktur dari tabel `interests`
 --
 
 CREATE TABLE `interests` (
@@ -114,7 +33,7 @@ CREATE TABLE `interests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `interests`
+-- Dumping data untuk tabel `interests`
 --
 
 INSERT INTO `interests` (`id`, `name`) VALUES
@@ -178,7 +97,7 @@ INSERT INTO `interests` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results`
+-- Struktur dari tabel `results`
 --
 
 CREATE TABLE `results` (
@@ -192,7 +111,7 @@ CREATE TABLE `results` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results_details`
+-- Struktur dari tabel `results_details`
 --
 
 CREATE TABLE `results_details` (
@@ -204,7 +123,7 @@ CREATE TABLE `results_details` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rules`
+-- Struktur dari tabel `rules`
 --
 
 CREATE TABLE `rules` (
@@ -216,7 +135,7 @@ CREATE TABLE `rules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `rules`
+-- Dumping data untuk tabel `rules`
 --
 
 INSERT INTO `rules` (`id`, `type_id`, `interest_id`, `mb`, `md`) VALUES
@@ -280,7 +199,7 @@ INSERT INTO `rules` (`id`, `type_id`, `interest_id`, `mb`, `md`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types`
+-- Struktur dari tabel `types`
 --
 
 CREATE TABLE `types` (
@@ -292,24 +211,65 @@ CREATE TABLE `types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `types`
+-- Dumping data untuk tabel `types`
 --
 
 INSERT INTO `types` (`id`, `name`, `detail`, `advice`, `fields`) VALUES
-('T0001', 'Kinestetik', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Atlet Olahraga, Model, Aktor, Penari'),
-('T0002', 'Linguistik', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Penulis, Wartawan'),
-('T0003', 'Intra-personal', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Motivator, Pelatih'),
-('T0004', 'Inter-personal', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Psikolog, Pengusaha'),
-('T0005', 'Visual Spasial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisuGummies bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll. Toffee sugar plum sugar plum jelly-o jujubes bonbon dessert carrot cake. Sweet pie candy jelly. ', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Desain Grafis, Arsitek, Pelukis'),
-('T0006', 'Musikal', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu\nGummies bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll. Toffee sugar plum sugar plum jelly-o jujubes bonbon dessert carrot cake. Sweet pie candy jelly. ', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Musisi Musik, Budayawan'),
-('T0007', 'Matematika-Logika', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu\nGummies bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll. Toffee sugar plum sugar plum jelly-o jujubes bonbon dessert carrot cake. Sweet pie candy jelly. ', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Programmer, Guru Matematika, Teknisi'),
-('T0008', 'Naturalis', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt assumenda mollitia officia dolorum eius quasi.Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes tiramisu\nGummies bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll. Toffee sugar plum sugar plum jelly-o jujubes bonbon dessert carrot cake. Sweet pie candy jelly. ', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Antropolog, Arkeolog, Meteorolog, Aktifis Alam'),
-('T0009', 'sdfsdf', '', NULL, NULL);
+('T0001', 'Kinestetik', 'Kecerdasan Kinestetik merupakan salah satu jenis kecerdasan majemuk. Kecerdasan ini merupakan kemampuan seseorang untuk menggunakan seluruh tubuh atau fisiknya untuk mengekspresikan ide dan perasaan, serta keterampilan menggunakan tangan untuk mengubah atau menciptakan sesuatu.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Atlet Olahraga, Model, Aktor, Penari'),
+('T0002', 'Linguistik', 'Kecerdasan Linguistik atau kecerdasan berbahasa adalah kemampuan seseorang untuk mengungkapkan pendapat atau pikirannya melalui bahasa verbal maupun non verbal secara jelas dan lugas dengan tatanan bahasa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Penulis, Wartawan'),
+('T0003', 'Intra-personal', 'Kecerdasan Intrapersonal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Motivator, Pelatih'),
+('T0004', 'Inter-personal', 'Komunikasi interpersonal adalah komunikasi yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. Dalam komunikasi interpersonal, setiap partisipan menggunakan semua elemen dari proses komunikasi.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Psikolog, Pengusaha'),
+('T0005', 'Visual Spasial', 'Kecerdasan spasial - visual merupakan kemampuan seseorang untuk memahami, memproses dan berfikir ke dalam bentuk visual. Kecerdasan spasial - visual juga merupakan salah satu jenis kecerdasan majemuk. Seseorang yang memiliki kecerdasan ini mampu menerjemahkan gambaran dalam pikirannya sendiri ke dalam bentuk dua dimensi atau tiga dimensi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Desain Grafis, Arsitek, Pelukis'),
+('T0006', 'Musikal', 'Kecerdasan musikal adalah kemampuan untuk menikmati, mengamati, membedakan, mengarang, membentuk, dan mengekspresikan bentuk-bentuk musik. Kecerdasan ini meliputi kepekaan terhadap ritme, melodi dan timbre dari musik yang didengar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Musisi Musik, Budayawan'),
+('T0007', 'Matematika-Logika', 'Kecerdasan matematis logis ini adalah kemampuan untuk menangani bilangan dan perhitungan, pola berpikir logis dan ilmiah. Biasanya, kecerdasan ini dimiliki oleh para ilmuwan, filsuf, dan sebagainya', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Programmer, Guru Matematika, Teknisi'),
+('T0008', 'Naturalis', 'Kecerdasan naturalis didefinisikan Howard Gardner sebagai kemampuan mengenali, melihat perbedaan, menggolongkan, dan mengkategorikan apa yang dilihat atau jumpai di alam atau di lingkungannya', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Antropolog, Arkeolog, Meteorolog, Aktifis Alam');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `types_pictures`
+--
+
+CREATE TABLE `types_pictures` (
+  `id` int(11) NOT NULL,
+  `type_id` varchar(5) NOT NULL,
+  `file_name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `types_pictures`
+--
+
+INSERT INTO `types_pictures` (`id`, `type_id`, `file_name`) VALUES
+(1, 'T0001', 'T0001-1.svg'),
+(2, 'T0001', 'T0001-3.svg'),
+(3, 'T0001', 'T0001-2.svg'),
+(4, 'T0002', 'T0002-1.svg'),
+(5, 'T0002', 'T0002-2.svg'),
+(6, 'T0002', 'T0002-3.svg'),
+(7, 'T0003', 'T0003-1.svg'),
+(8, 'T0003', 'T0003-2.svg'),
+(9, 'T0004', 'T0004-1.svg'),
+(10, 'T0004', 'T0004-2.svg'),
+(11, 'T0004', 'T0004-3.svg'),
+(12, 'T0005', 'T0005-1.svg'),
+(13, 'T0005', 'T0005-2.svg'),
+(14, 'T0005', 'T0005-3.svg'),
+(15, 'T0005', 'T0005-4.svg'),
+(16, 'T0006', 'T0006-1.svg'),
+(17, 'T0006', 'T0006-2.svg'),
+(18, 'T0007', 'T0007-1.svg'),
+(19, 'T0007', 'T0007-2.svg'),
+(20, 'T0007', 'T0007-3.svg'),
+(21, 'T0008', 'T0008-1.svg'),
+(22, 'T0008', 'T0008-2.svg'),
+(23, 'T0008', 'T0008-3.svg'),
+(24, 'T0008', 'T0008-4.svg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -323,7 +283,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `privilege`, `avatar_id`, `last_login`) VALUES
@@ -336,27 +296,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `privilege`, `av
 --
 
 --
--- Indexes for table `fields`
---
-ALTER TABLE `fields`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `illustrations`
---
-ALTER TABLE `illustrations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `interests`
+-- Indeks untuk tabel `interests`
 --
 ALTER TABLE `interests`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `results`
+-- Indeks untuk tabel `results`
 --
 ALTER TABLE `results`
   ADD PRIMARY KEY (`id`),
@@ -364,14 +310,14 @@ ALTER TABLE `results`
   ADD KEY `type_id` (`type_id`);
 
 --
--- Indexes for table `results_details`
+-- Indeks untuk tabel `results_details`
 --
 ALTER TABLE `results_details`
   ADD PRIMARY KEY (`result_id`,`interest_id`),
   ADD KEY `interests_id` (`interest_id`);
 
 --
--- Indexes for table `rules`
+-- Indeks untuk tabel `rules`
 --
 ALTER TABLE `rules`
   ADD PRIMARY KEY (`id`),
@@ -379,64 +325,65 @@ ALTER TABLE `rules`
   ADD KEY `type_id` (`type_id`);
 
 --
--- Indexes for table `types`
+-- Indeks untuk tabel `types`
 --
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `types_pictures`
+--
+ALTER TABLE `types_pictures`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `type_id` (`type_id`);
+
+--
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `illustrations`
+-- AUTO_INCREMENT untuk tabel `types_pictures`
 --
-ALTER TABLE `illustrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+ALTER TABLE `types_pictures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `fields`
---
-ALTER TABLE `fields`
-  ADD CONSTRAINT `fields_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
-
---
--- Constraints for table `illustrations`
---
-ALTER TABLE `illustrations`
-  ADD CONSTRAINT `illustrations_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
-
---
--- Constraints for table `results`
+-- Ketidakleluasaan untuk tabel `results`
 --
 ALTER TABLE `results`
   ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
 
 --
--- Constraints for table `results_details`
+-- Ketidakleluasaan untuk tabel `results_details`
 --
 ALTER TABLE `results_details`
   ADD CONSTRAINT `results_details_ibfk_2` FOREIGN KEY (`interest_id`) REFERENCES `interests` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_details_ibfk_3` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `rules`
+-- Ketidakleluasaan untuk tabel `rules`
 --
 ALTER TABLE `rules`
   ADD CONSTRAINT `rules_ibfk_1` FOREIGN KEY (`interest_id`) REFERENCES `interests` (`id`),
   ADD CONSTRAINT `rules_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `types_pictures`
+--
+ALTER TABLE `types_pictures`
+  ADD CONSTRAINT `types_pictures_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

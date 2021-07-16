@@ -1,7 +1,7 @@
 <?php
 
 require_once "Database.php";
-
+require_once "TypesPictures.php";
 class Types
 {
     public static function get($id): stdClass
@@ -20,6 +20,22 @@ class Types
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
+            $sql = "
+                SELECT
+                    id,
+                    type_id typeId,
+                    file_name fileName
+                FROM
+                    types_pictures
+                WHERE
+                    type_id = '$id'
+            ";
+            $temp = Database::query($sql);
+            
+            if (isset($temp->data)) {
+                $response->data[0]["pictures"] = $temp->data;
+            }
+
             http_response_code(200);
             $response->statusCode = 200;
             $response->message = "Berhasil mendapatkan data";
@@ -45,6 +61,23 @@ class Types
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
+            for ($i = 0; $i < count($response->data); $i++) {
+                $sql = "
+                    SELECT
+                        id,
+                        type_id typeId,
+                        file_name fileName
+                    FROM
+                        types_pictures
+                    WHERE
+                        type_id = '" . $response->data[$i]["id"] . "'";
+                $temp = Database::query($sql);
+                
+                if (isset($temp->data)) {
+                    $response->data[$i]["pictures"] = $temp->data;
+                }
+            }
+
             http_response_code(200);
             $response->statusCode = 200;
             $response->message = "Berhasil mendapatkan data tipe";
@@ -65,17 +98,20 @@ class Types
             $newID = Types::getNewID();
             $sql = "
             INSERT INTO 
-                types(id, name, detail) 
+                types(id, name, detail, advice, fields) 
             VALUES 
                 (
                     '$newID', 
                     '$data->name',
-                    '$data->detail'
+                    '$data->detail',
+                    '$data->advice',
+                    '$data->fields'
                 )
         ";
             $response = Database::query($sql);
             http_response_code(200);
             $response->statusCode = 200;
+            $response->insertId = $newID;
             $response->message = "Berhasil membuat tipe";
         } else {
             $response = new stdClass();
@@ -139,13 +175,16 @@ class Types
                     types
                 SET
                     name = '$data->name',
-                    detail = '$data->detail'
+                    detail = '$data->detail',
+                    advice = '$data->advice',
+                    fields = '$data->fields'
                 WHERE
                     id = '". $tempType->data[0]["id"] ."'
 
             ";
 
             $response = Database::query($sql);
+            $response->id = $id;
             $response->statusCode = 200;
             $response->message = "Berhasil mengubah data tipe";
             http_response_code(200);
@@ -172,6 +211,7 @@ class Types
                 WHERE 
                     id = '$id'
             ";
+            TypesPictures::delete($id);
             $response = Database::query($sql);
             $response->statusCode = 200;
             $response->message = "Berhasil menghapus data tipe";

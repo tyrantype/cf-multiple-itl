@@ -13,6 +13,9 @@ class Database {
         if(isset($result->num_rows)) {
             if($result->num_rows > 0) {
                 foreach($result as $row) $response->data[] = $row;
+                if ($connection->insert_id !== null) {
+                    $response->insertId = $connection->insert_id;
+                }
             }
         }
 
