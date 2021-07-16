@@ -185,19 +185,19 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
             $pageFound = true;
             switch ($page) {
                 case "dashboard":
-                    include_once "pages/dashboard.php";
+                    include_once "pages/dashboard.html";
                     $script = "dashboard.js";
                     break;
                 case "users":
-                    include_once "pages/users.php";
+                    include_once "pages/users.html";
                     $script = "users.js";
                     break;
                 case "tipe-minat-bakat":
-                    include_once "pages/types.php";
+                    include_once "pages/types.html";
                     $script = "types.js";
                     break;
                 case "identifikasi-minat-bakat":
-                    include_once "pages/interests-identification.php";
+                    include_once "pages/interests-identification.html";
                     $script = "interests-identification.js";
                     break;
                 default:
