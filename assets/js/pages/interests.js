@@ -97,6 +97,8 @@ function initEditInterest() {
             editInterestForm["name"].value = name;
             editInterestForm["typeId"].value = typeId;
             editInterestForm["mb"].value = mb;
+
+            window.scroll(0,0);
         });
     });
 }

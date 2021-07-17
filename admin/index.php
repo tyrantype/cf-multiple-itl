@@ -76,9 +76,9 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                         </li>
 
                         <li class="sidebar-item  sidebar-item-minat-bakat">
-                            <a href="?ciri-minat-bakat" class='sidebar-link'>
+                            <a href="?rules" class='sidebar-link'>
                                 <i class="bi bi-brush-fill"></i>
-                                <span>Ciri Minat Bakat</span>
+                                <span>Rules</span>
                             </a>
                         </li>
 
@@ -90,7 +90,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                         </li> -->
 
                         <li class="sidebar-item  sidebar-item-identifikasi-minat-bakat">
-                            <a href="?identifikasi-minat-bakat" class='sidebar-link'>
+                            <a href="?demo" class='sidebar-link'>
                                 <i class="bi bi-upc-scan"></i>
                                 <span>Demo</span>
                             </a>
@@ -196,13 +196,13 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                     include_once "pages/types.html";
                     $script = "types.js";
                     break;
-                case "ciri-minat-bakat":
+                case "rules":
                     include_once "pages/interests.html";
                     $script = "interests.js";
                     break;
-                case "identifikasi-minat-bakat":
-                    include_once "pages/interests-identification.html";
-                    $script = "interests-identification.js";
+                case "demo":
+                    include_once "pages/demo.html";
+                    $script = "demo.js";
                     break;
                 default:
                     include_once "../pages/404.html";

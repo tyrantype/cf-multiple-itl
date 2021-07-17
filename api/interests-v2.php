@@ -10,7 +10,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             if ($_GET["view"] == "single") {
                 $response = InterestsV2::get($_GET["id"]);
             } else {
-                $response = InterestsV2::getAll();
+                if (isset($_GET["random"])) {
+                    $response = InterestsV2::getAll("rand()");
+                } else {
+                    $response = InterestsV2::getAll();
+                }
             }
         } else {
             $response = InterestsV2::badRequest();

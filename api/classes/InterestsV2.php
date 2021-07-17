@@ -35,7 +35,7 @@ class InterestsV2
         return $response;
     }
 
-    public static function getAll(): stdClass
+    public static function getAll($order = "i.type_id ASC"): stdClass
     {
         $sql = "
             SELECT 
@@ -51,7 +51,7 @@ class InterestsV2
             ON
                 t.id = i.type_id
             ORDER BY
-                i.type_id ASC
+                $order
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {

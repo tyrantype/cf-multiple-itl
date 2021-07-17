@@ -351,9 +351,6 @@ document.querySelector("#previewModal").addEventListener("show.bs.modal", evt =>
 
         carouselIndicators.innerHTML= "";
         carouselInner.innerHTML = "";
-
-        document.querySelectorAll(".carousel-indicators :not(template)").forEach(child => carouselIndicators.remove(child));
-        document.querySelectorAll(".carousel-inner :not(template)").forEach(child => carouselInner.remove(child));
         
         for (let i = 0; i < result.data[0].pictures.length; i++) {
             const clone = createElementFromHTML(`

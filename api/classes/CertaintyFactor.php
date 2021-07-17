@@ -82,8 +82,8 @@ class CertaintyFactor {
                             return $userInterest->id == $interestId;
                         }
                     );
-                    $userCF = current($userCF)->userCF;
-                    $cf = (float) $rule["mb"] * $userCF;
+                    $userCF = floatval(current($userCF)->userCF);
+                    $cf = floatval($rule["mb"]) * $userCF;
 
                     $tempRule = [
                         "id" => $rule["id"],
@@ -102,54 +102,6 @@ class CertaintyFactor {
         }
         
         return $types;
-
-
-
-        // $typesId = [];
-        // foreach ($rules as $rule) {
-        //     $typesId[] = $rule["typeId"];
-        // }
-        // $typesId = array_unique($typesId);
-    
-        // $types = [];
-        // foreach ($typesId as $typeId) {
-        //     $tempType = new stdClass;
-        //     $tempType->id = $typeId;
-            
-        //     // filter rules by type id
-        //     $filteredRules = array_filter(
-        //         $rules,
-        //         function ($rules) use ($typeId) {
-        //             return $rules["typeId"] == $typeId;
-        //         }
-        //     );
-    
-        //     // Result : (id, type_id, type_name, type_detail, interest_id, interest_name, mb, md)
-        //     // map array of rules (object), only include id, interestId, interestName, mb,md, userCF
-        //     $mappedRules = array_map(
-        //         function ($e) {
-        //             $tempRule = new stdClass();
-        //             $tempRule->id = $rule->id;
-        //             $tempRule->interestId = $rule->interestId;
-        //             $tempRule->interestName = $rule->interestName;
-        //             $tempRule->mb = $rule->mb;
-        //             $tempRule->md = $rule->md;
-    
-        //             $tempRule->userCF = array_filter(
-        //                 $userInterests,
-        //                 function ($userInterests) use ($tempRule) {
-        //                     return $userInterests->id === $tempRule->interestId;
-        //                 }
-        //             )[0]->cf;
-    
-        //             return $tempRule;
-        //         },
-        //         $filteredRules
-        //     );
-    
-        //     $types[] = $tempType;
-        // }
-        // return $types;
     }
 
     private static function calculateCF($types): array {
@@ -159,7 +111,7 @@ class CertaintyFactor {
             if (count($type["rules"]) <= 1) {
                 $combination[] = [
                     "formula" => "-",
-                    "cf" => $type["rules"][0]["cf"]
+                    "cf" => floatval($type["rules"][0]["cf"])
                 ];
             } else {
                 for ($i = 0; $i < count($type["rules"]); $i++) {
@@ -167,7 +119,7 @@ class CertaintyFactor {
                         $cf1 = $type["rules"][0]["cf"];
                         $cf2 = $type["rules"][1]["cf"];
                         $cfEnd = $cf1 + $cf2 - ($cf1 * $cf2);
-                        $cfEnd = number_format($cfEnd, 3, '.', ','); 
+                        $cfEnd = floatval(number_format($cfEnd, 3, '.', ',')); 
                         $combination[] = [
                             "formula" => "$cf1  +  $cf2 - ($cf1 * $cf2) = $cfEnd",
                             "cf" => $cfEnd
@@ -177,7 +129,7 @@ class CertaintyFactor {
                         $cf1 = end($combination)["cf"];
                         $cf2 = $type["rules"][$i]["cf"];
                         $cfEnd = $cf1 + $cf2 - ($cf1 * $cf2);
-                        $cfEnd = number_format($cfEnd, 3, '.', ','); 
+                        $cfEnd = floatval(number_format($cfEnd, 3, '.', ',')); 
                         $combination[] = [
                             "formula" => "$cf1  +  $cf2 - ($cf1 * $cf2) = $cfEnd",
                             "cf" => $cfEnd

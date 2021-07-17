@@ -20,6 +20,8 @@ RewriteRule ^api/interest/(.*)$   api/interests.php?view=single&id=$1 [NC,QSA,L]
 RewriteRule ^api/interest-v2$   api/interests-v2.php [NC,QSA,L]
 RewriteRule ^api/interests-v2$   api/interests-v2.php?view=all [NC,QSA,L]
 RewriteRule ^api/interest-v2/(.*)$   api/interests-v2.php?view=single&id=$1 [NC,QSA,L]
+RewriteRule ^api/interests-v2?random=true$   api/interests.php?view=all&random=true [NC,QSA,L]
+
 
 RewriteRule ^api/field$   api/fields.php [NC,QSA,L]
 RewriteRule ^api/fields$   api/fields.php?view=all [NC,QSA,L]
@@ -39,3 +41,7 @@ RewriteRule ^api/result-detail?(.*)$   api/results-details.php?view=single&$1 [N
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php [NC,QSA,L]
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php?view=all [NC,QSA,L]
 RewriteRule ^api/certainty-factor/(.*)$   api/certainty-factor.php?view=single&id=$1 [NC,QSA,L]
+
+RewriteRule ^api/certainty-factor-v2$   api/certainty-factor-v2.php [NC,QSA,L]
+RewriteRule ^api/certainty-factor-v2$   api/certainty-factor-v2.php?view=all [NC,QSA,L]
+RewriteRule ^api/certainty-factor-v2/(.*)$   api/certainty-factor-v2.php?view=single&id=$1 [NC,QSA,L]
