@@ -1,4 +1,7 @@
 <?php
+
+
+
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
     $page = strtok(explode("?", $_SERVER["REQUEST_URI"])[1], '&');
 } else {
@@ -75,19 +78,12 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                             </a>
                         </li>
 
-                        <li class="sidebar-item  sidebar-item-minat-bakat">
-                            <a href="?rules" class='sidebar-link'>
-                                <i class="bi bi-brush-fill"></i>
-                                <span>Rules</span>
-                            </a>
-                        </li>
-
-                        <!-- <li class="sidebar-item  sidebar-item-rules">
+                        <li class="sidebar-item  sidebar-item-rules">
                             <a href="?rules" class='sidebar-link'>
                                 <i class="bi bi-rulers"></i>
                                 <span>Rules</span>
                             </a>
-                        </li> -->
+                        </li>
 
                         <li class="sidebar-item  sidebar-item-identifikasi-minat-bakat">
                             <a href="?demo" class='sidebar-link'>
@@ -205,7 +201,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                     $script = "demo.js";
                     break;
                 default:
-                    include_once "../pages/404.html";
+                    include_once "pages/404.html";
                     $pageFound = false;
             }
             ?>
@@ -227,7 +223,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
     <script src="../assets/js/main.js"></script>
 
     <?=
-    $pageFound ? "<script src='../assets/js/pages/$script'></script>" : ""
+    $pageFound ? "<script src='assets/js/$script'></script>" : ""
     ?>
 
 </body>
