@@ -55,7 +55,10 @@ function refreshUsersDataTable() {
                         render: function (data, cell, row) {
                             return `
                                 <td>
-                                    <button class="popover-option btn btn-light-primary font-bold"  data-bs-username='${row.children.item(3).innerText}' data-bs-fullname='${row.children.item(2).querySelector('span').innerText}'>...</button>
+                                    <div class="d-flex">
+                                        <button class="btn btn-light-info d-grid place-items-center me-1" data-bs-toggle="modal" data-bs-target="#historyModal" data-bs-username="${row.children.item(3).innerText}">Riwayat</button>
+                                        <button class="popover-option btn btn-light-primary font-bold"  data-bs-username='${row.children.item(3).innerText}' data-bs-fullname='${row.children.item(2).querySelector('span').innerText}'>...</button>
+                                    </div>
                                 </td>
                             `;
                         }
@@ -87,7 +90,6 @@ function initPopoverEvent() {
                     <button class="btn btn-light-warning d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#editUserModal" data-bs-username="${popoverTriggerEl.getAttribute('data-bs-username')}" data-bs-fullname="${popoverTriggerEl.getAttribute('data-bs-fullname')}">Ubah Data</button>
                     <button id="btnResetPasswordUser" class="btn btn-light-warning d-grid place-items-center m-1 pt-2 pb-2" data-bs-username="${popoverTriggerEl.getAttribute('data-bs-username')}" data-bs-fullname="${popoverTriggerEl.getAttribute('data-bs-fullname')}">Reset Password</button>
                     <button id="btnRemoveUser" class="btn btn-light-danger d-grid place-items-center m-1 pt-2 pb-2" data-bs-username="${popoverTriggerEl.getAttribute('data-bs-username')}" data-bs-fullname="${popoverTriggerEl.getAttribute('data-bs-fullname')}">Hapus</i></button>
-                    <button class="btn btn-light-secondary d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#historyModal" data-bs-username="${popoverTriggerEl.getAttribute('data-bs-username')}">Riwayat</button>
                 </div>
             `
         })

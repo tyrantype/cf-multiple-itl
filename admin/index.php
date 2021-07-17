@@ -76,18 +76,18 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                         </li>
 
                         <li class="sidebar-item  sidebar-item-minat-bakat">
-                            <a href="?minat-bakat" class='sidebar-link'>
+                            <a href="?ciri-minat-bakat" class='sidebar-link'>
                                 <i class="bi bi-brush-fill"></i>
                                 <span>Ciri Minat Bakat</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  sidebar-item-rules">
+                        <!-- <li class="sidebar-item  sidebar-item-rules">
                             <a href="?rules" class='sidebar-link'>
                                 <i class="bi bi-rulers"></i>
                                 <span>Rules</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="sidebar-item  sidebar-item-identifikasi-minat-bakat">
                             <a href="?identifikasi-minat-bakat" class='sidebar-link'>
@@ -195,6 +195,10 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 case "tipe-minat-bakat":
                     include_once "pages/types.html";
                     $script = "types.js";
+                    break;
+                case "ciri-minat-bakat":
+                    include_once "pages/interests.html";
+                    $script = "interests.js";
                     break;
                 case "identifikasi-minat-bakat":
                     include_once "pages/interests-identification.html";

@@ -41,8 +41,8 @@ function refreshTypesDataTable() {
                 if (v[3].length > 50) {
                     v[3] = v[3].substring(0, 50) + "...";
                 }
-                if (v[4].length > 50) {
-                    v[4] = v[4].substring(0, 50) + "...";
+                if (v[4].length > 40) {
+                    v[4] = v[4].substring(0, 40) + "...";
                 }
             }
 
@@ -54,7 +54,10 @@ function refreshTypesDataTable() {
                         render: function (data, cell, row) {
                             return `
                                 <td>
-                                    <button class="popover-option btn btn-light-primary font-bold"  data-bs-id='${row.children.item(1).innerText}' data-bs-name='${row.children.item(2).innerText}'>...</button>
+                                    <div class="d-flex">
+                                        <button id="btnPreview" class="btn btn-light-info d-grid place-items-center me-1" data-bs-toggle="modal" data-bs-target="#previewModal" data-bs-id="${row.children.item(1).innerText}" data-bs-name="${row.children.item(2).innerText}">Preview</i></button>
+                                        <button class="popover-option btn btn-light-primary font-bold"  data-bs-id='${row.children.item(1).innerText}' data-bs-name='${row.children.item(2).innerText}'>...</button>
+                                    </div>
                                 </td>
                             `;
                         }
@@ -84,7 +87,6 @@ function initPopoverEvent() {
                 <div class="d-flex flex-column">
                     <button class="btn btn-light-warning d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#editTypeModal" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Ubah</button>
                     <button id="btnRemoveType" class="btn btn-light-danger d-grid place-items-center m-1 pt-2 pb-2" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Hapus</i></button>
-                    <button id="btnPreview" class="btn btn-light-info d-grid place-items-center m-1 pt-2 pb-2" data-bs-toggle="modal" data-bs-target="#previewModal" data-bs-id="${popoverTriggerEl.getAttribute('data-bs-id')}" data-bs-name="${popoverTriggerEl.getAttribute('data-bs-name')}">Preview</i></button>
                 </div>
             `
         })
