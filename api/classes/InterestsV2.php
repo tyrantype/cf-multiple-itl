@@ -2,24 +2,31 @@
 
 require_once "Database.php";
 
-class Interests
+class InterestsV2
 {
     public static function get($id): stdClass
     {
         $sql = "
             SELECT 
-                id, 
-                name
+                i.id, 
+                i.name,
+                i.type_id typeId,
+                t.name typeName,
+                i.mb mb
             FROM 
-                interests 
+                Interests_v2 i
+            INNER JOIN
+                types t
+            ON
+                t.id = i.type_id
             WHERE 
-                id = '$id'
+                i.id = '$id'
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Berhasil mendapatkan data minat";
+            $response->message = "Berhasil mendapatkan data minat bakat";
         } else {
             http_response_code(404);
             $response->statusCode = 404;
@@ -32,16 +39,25 @@ class Interests
     {
         $sql = "
             SELECT 
-                id, 
-                name
+                i.id, 
+                i.name,
+                i.type_id typeId,
+                t.name typeName,
+                i.mb mb
             FROM 
-                interests
+                Interests_v2 i
+            INNER JOIN
+                types t
+            ON
+                t.id = i.type_id
+            ORDER BY
+                i.type_id ASC
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Berhasil mendapatkan data minat";
+            $response->message = "Berhasil mendapatkan data minat bakat";
         } else {
             http_response_code(200);
             $response->statusCode = 200;
@@ -53,34 +69,37 @@ class Interests
     public static function create($data): stdClass
     {
         $response = new stdClass();
-        
-        $countName = (int) Database::query("SELECT COUNT(*) count FROM interests WHERE name = '$data->name'")->data[0]["count"];
+
+        $countName = (int) Database::query("SELECT COUNT(*) count FROM Interests_v2 WHERE name = '$data->name'")->data[0]["count"];
         if ($countName < 1) {
-            $newID = Interests::getNewID();
+            $newID = InterestsV2::getNewID();
             $sql = "
             INSERT INTO 
-                interests(id, name) 
+                Interests_v2(id, name, type_id, mb) 
             VALUES 
                 (
                     '$newID', 
-                    '$data->name'
+                    '$data->name',
+                    '$data->typeId',
+                    '$data->mb'
                 )
         ";
             $response = Database::query($sql);
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Berhasil membuat minat";
+            $response->message = "Berhasil membuat ciri minat bakat";
         } else {
             $response = new stdClass();
             http_response_code(409);
             $response->statusCode = 409;
-            $response->message = "Nama minat telah digunakan";
+            $response->message = "Nama ciri minat bakat telah digunakan";
         }
         return $response;
     }
 
-    private static function getLastID(): string {
-        $sql = "SELECT id FROM interests ORDER BY id DESC LIMIT 1";
+    private static function getLastID(): string
+    {
+        $sql = "SELECT id FROM Interests_v2 ORDER BY id DESC LIMIT 1";
         $response = Database::query($sql);
         if (isset($response->data[0])) {
             return $response->data[0]["id"];
@@ -89,8 +108,9 @@ class Interests
         }
     }
 
-    private static function getNewID(): string {
-        $lastNumber = intval(substr(Interests::getLastID(), 1)) + 1;
+    private static function getNewID(): string
+    {
+        $lastNumber = intval(substr(InterestsV2::getLastID(), 1)) + 1;
         $newID = "";
         if ($lastNumber < 10) {
             $newID = "I000$lastNumber";
@@ -104,13 +124,14 @@ class Interests
         return $newID;
     }
 
-    public static function update($id, $data): stdClass {
-        $tempInterest = Interests::get($id);
+    public static function update($id, $data): stdClass
+    {
+        $tempInterest = InterestsV2::get($id);
         if ($tempInterest->statusCode !== 200) {
             $response = new stdClass();
             http_response_code(404);
             $response->statusCode = 404;
-            $response->message = "Gagal mengubah data minat (Not Found)";
+            $response->message = "Gagal mengubah ciri minat bakat (Not Found)";
             return $response;
         }
 
@@ -118,61 +139,65 @@ class Interests
             SELECT
                 COUNT(*) count
             FROM 
-                interests
+                Interests_v2
             WHERE
                 name = '$data->name'
             AND
-                id <> '". $tempInterest->data[0]["id"] ."'
+                id <> '" . $tempInterest->data[0]["id"] . "'
         ";
         $countName = (int) Database::query($sql)->data[0]["count"];
 
-        if($countName < 1) {
+        if ($countName < 1) {
             $sql = "
                 UPDATE
-                    interests
+                    Interests_v2
                 SET
-                    name = '$data->name'
+                    name = '$data->name',
+                    mb = '$data->typeId',
+                    mb = '$data->mb'
                 WHERE
-                    id = '". $tempInterest->data[0]["id"] ."'
+                    id = '" . $tempInterest->data[0]["id"] . "'
 
             ";
 
             $response = Database::query($sql);
             $response->statusCode = 200;
-            $response->message = "Berhasil mengubah data minat";
+            $response->message = "Berhasil mengubah ciri minat bakat";
             http_response_code(200);
         } else {
             $response = new stdClass();
             http_response_code(409);
             $response->statusCode = 409;
-            $response->message = "Nama minat telah digunakan";
+            $response->message = "Nama ciri minat bakat telah digunakan";
         }
         return $response;
     }
 
-    public static function delete($id) {
-        $tempInterest = Interests::get($id);
+    public static function delete($id)
+    {
+        $tempInterest = InterestsV2::get($id);
         if ($tempInterest->statusCode != 200) {
             http_response_code(404);
             $response = new stdClass();
             $response->statusCode = 404;
-            $response->message = "Gagal menghapus data minat (Not Found)";
+            $response->message = "Gagal menghapus ciri minat bakat (Not Found)";
         } else {
             $sql = "
                 DELETE FROM
-                    interests
+                    Interests_v2
                 WHERE 
                     id = '$id'
             ";
             $response = Database::query($sql);
             $response->statusCode = 200;
-            $response->message = "Berhasil menghapus data minat";
+            $response->message = "Berhasil menghapus ciri minat bakat";
             http_response_code(200);
         }
         return $response;
     }
 
-    public static function badRequest() {
+    public static function badRequest()
+    {
         http_response_code(400);
         $response = new stdClass();
         $response->statusCode = 400;

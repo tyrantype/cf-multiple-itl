@@ -17,6 +17,10 @@ RewriteRule ^api/interest$   api/interests.php [NC,QSA,L]
 RewriteRule ^api/interests$   api/interests.php?view=all [NC,QSA,L]
 RewriteRule ^api/interest/(.*)$   api/interests.php?view=single&id=$1 [NC,QSA,L]
 
+RewriteRule ^api/interest-v2$   api/interests-v2.php [NC,QSA,L]
+RewriteRule ^api/interests-v2$   api/interests-v2.php?view=all [NC,QSA,L]
+RewriteRule ^api/interest-v2/(.*)$   api/interests-v2.php?view=single&id=$1 [NC,QSA,L]
+
 RewriteRule ^api/field$   api/fields.php [NC,QSA,L]
 RewriteRule ^api/fields$   api/fields.php?view=all [NC,QSA,L]
 RewriteRule ^api/field/(.*)$   api/fields.php?view=single&id=$1 [NC,QSA,L]

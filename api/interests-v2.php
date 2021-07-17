@@ -2,42 +2,42 @@
 
 header('Content-Type: application/json');
 
-require_once "classes/Interests.php";
+require_once "classes/InterestsV2.php";
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
         if (isset($_GET["view"])) {
             if ($_GET["view"] == "single") {
-                $response = Interests::get($_GET["id"]);
+                $response = InterestsV2::get($_GET["id"]);
             } else {
-                $response = Interests::getAll();
+                $response = InterestsV2::getAll();
             }
         } else {
-            $response = Interests::badRequest();
+            $response = InterestsV2::badRequest();
         }
         break;
 
     case "POST":
             if (file_get_contents("php://input") !== null) {
-                $response = Interests::create(json_decode(file_get_contents("php://input")));
+                $response = InterestsV2::create(json_decode(file_get_contents("php://input")));
             } else {
-                $response = Interests::badRequest();
+                $response = InterestsV2::badRequest();
             }
         break;
 
     case "PUT":
             if (isset($_GET["id"]) && file_get_contents("php://input") !== null) {
-                $response = Interests::update($_GET["id"], json_decode(file_get_contents("php://input")));
+                $response = InterestsV2::update($_GET["id"], json_decode(file_get_contents("php://input")));
             } else {
-                $response = Interests::badRequest();
+                $response = InterestsV2::badRequest();
             }
         break;
 
     case "DELETE":
         if (isset($_GET["id"])) {
-            $response = Interests::delete($_GET["id"]);
+            $response = InterestsV2::delete($_GET["id"]);
         } else {
-            $response = Interests::badRequest();
+            $response = InterestsV2::badRequest();
         }
         break;
 }
