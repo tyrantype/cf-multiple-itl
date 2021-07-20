@@ -104,6 +104,8 @@ document.forms["demoForm"].addEventListener("reset", evt => {
     refreshInterestsTable(interestsData, false);
 });
 
+let selectedInterestsDataTable;
+
 document.forms["demoForm"].addEventListener("submit", evt => {
     evt.preventDefault();
 
@@ -126,6 +128,10 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                 const formula = document.querySelector("#formula");
                 const data = result.data.result;
 
+                formula.innerHTML = "";
+                selectedRulesElement.innerHTML = "";
+
+
                 name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
@@ -140,7 +146,6 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                     }
                 }
 
-                formula.innerHTML = "";
                 for (let i = 0; i < data.length; i++) {
                     const nameTypeLi = document.createElement("li");
 
@@ -167,7 +172,6 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                     formula.appendChild(nameTypeLi);
                 }
 
-                selectedRulesElement.innerHTML = "";
                 const selectedRules = result.data.selectedRules;
                 let obj = {
                     headings: ["Ciri Minat Bakat", "MB", "MD"],
@@ -182,7 +186,11 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                     }
                 }
 
-                const selectedInterestsDataTable = new simpleDatatables.DataTable(selectedRulesElement, {
+                if (selectedInterestsDataTable !== undefined) {
+                    selectedInterestsDataTable.destroy();
+                }
+
+                selectedInterestsDataTable = new simpleDatatables.DataTable(selectedRulesElement, {
                     searchable: false,
                     paging: false,
                     data: obj
