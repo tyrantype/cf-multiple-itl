@@ -77,14 +77,14 @@ class CertaintyFactorV2 {
             $tempType["rules"] = [];
             foreach ($userInterests as $userInterest) {
                 if ($tempType["id"] === $userInterest["typeId"]) {
-                    $cf = $userInterest["mb"] * $userInterest["md"];
+                    $cf = floatval($userInterest["mb"]) * floatval($userInterest["md"]);
                     $tempRule = [
                         "id" => $userInterest["id"],
                         "name" => $userInterest["name"],
                         "mb" => (float) $userInterest["mb"],
                         "md" => (float) $userInterest["md"],
                         "formula" => "$userInterest[mb] x $userInterest[md] = $cf",
-                        "cf" => $cf
+                        "cf" => floatval(number_format($cf, 3, '.', ','))
                     ];
                     $tempType["rules"][] = $tempRule;
                 }
@@ -121,7 +121,7 @@ class CertaintyFactorV2 {
                         $cf1 = $type["rules"][0]["cf"];
                         $cf2 = $type["rules"][1]["cf"];
                         $cfEnd = $cf1 + $cf2 - ($cf1 * $cf2);
-                        $cfEnd = floatval(number_format($cfEnd, 5, '.', ',')); 
+                        $cfEnd = floatval(number_format($cfEnd, 3, '.', ',')); 
                         $combination[] = [
                             "formula" => "$cf1  +  $cf2 - ($cf1 * $cf2) = $cfEnd",
                             "cf" => $cfEnd
@@ -131,7 +131,7 @@ class CertaintyFactorV2 {
                         $cf1 = end($combination)["cf"];
                         $cf2 = $type["rules"][$i]["cf"];
                         $cfEnd = $cf1 + $cf2 - ($cf1 * $cf2);
-                        $cfEnd = floatval(number_format($cfEnd, 5, '.', ',')); 
+                        $cfEnd = floatval(number_format($cfEnd, 3, '.', ',')); 
                         $combination[] = [
                             "formula" => "$cf1  +  $cf2 - ($cf1 * $cf2) = $cfEnd",
                             "cf" => $cfEnd

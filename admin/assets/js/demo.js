@@ -61,7 +61,7 @@ function refreshInterestsTable(data, filter) {
                             valueSelected = temp.userCF;
                         }
                     }
-                    let options = { "": "", "1": "", "0.5": "", "0": "", "-0.5": "", "-1": "" };
+                    let options = { "": "", "1": "", "0.8": "", "0.6": "", "0.4": "", "0.2": "" };
                     options[valueSelected] = "selected";
 
                     return `
@@ -70,10 +70,10 @@ function refreshInterestsTable(data, filter) {
                                 <select class="form-select" id="select-md-${id}" data-id="${id}" >
                                     <option value="" disabled ${options[""]} hidden>Pilih</option>
                                     <option value="1" ${options["1"]} class="bg-success">Ya</option>
-                                    <option value="0.5" ${options["0.5"]} class="bg-light-success">Mungkin ya</option>
-                                    <option value="0" ${options["0"]} class="bg-light-secondary">Tidak tahu</option>
-                                    <option value="-0.5" ${options["-0.5"]} class="bg-light-danger">Mungkin tidak</option>
-                                    <option value="-1" ${options["-1"]} class="bg-danger">Tidak</option>
+                                    <option value="0.8" ${options["0.8"]} class="bg-light-success">Mungkin ya</option>
+                                    <option value="0.6" ${options["0.6"]} class="bg-light-secondary">Tidak tahu</option>
+                                    <option value="0.4" ${options["0.4"]} class="bg-light-danger">Mungkin tidak</option>
+                                    <option value="0.2" ${options["0.2"]} class="bg-danger">Tidak</option>
                                 </select>
                                 <label class="input-group-text p-0" for="select-md-${id}">
                                     <button type="button" id="btn-clear-md-${id}" class="btn btn-light-secondary" style="font-size:0.65em">x</button>
@@ -126,7 +126,7 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                 const formula = document.querySelector("#formula");
                 const data = result.data.result;
 
-                name.textContent = `${data[0].name} (${data[0].cf}%)`;
+                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
                 fields.textContent = data[0].fields;
@@ -135,11 +135,12 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                     otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
-                        li.textContent = `${data[i].name} (${data[i].cf}%)`
+                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent"})})`
                         otherPossibilities.appendChild(li);
                     }
                 }
 
+                formula.innerHTML = "";
                 for (let i = 0; i < data.length; i++) {
                     const nameTypeLi = document.createElement("li");
 
