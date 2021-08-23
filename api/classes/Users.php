@@ -10,7 +10,10 @@ class Users
             SELECT 
                 id 'id', 
                 full_name 'Nama Lengkap',
-                username 'Username', 
+                username 'Username',
+                gender 'Jenis Kelamin',
+                date_of_birth 'Tanggal Lahir',
+                address 'Alamat', 
                 last_login 'Terakhir Login',
                 privilege 'Hak Akses',
                 avatar_id 'avatarId'
@@ -39,6 +42,9 @@ class Users
                 id 'id', 
                 full_name 'Nama Lengkap',
                 username 'Username', 
+                gender 'Jenis Kelamin',
+                date_of_birth 'Tanggal Lahir',
+                address 'Alamat', 
                 last_login 'Terakhir Login',
                 privilege 'Hak Akses',
                 avatar_id 'avatarId'
@@ -68,13 +74,16 @@ class Users
             $hashedPassword = password_hash($data->password, PASSWORD_DEFAULT);
             $sql = "
             INSERT INTO 
-                users(id, username, password, full_name, privilege, avatar_id) 
+                users(id, username, password, full_name, gender, date_of_birth, address, privilege, avatar_id) 
             VALUES 
                 (
                     '$newID', 
                     '$data->username', 
                     '$hashedPassword', 
                     '$data->fullName',
+                    '$data->gender',
+                    '$data->dateOfBirth',
+                    '$data->address',
                     '$data->privilege',
                     '$data->avatarId'
                 )
@@ -147,6 +156,9 @@ class Users
                 SET
                     username = '$data->username',
                     full_name = '$data->fullName',
+                    gender = '$data->gender',
+                    date_of_birth = '$data->dateOfBirth',
+                    address = '$data->address',
                     privilege = '$data->privilege',
                     avatar_id = '$data->avatarId'
                 WHERE

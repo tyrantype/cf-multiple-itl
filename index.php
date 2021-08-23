@@ -1,13 +1,15 @@
 <?php
+session_start();
+
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
     $page = strtok(explode("?", $_SERVER["REQUEST_URI"])[1], '&');
     switch($page) {
         case "login":
-            header("Location: pages/login.html");
+            require_once "pages/login.php";
             die();
             break;
         case "register":
-            header("Location: pages/register.html");
+            require_once "pages/register.php";
             die();
             break;
     }
@@ -152,7 +154,6 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
     <?=
     $pageFound ? "<script src='assets/js/pages/$script'></script>" : ""
     ?>
-
 </body>
 
 </html>

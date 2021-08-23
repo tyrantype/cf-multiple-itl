@@ -32,10 +32,10 @@ input:checked + .avatar img
     border: 4px solid lightgray;
 }
 
-input, select
+/* input, select
 {
     color: #202124 !important;
-}
+} */
 
 #newPassword {
     cursor: pointer;

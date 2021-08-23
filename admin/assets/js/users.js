@@ -14,7 +14,7 @@ function refreshUsersDataTable() {
                 usersDataTable = undefined;
             }
             let obj = {
-                headings: ["No", "id", "Nama Lengkap", "Username", "Terakhir Login", "Hak Akses", "avatarId", "Opsi"],
+                headings: ["No", "id", "Nama Lengkap", "NIS", "Jenis Kelamin", "Tanggal Lahir", "Alamat", "Terakhir Login", "Hak Akses", "avatarId", "Opsi"],
                 data: []
             };
 
@@ -29,10 +29,10 @@ function refreshUsersDataTable() {
             }
 
             for (data of obj.data) {
-                if (data[4] !== null) {
-                    data[4] = dayjs(data[4]).fromNow();
+                if (data[7] !== null) {
+                    data[7] = dayjs(data[7]).fromNow();
                 } else {
-                    data[4] = "---";
+                    data[7] = "---";
                 }
             }
 
@@ -43,15 +43,15 @@ function refreshUsersDataTable() {
                         render: function (data, cell, row) {
                             return `
                             <div class="avatar avatar-sm bg-warning me-2">
-                                <img src="../assets/images/faces/${row.children.item(6).innerText}.jpg">
+                                <img src="../assets/images/faces/${row.children.item(9).innerText}.jpg">
                             </div>
                             <span>${data}</span>
                             `;
                         }
                     },
-                    { select: [1, 6], hidden: true },
+                    { select: [1, 9], hidden: true },
                     {
-                        select: 7,
+                        select: 10,
                         render: function (data, cell, row) {
                             return `
                                 <td>
@@ -268,6 +268,9 @@ document.querySelector("#editUserModal").addEventListener("show.bs.modal", evt =
             editForm["fullName"].value = result.data[0]["Nama Lengkap"]
             editForm["oldUsername"].value = result.data[0]["Username"]
             editForm["username"].value = result.data[0]["Username"]
+            editForm["gender"].value = result.data[0]["Jenis Kelamin"]
+            editForm["dateOfBirth"].value = result.data[0]["Tanggal Lahir"]
+            editForm["address"].value = result.data[0]["Alamat"]
             editForm["privilege"].value = result.data[0]["Hak Akses"]
             editForm["avatarId"].value = result.data[0]["avatarId"]
         })

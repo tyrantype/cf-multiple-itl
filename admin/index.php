@@ -219,6 +219,8 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/vendors/dayjs/dayjs.min.js"></script>
     <script src="../assets/vendors/dayjs/plugin/relativeTime.js"></script>
+    <script src="../assets/vendors/dayjs/plugin/utc.js"></script>
+    <script src="../assets/vendors/dayjs/plugin/timezone.js"></script>
 
     <script src="../assets/js/main.js"></script>
 

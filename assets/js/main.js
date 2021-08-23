@@ -1,4 +1,4 @@
-dayjs.extend(window.dayjs_plugin_relativeTime)
+dayjs.extend(window.dayjs_plugin_relativeTime);
 dayjs().format();
 
 function showToast(statusCode, message) {

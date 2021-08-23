@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2021 at 11:42 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Generation Time: Aug 23, 2021 at 03:50 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `certainty_factor`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `username` varchar(5) NOT NULL,
+  `content` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -274,6 +286,24 @@ INSERT INTO `rules` (`id`, `type_id`, `interest_id`, `mb`, `md`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `setting`
+--
+
+CREATE TABLE `setting` (
+  `school_name` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `setting`
+--
+
+INSERT INTO `setting` (`school_name`, `address`) VALUES
+('SDN Kwaron I', 'Diwek, Jombang');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `types`
 --
 
@@ -352,6 +382,9 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(64) NOT NULL,
   `full_name` varchar(100) NOT NULL,
+  `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
+  `date_of_birth` date DEFAULT current_timestamp(),
+  `address` varchar(100) DEFAULT NULL,
   `privilege` enum('User','Admin') NOT NULL DEFAULT 'User',
   `avatar_id` int(11) NOT NULL DEFAULT 1,
   `last_login` datetime DEFAULT NULL
@@ -361,13 +394,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `privilege`, `avatar_id`, `last_login`) VALUES
-('U0001', 'yusuf', '$2y$10$DYwZUHvSBPjCfQD.st7DhuzEMMd6/Andqb8BZ1r0TQ/uWobiYATuK', 'Yusuf Effendi', 'Admin', 2, '2021-07-14 01:36:29'),
-('U0002', 'aldikurw', '$2y$10$poD7TkNcO1WcDJTKmk.mbOz05BQeM.98An3yHJKE3k5aLg1kbbMne', 'Aldi Kurniawan', 'User', 1, '2021-07-11 03:00:27');
+INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_of_birth`, `address`, `privilege`, `avatar_id`, `last_login`) VALUES
+('U0001', '1001', '$2y$10$DYwZUHvSBPjCfQD.st7DhuzEMMd6/Andqb8BZ1r0TQ/uWobiYATuK', 'Yusuf Effendi', 'Laki-Laki', '1999-08-22', 'Diwek', 'Admin', 2, '2021-07-14 01:36:29'),
+('U0002', '2001', '$2y$10$poD7TkNcO1WcDJTKmk.mbOz05BQeM.98An3yHJKE3k5aLg1kbbMne', 'Aldi Kurniawan', 'Laki-Laki', '1999-08-22', 'Sugihwaras', 'User', 1, '2021-07-11 03:00:27');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `interests_v2`
@@ -421,6 +460,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `types_pictures`
