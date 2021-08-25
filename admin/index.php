@@ -1,6 +1,16 @@
 <?php
+session_start();
 
+if (!isset($_SESSION["username"])) {
+    header("Location: ..?login");
+} else {
+    require_once "../api/classes/Users.php";
 
+    $response = Users::get($_SESSION["username"]);
+    if ($response->statusCode === 200) {
+        if ($response->data[0]["Hak Akses"] !== "Admin") header("Location: ..");
+    }
+}
 
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
     $page = strtok(explode("?", $_SERVER["REQUEST_URI"])[1], '&');
@@ -114,7 +124,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                         </li>
 
                         <li class="sidebar-item sidebar-item-pengaturan ">
-                            <a href="?pengaturan" class='sidebar-link'>
+                            <a href="?logout" class='sidebar-link'>
                                 <i class="bi bi-box-arrow-left"></i>
                                 <span>Keluar</span>
                             </a>
@@ -199,6 +209,10 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 case "demo":
                     include_once "pages/demo.html";
                     $script = "demo.js";
+                    break;
+                case "logout":
+                    session_destroy();
+                    $script = "logout.js";
                     break;
                 default:
                     include_once "pages/404.html";

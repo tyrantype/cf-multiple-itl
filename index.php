@@ -1,15 +1,27 @@
 <?php
 session_start();
 
+if (isset($_SESSION["username"])) {
+    require_once "api/classes/Users.php";
+
+    $response = Users::get($_SESSION["username"]);
+    
+    if ($response->statusCode === 200) {
+        if ($response->data[0]["Hak Akses"] === "Admin") header("Location: ./admin");
+        else header("Location: ./user");
+    }
+    die();
+}
+
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
     $page = strtok(explode("?", $_SERVER["REQUEST_URI"])[1], '&');
     switch($page) {
         case "login":
-            require_once "pages/login.php";
+            require_once "pages/login.html";
             die();
             break;
         case "register":
-            require_once "pages/register.php";
+            require_once "pages/register.html";
             die();
             break;
     }

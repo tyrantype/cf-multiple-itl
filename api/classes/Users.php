@@ -229,6 +229,36 @@ class Users
         return $response;
     }
 
+    public static function login($username, $password): stdClass
+    {
+        $sql = "
+            SELECT 
+                password,
+                privilege
+            FROM 
+                users 
+            WHERE 
+                username = '$username'
+        ";
+        $response = Database::query($sql);
+        if (isset($response->data)) {
+            if (password_verify($password, $response->data[0]["password"])) {
+                http_response_code(200);
+                $response->statusCode = 200;
+                $response->message = "Login berhasil";
+            } else {
+                http_response_code(404);
+                $response->statusCode = 404;
+                $response->message = "Login gagal";
+            }
+        } else {
+            http_response_code(404);
+            $response->statusCode = 404;
+            $response->message = "Login gagal";
+        }
+        return $response;
+    }
+
     public static function badRequest() {
         http_response_code(400);
         $response = new stdClass();
