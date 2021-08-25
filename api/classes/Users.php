@@ -72,6 +72,7 @@ class Users
         if ($tempUser->statusCode != 200) {
             $newID = Users::getNewID();
             $hashedPassword = password_hash($data->password, PASSWORD_DEFAULT);
+            if (!isset($data->privilege)) $data->privilege = "User";
             $sql = "
             INSERT INTO 
                 users(id, username, password, full_name, gender, date_of_birth, address, privilege, avatar_id) 

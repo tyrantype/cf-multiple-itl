@@ -14,78 +14,193 @@
 
 <body>
     <div id="auth">
-        
-<div class="row h-100">
-    <div class="col-lg-5 col-12">
-        <div id="auth-left">
-            <div class="auth-logo">
-                <a href="index.html"><img src="assets/images/logo/sistem-pakar.webp" alt="Logo"></a>
-            </div>
-            <h1 class="auth-title">Sign Up</h1>
-            <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
 
-            <form action="index.html">
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" name="fullName" placeholder="Nama Lengkap" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-person"></i>
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a href="."><img src="assets/images/logo/sistem-pakar.webp" alt="Logo"></a>
+                    </div>
+                    <h1 class="auth-title">Sign Up</h1>
+                    <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
+
+                    <form id="register">
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control form-control-xl" name="fullName"
+                                placeholder="Nama Lengkap" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>NIS</label>
+                            <input type="text" class="form-control form-control-xl" name="username" placeholder="NIS"
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-credit-card-2-front"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Password</label>
+                            <input type="password" class="form-control form-control-xl" name="password"
+                                placeholder="Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-key"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Ulangi Password</label>
+                            <input type="password" class="form-control form-control-xl" name="password2"
+                                placeholder="Ulangi Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-key"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Jenis Kelamin</label>
+                            <select class="form-control form-control-xl" name="gender" required>
+                                <option value="" disabled selected hidden>Jenis Kelamin</option>
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            <div class="form-control-icon">
+                                <i class="bi bi-thermometer"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Tanggal Lahir</label>
+                            <input type="date" class="form-control form-control-xl" name="dateOfBirth" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar-date"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <label>Alamat</label>
+                            <input type="text" class="form-control form-control-xl" name="address" placeholder="Alamat"
+                                required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-signpost"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <p class="mb-1">Avatar</p>
+                            <label>
+                                <input type="radio" name="avatarId" value="1" selected>
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/1.jpg" alt="avatar1">
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" name="avatarId" value="2">
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/2.jpg" alt="avatar2">
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" name="avatarId" value="3">
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/3.jpg" alt="avatar3">
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" name="avatarId" value="4">
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/4.jpg" alt="avatar4">
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" name="avatarId" value="5">
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/5.jpg" alt="avatar5">
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" name="avatarId" value="6">
+                                <div class="avatar avatar-lg me-2">
+                                    <img src="assets/images/faces/6.jpg" alt="avatar6">
+                                </div>
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Daftar</button>
+                    </form>
+                    <div class="text-center mt-5 text-lg fs-4">
+                        <p class='text-gray-600'>Sudah mempunyai akun? <a href="?login" class='font-bold'>Masuk</a>.</p>
                     </div>
                 </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" name="username" placeholder="NIS" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-credit-card-2-front"></i>
-                    </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+
                 </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" name="password" placeholder="Password" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-key"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" name="password2" placeholder="Ulangi Password" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-key"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" name="address" placeholder="Alamat" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-signpost"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="date" class="form-control form-control-xl" name="dateOfBirth" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-calendar-date"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <select class="form-control form-control-xl" name="gender" required>
-                        <option value="" disabled selected hidden>Jenis Kelamin</option>
-                        <option value="Laki-Laki">Laki-Laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-                    <div class="form-control-icon">
-                        <i class="bi bi-thermometer"></i>
-                    </div>
-                </div>
-                <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Daftar</button>
-            </form>
-            <div class="text-center mt-5 text-lg fs-4">
-                <p class='text-gray-600'>Sudah mempunyai akun? <a href="?login" class='font-bold'>Masuk</a>.</p>
             </div>
         </div>
     </div>
-    <div class="col-lg-7 d-none d-lg-block">
-        <div id="auth-right">
 
-        </div>
-    </div>
-</div>
+    <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    <script>
+        const form = document.forms["register"];
+        form.addEventListener("submit", evt => {
+            evt.preventDefault()
 
-    </div>
+            if (form["password"].value !== form["password2"].value) {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Password tidak sama'
+                });
+                return;
+            }
+
+            if (form["avatarId"].value === "") {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Pilih salah satu avatar'
+                });
+                return;
+            }
+
+            const formData = new FormData(form)
+            const data = JSON.stringify(Object.fromEntries(formData))
+
+            fetch("api/register.php", {
+                method: "POST",
+                headers: {
+                    "ContentType": "application/json;charset=utf-8"
+                },
+                body: data
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.statusCode === 200) {
+                        Swal.fire({
+                            text: 'Berhasil membuat akun',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Masuk'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = ".?login"
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: result.message
+                        });
+                    }
+                });
+        })
+    </script>
+
 </body>
 
 </html>
