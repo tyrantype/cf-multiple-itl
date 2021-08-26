@@ -1,11 +1,13 @@
 <?php
 
 require_once "Database.php";
-require_once "TypesPictures.php";
+require_once "Results.php";
+require_once "ResultsDetails.php";
 
 class CertaintyFactorV2 {
 
     public static function calculate($userInterests) {
+        $input = $userInterests;
         $userInterests = CertaintyFactorV2::getData($userInterests);
         $types = CertaintyFactorV2::groupInterestsByType($userInterests);
         $types = CertaintyFactorV2::calculateCF($types);
@@ -13,6 +15,8 @@ class CertaintyFactorV2 {
 
         $selectedRules = $userInterests;
 
+        $resultResponse = Results::create($types[0]["id"], $types[0]["cf"]);
+        $resultDetailResponse = ResultsDetails::create($resultResponse->insertId, $input);
 
         http_response_code(200);
         $response = new stdClass();

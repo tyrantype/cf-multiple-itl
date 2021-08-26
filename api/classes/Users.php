@@ -175,7 +175,7 @@ class Users
             $response = new stdClass();
             http_response_code(409);
             $response->statusCode = 409;
-            $response->message = "Username telah digunakan";
+            $response->message = "NIS telah digunakan";
         }
         return $response;
     }

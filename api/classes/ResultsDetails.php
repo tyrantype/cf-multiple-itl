@@ -64,32 +64,22 @@ class ResultsDetails
         return $response;
     }
 
-    public static function create($data): stdClass
+    public static function create($resultId, $userInterests): stdClass
     {
         $response = new stdClass();
-        
-        $count = (int) Database::query("SELECT COUNT(*) count FROM results_details WHERE result_id = '$data->resultId' AND interest_id = '$data->interestId'")->data[0]["count"];
-        if ($count < 1) {
+
+        for ($i = 0; $i < count($userInterests); $i++) {
             $sql = "
-            INSERT INTO 
-                results_details(result_id, interest_id, value) 
-            VALUES 
-                (
-                    '$data->resultId',
-                    '$data->interestId', 
-                    '$data->value'
-                )
-        ";
+                INSERT INTO 
+                    results_details(result_id, interest_id, value) 
+                VALUES 
+                    ('$resultId', '" . $userInterests[$i]->id . "', '" . $userInterests[$i]->userCF . "')";
             $response = Database::query($sql);
-            http_response_code(200);
-            $response->statusCode = 200;
-            $response->message = "Berhasil membuat data detail hasil";
-        } else {
-            $response = new stdClass();
-            http_response_code(409);
-            $response->statusCode = 409;
-            $response->message = "Data resultId dan interestId telah digunakan";
         }
+        
+        http_response_code(200);
+        $response->statusCode = 200;
+        $response->message = "Berhasil membuat data detail hasil";
         return $response;
     }
 

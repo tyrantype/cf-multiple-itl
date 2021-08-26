@@ -1,7 +1,9 @@
 <?php
+session_start();
 
 date_default_timezone_set("Asia/Jakarta");
 require_once "Database.php";
+require_once "Users.php";
 
 class Results
 {
@@ -65,18 +67,24 @@ class Results
         return $response;
     }
 
-    public static function create($data): stdClass
+    public static function create($typeId, $cfValue): stdClass
     {
+        $userId = "NULL";
+        if (isset($_SESSION["username"])) {
+            $response = Users::get($_SESSION["username"]);
+            $userId = "'" . $response->data[0]["id"] . "'";
+        }
+        
         $newID = Results::getNewID();
-        $dateTime = date('Y-m-d H:i:s', time());
         $sql = "
             INSERT INTO 
-                results(id, user_id, datetime) 
+                results(id, user_id, type_id, cf_value) 
             VALUES 
                 (
                     '$newID', 
-                    '$data->userId',
-                    '$dateTime'
+                    $userId,
+                    '$typeId',
+                    '$cfValue'
                 )
         ";
         
