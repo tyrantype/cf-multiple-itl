@@ -110,12 +110,17 @@ document.forms["demoForm"].addEventListener("submit", evt => {
     evt.preventDefault();
 
     if (tempData.length !== 0) {
+        let postData = {
+            saveHistory: "yes",
+            userInterests: tempData
+        };
+
         fetch("../api/certainty-factor-v2", {
             method: "POST",
             headers: {
                 "ContentType": "application/json;charset=utf-8"
             },
-            body: JSON.stringify(tempData)
+            body: JSON.stringify(postData)
         })
             .then(response => response.json())
             .then(result => {

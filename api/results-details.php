@@ -8,7 +8,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
         if (isset($_GET["view"])) {
             if ($_GET["view"] == "single") {
-                $response = ResultsDetails::get($_GET["resultId"], $_GET["interestId"]);
+                $response = ResultsDetails::get($_GET["id"]);
             } else {
                 $response = ResultsDetails::getAll();
             }
@@ -18,11 +18,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "POST":
-            if (file_get_contents("php://input") !== null) {
-                $response = ResultsDetails::create(json_decode(file_get_contents("php://input")));
-            } else {
-                $response = ResultsDetails::badRequest();
-            }
+            // if (file_get_contents("php://input") !== null) {
+            //     $response = ResultsDetails::create(json_decode(file_get_contents("php://input")));
+            // } else {
+            //     $response = ResultsDetails::badRequest();
+            // }
         break;
 
     case "DELETE":

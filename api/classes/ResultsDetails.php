@@ -4,7 +4,7 @@ require_once "Database.php";
 
 class ResultsDetails
 {
-    public static function get($resultId, $interestId): stdClass
+    public static function get($resultId): stdClass
     {
         $sql = "
             SELECT 
@@ -20,8 +20,6 @@ class ResultsDetails
                  i.id = rd.interest_id
             WHERE 
                 rd.result_id = '$resultId'
-                AND
-                rd.interest_id = '$interestId'
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {

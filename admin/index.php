@@ -102,8 +102,8 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                             </a>
                         </li>
 
-                        <li class="sidebar-item  sidebar-item-riwayat-identifikasi">
-                            <a href="?riwayat-identifikasi" class='sidebar-link'>
+                        <li class="sidebar-item  sidebar-item-history">
+                            <a href="?history" class='sidebar-link'>
                                 <i class="bi bi-clock-history"></i>
                                 <span>Riwayat</span>
                             </a>
@@ -209,6 +209,10 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 case "demo":
                     include_once "pages/demo.html";
                     $script = "demo.js";
+                    break;
+                case "history":
+                    include_once "pages/history.html";
+                    $script = "history.js";
                     break;
                 case "logout":
                     session_destroy();

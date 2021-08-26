@@ -6,17 +6,18 @@ require_once "ResultsDetails.php";
 
 class CertaintyFactorV2 {
 
-    public static function calculate($userInterests) {
-        $input = $userInterests;
-        $userInterests = CertaintyFactorV2::getData($userInterests);
+    public static function calculate($data) {
+        $userInterests = CertaintyFactorV2::getData($data->userInterests);
         $types = CertaintyFactorV2::groupInterestsByType($userInterests);
         $types = CertaintyFactorV2::calculateCF($types);
         usort($types, function($a, $b) {return $a["cf"] < $b["cf"];});
 
         $selectedRules = $userInterests;
 
-        $resultResponse = Results::create($types[0]["id"], $types[0]["cf"]);
-        $resultDetailResponse = ResultsDetails::create($resultResponse->insertId, $input);
+        if ($data->saveHistory === "yes") {
+            $resultResponse = Results::create($types[0]["id"], $types[0]["cf"]);
+            $resultDetailResponse = ResultsDetails::create($resultResponse->insertId, $data->userInterests);
+        }
 
         http_response_code(200);
         $response = new stdClass();

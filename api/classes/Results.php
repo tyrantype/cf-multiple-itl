@@ -13,15 +13,22 @@ class Results
             SELECT 
                 r.id id, 
                 r.user_id userId,
+                u.username username,
                 u.full_name fullName,
-                r.datetime datetime,
-                r.cf_value cfValue
+                r.type_id typeId,
+                t.name typeName,
+                r.cf_value cfValue,
+                r.datetime datetime
             FROM 
                 results r
             INNER JOIN
                 users u
                 ON
                 u.id = r.user_id
+            INNER JOIN
+                types t
+            ON
+                t.id = r.type_id
             WHERE 
                 r.id = '$id'
         ";
@@ -29,11 +36,11 @@ class Results
         if (isset($response->data)) {
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Berhasil mendapatkan data hasil";
+            $response->message = "Berhasil mendapatkan data riwayat";
         } else {
             http_response_code(404);
             $response->statusCode = 404;
-            $response->message = "Data hasil tidak ditemukan";
+            $response->message = "Data riwayat tidak ditemukan";
         }
         return $response;
     }
@@ -44,25 +51,34 @@ class Results
             SELECT 
                 r.id id, 
                 r.user_id userId,
+                u.username username,
                 u.full_name fullName,
-                r.datetime datetime,
-                r.cf_value cfValue
+                r.type_id typeId,
+                t.name typeName,
+                r.cf_value cfValue,
+                r.datetime datetime
             FROM 
                 results r
             INNER JOIN
                 users u
                 ON
                 u.id = r.user_id
+            INNER JOIN
+                types t
+            ON
+                t.id = r.type_id
+            ORDER BY
+                r.datetime DESC
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Berhasil mendapatkan data hasil";
+            $response->message = "Berhasil mendapatkan data riwayat";
         } else {
             http_response_code(200);
             $response->statusCode = 200;
-            $response->message = "Data hasil kosong";
+            $response->message = "Data riwayat kosong";
         }
         return $response;
     }
@@ -74,7 +90,7 @@ class Results
             $response = Users::get($_SESSION["username"]);
             $userId = "'" . $response->data[0]["id"] . "'";
         }
-        
+
         $newID = Results::getNewID();
         $sql = "
             INSERT INTO 
@@ -90,7 +106,7 @@ class Results
         
         $response = Database::query($sql);
         $response->statusCode = 200;
-        $response->message = "Berhasil membuat hasil";
+        $response->message = "Berhasil membuat riwayat";
         $response->insertId = $newID;
         http_response_code(200);
         return $response;
@@ -154,7 +170,7 @@ class Results
             http_response_code(404);
             $response = new stdClass();
             $response->statusCode = 404;
-            $response->message = "Gagal menghapus data hasil (Not Found)";
+            $response->message = "Gagal menghapus data riwayat (Not Found)";
         } else {
             $sql = "
                 DELETE FROM
@@ -164,7 +180,7 @@ class Results
             ";
             $response = Database::query($sql);
             $response->statusCode = 200;
-            $response->message = "Berhasil menghapus hasil";
+            $response->message = "Berhasil menghapus riwayat";
             http_response_code(200);
         }
         return $response;
