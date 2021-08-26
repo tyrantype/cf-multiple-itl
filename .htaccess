@@ -34,6 +34,7 @@ RewriteRule ^api/rule/(.*)$   api/rules.php?view=single&id=$1 [NC,QSA,L]
 RewriteRule ^api/result$   api/results.php [NC,QSA,L]
 RewriteRule ^api/results$   api/results.php?view=all [NC,QSA,L]
 RewriteRule ^api/result/(.*)$   api/results.php?view=single&id=$1 [NC,QSA,L]
+RewriteRule ^api/results/(.*)$   api/results.php?view=all&username=$1 [NC,QSA,L]
 
 RewriteRule ^api/results-details$   api/results-details.php?view=all [NC,QSA,L]
 RewriteRule ^api/result-detail/(.*)$   api/results-details.php?view=single&id=$1 [NC,QSA,L]

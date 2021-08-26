@@ -45,6 +45,44 @@ class Results
         return $response;
     }
 
+    public static function getAllByUsername($username): stdClass
+    {
+        $sql = "
+            SELECT 
+                r.id id, 
+                r.user_id userId,
+                u.username username,
+                u.full_name fullName,
+                r.type_id typeId,
+                t.name typeName,
+                r.cf_value cfValue,
+                r.datetime datetime
+            FROM 
+                results r
+            INNER JOIN
+                users u
+                ON
+                u.id = r.user_id
+            INNER JOIN
+                types t
+            ON
+                t.id = r.type_id
+            WHERE 
+                u.username = '$username'
+        ";
+        $response = Database::query($sql);
+        if (isset($response->data)) {
+            http_response_code(200);
+            $response->statusCode = 200;
+            $response->message = "Berhasil mendapatkan data riwayat";
+        } else {
+            http_response_code(404);
+            $response->statusCode = 404;
+            $response->message = "Data riwayat tidak ditemukan";
+        }
+        return $response;
+    }
+
     public static function getAll(): stdClass
     {
         $sql = "

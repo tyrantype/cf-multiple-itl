@@ -6,6 +6,16 @@ function refreshHistoryTable() {
     fetch("../api/results")
         .then(response => response.json())
         .then(result => {
+
+            if (result.data === undefined) {
+                document.querySelector("#emptyLabel").classList.toggle("d-none")
+                if (typeof historyDataTable !== "undefined") {
+                    historyDataTable.destroy();
+                    historyDataTable = undefined;
+                }
+                return;
+            }
+
             let historyTable = document.querySelector('#historyTable');
             historyTable.innerHTML = "";
 
@@ -14,7 +24,7 @@ function refreshHistoryTable() {
                 historyDataTable = undefined;
             }
             let obj = {
-                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "CF", "Opsi"],
+                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "Opsi"],
                 data: []
             };
 
@@ -27,9 +37,13 @@ function refreshHistoryTable() {
                 }
                 obj.data[i].push("");
 
+                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent"})
+
                 let time = dayjs(obj.data[i][7]).fromNow();
                 obj.data[i].splice(7, 1);
                 obj.data[i].splice(0, 0, time);
+
+
             }
 
             console.log(obj.data);

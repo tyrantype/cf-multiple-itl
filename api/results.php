@@ -10,7 +10,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             if ($_GET["view"] == "single") {
                 $response = Results::get($_GET["id"]);
             } else {
-                $response = Results::getAll();
+                if (isset($_GET["username"])) {
+                    $response = Results::getAllByUsername($_GET["username"]);
+                } else {
+                    $response = Results::getAll();
+                }
             }
         } else {
             $response = Results::badRequest();
@@ -18,11 +22,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "POST":
-            if (file_get_contents("php://input") !== null) {
-                $response = Results::create(json_decode(file_get_contents("php://input")));
-            } else {
-                $response = Results::badRequest();
-            }
+            // if (file_get_contents("php://input") !== null) {
+            //     $response = Results::create(json_decode(file_get_contents("php://input")));
+            // } else {
+            //     $response = Results::badRequest();
+            // }
         break;
 
     case "DELETE":
