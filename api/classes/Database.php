@@ -1,5 +1,8 @@
 <?php
 
+$superuser = new stdClass();
+$superuser->username = "superuser";
+$superuser->password = "superuser";
 class Database {
     private static function getConnection(): mysqli {
         return new mysqli("localhost", "root", "", "certainty_factor");

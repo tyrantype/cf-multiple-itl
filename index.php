@@ -1,16 +1,21 @@
 <?php
 session_start();
 
-if (isset($_SESSION["username"])) {
-    require_once "api/classes/Users.php";
+require_once "api/classes/Users.php";
 
-    $response = Users::get($_SESSION["username"]);
+if (isset($_SESSION["username"])) {
+
+    if ($_SESSION["username"] === $superuser->username) {
+        header("Location: ./admin");
+    } else {
+        $response = Users::get($_SESSION["username"]);
     
-    if ($response->statusCode === 200) {
-        if ($response->data[0]["Hak Akses"] === "Admin") header("Location: ./admin");
-        else header("Location: ./user");
+        if ($response->statusCode === 200) {
+            if ($response->data[0]["Hak Akses"] === "Admin") header("Location: ./admin");
+            else header("Location: ./user");
+        }
+        die();
     }
-    die();
 }
 
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {

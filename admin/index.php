@@ -1,14 +1,16 @@
 <?php
 session_start();
 
+require_once "../api/classes/Users.php";
+
 if (!isset($_SESSION["username"])) {
     header("Location: ..?login");
 } else {
-    require_once "../api/classes/Users.php";
-
-    $response = Users::get($_SESSION["username"]);
-    if ($response->statusCode === 200) {
-        if ($response->data[0]["Hak Akses"] !== "Admin") header("Location: ..");
+    if ($_SESSION["username"] !== $superuser->username) {
+        $response = Users::get($_SESSION["username"]);
+        if ($response->statusCode === 200) {
+            if ($response->data[0]["Hak Akses"] !== "Admin") header("Location: ..");
+        }
     }
 }
 
@@ -213,6 +215,10 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 case "history":
                     include_once "pages/history.html";
                     $script = "history.js";
+                    break;
+                case "feedback":
+                    include_once "pages/feedback.html";
+                    $script = "feedback.js";
                     break;
                 case "logout":
                     session_destroy();

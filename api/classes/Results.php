@@ -123,8 +123,10 @@ class Results
 
     public static function create($typeId, $cfValue): stdClass
     {
+        global $superuser;
+        
         $userId = "NULL";
-        if (isset($_SESSION["username"])) {
+        if (isset($_SESSION["username"]) && $_SESSION["username"] !== $superuser->username) {
             $response = Users::get($_SESSION["username"]);
             $userId = "'" . $response->data[0]["id"] . "'";
         }
