@@ -14,6 +14,7 @@
             $response = Users::login($data->username, $data->password);
             if ($response->statusCode === 200) {
                 $_SESSION["username"] = $data->username;
+                Users::updateLastLogin($data->username);
                 echo '{"loginStatus": "success"}';
             } else {
                 echo '{"loginStatus": "failed"}';

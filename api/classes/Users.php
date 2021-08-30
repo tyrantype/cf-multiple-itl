@@ -180,6 +180,23 @@ class Users
         return $response;
     }
 
+    public static function updateLastLogin($username) {
+        $sql = "
+                UPDATE
+                    users
+                SET
+                    last_login = NOW()
+                WHERE
+                    username = '$username'
+
+            ";
+
+            $response = Database::query($sql);
+            $response->statusCode = 200;
+            $response->message = "Berhasil mengubah data user";
+            http_response_code(200);
+    }
+
     public static function passwordReset($username) {
         $tempUser = Users::get($username);
         if ($tempUser->statusCode != 200) {

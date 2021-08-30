@@ -24,7 +24,7 @@ function refreshFeedbackTable() {
                 feedbackDataTable = undefined;
             }
             let obj = {
-                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "Opsi"],
+                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "Feedback", "Opsi"],
                 data: []
             };
 
@@ -37,10 +37,8 @@ function refreshFeedbackTable() {
                 }
                 obj.data[i].push("");
 
-                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent"})
-
-                let time = dayjs(obj.data[i][7]).fromNow();
-                obj.data[i].splice(7, 1);
+                let time = dayjs(obj.data[i][5]).fromNow();
+                obj.data[i].splice(5, 1);
                 obj.data[i].splice(0, 0, time);
 
 
@@ -50,9 +48,9 @@ function refreshFeedbackTable() {
 
             feedbackDataTable = new simpleDatatables.DataTable(feedbackTable, {
                 columns: [
-                    { select: [1, 2, 5], hidden: true },
+                    { select: [1, 2], hidden: true },
                     {
-                        select: 8,
+                        select: 6,
                         render: function (data, cell, row) {
                             return `
                                 <td>
@@ -89,7 +87,7 @@ function initDeleteFeedback() {
                 cancelButtonText: 'Batal',
                 showLoaderOnConfirm: true,
                 preConfirm: (login) => {
-                    return fetch(`../api/result/${id}`, {
+                    return fetch(`../api/feedback/${id}`, {
                         method: "DELETE",
                         headers: {
                             "ContentType": "application/json;charset=utf-8"
@@ -103,7 +101,7 @@ function initDeleteFeedback() {
                         })
                         .then(result => {
                             showToast(result.statusCode, result.message);
-                            refreshfeedbackTable();
+                            refreshFeedbackTable();
                         })
                         .catch(error => {
                             console.error(error);

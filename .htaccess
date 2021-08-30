@@ -39,6 +39,9 @@ RewriteRule ^api/results/(.*)$   api/results.php?view=all&username=$1 [NC,QSA,L]
 RewriteRule ^api/results-details$   api/results-details.php?view=all [NC,QSA,L]
 RewriteRule ^api/result-detail/(.*)$   api/results-details.php?view=single&id=$1 [NC,QSA,L]
 
+RewriteRule ^api/feedback$   api/feedback.php?view=all [NC,QSA,L]
+RewriteRule ^api/feedback/(.*)$   api/feedback.php?view=single&id=$1 [NC,QSA,L]
+
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php [NC,QSA,L]
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php?view=all [NC,QSA,L]
 RewriteRule ^api/certainty-factor/(.*)$   api/certainty-factor.php?view=single&id=$1 [NC,QSA,L]
