@@ -18,7 +18,8 @@ class Results
                 r.type_id typeId,
                 t.name typeName,
                 r.cf_value cfValue,
-                r.datetime datetime
+                r.datetime datetime,
+                u.avatar_id avatarId
             FROM 
                 results r
             INNER JOIN
@@ -56,7 +57,8 @@ class Results
                 r.type_id typeId,
                 t.name typeName,
                 r.cf_value cfValue,
-                r.datetime datetime
+                r.datetime datetime,
+                u.avatar_id avatarId
             FROM 
                 results r
             INNER JOIN
@@ -94,7 +96,8 @@ class Results
                 r.type_id typeId,
                 t.name typeName,
                 r.cf_value cfValue,
-                r.datetime datetime
+                r.datetime datetime,
+                u.avatar_id avatarId
             FROM 
                 results r
             INNER JOIN

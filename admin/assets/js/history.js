@@ -24,7 +24,7 @@ function refreshHistoryTable() {
                 historyDataTable = undefined;
             }
             let obj = {
-                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "Opsi"],
+                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "_avatarId", "Opsi"],
                 data: []
             };
 
@@ -50,9 +50,20 @@ function refreshHistoryTable() {
 
             historyDataTable = new simpleDatatables.DataTable(historyTable, {
                 columns: [
-                    { select: [1, 2, 5], hidden: true },
+                    { select: [1, 2, 5, 8], hidden: true },
+                    { 
+                        select: 4,
+                        render: function (data, cell, row) {
+                            return `
+                            <div class="avatar avatar-sm bg-warning me-2">
+                                <img src="../assets/images/faces/${row.children.item(8).innerText}.jpg">
+                            </div>
+                            ${data}
+                            `;
+                        }
+                    },
                     {
-                        select: 8,
+                        select: 9,
                         render: function (data, cell, row) {
                             return `
                                 <td>

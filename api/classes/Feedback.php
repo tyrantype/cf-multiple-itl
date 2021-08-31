@@ -13,8 +13,9 @@ class Feedback
                 u.username username,
                 u.full_name fullname,
                 f.content content,
-                f.datetime datetime
-            FROM 
+                f.datetime datetime,
+                u.avatar_id avatarId
+                FROM 
                 feedback f
             INNER JOIN
                 users u
@@ -45,8 +46,9 @@ class Feedback
                 u.username username,
                 u.fullname fullname,
                 f.content content,
-                f.datetime datetime
-            FROM 
+                f.datetime datetime,
+                u.avatar_id avatarId
+                FROM 
                 feedback f
             INNER JOIN
                 users u
@@ -77,13 +79,15 @@ class Feedback
                 u.username username,
                 u.full_name fullname,
                 f.content content,
-                f.datetime datetime
-            FROM 
+                f.datetime datetime,
+                u.avatar_id avatarId
+                FROM 
                 feedback f
             INNER JOIN
                 users u
                 ON
                 u.id = f.user_id
+            ORDER BY f.datetime DESC
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {

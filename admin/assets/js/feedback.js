@@ -24,7 +24,7 @@ function refreshFeedbackTable() {
                 feedbackDataTable = undefined;
             }
             let obj = {
-                headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "Feedback", "Opsi"],
+                headings: ["Waktu", "_id", "_userId", "NIS", "Nama","Feedback", "_avatarId", "Opsi"],
                 data: []
             };
 
@@ -48,9 +48,20 @@ function refreshFeedbackTable() {
 
             feedbackDataTable = new simpleDatatables.DataTable(feedbackTable, {
                 columns: [
-                    { select: [1, 2], hidden: true },
+                    { select: [1, 2, 6], hidden: true },
+                    { 
+                        select: 4,
+                        render: function (data, cell, row) {
+                            return `
+                            <div class="avatar avatar-sm me-2">
+                                <img src="../assets/images/faces/${row.children.item(6).innerText}.jpg">
+                                <span class="ms-2">${data}</span>
+                            </div>
+                            `;
+                        }
+                    },
                     {
-                        select: 6,
+                        select: 7,
                         render: function (data, cell, row) {
                             return `
                                 <td>
