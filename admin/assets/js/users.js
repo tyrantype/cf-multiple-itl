@@ -197,30 +197,30 @@ function initHistoryModalEvent() {
                 .then(response => response.json())
                 .then(result => {
                     if (result.statusCode === 200) {
-                        let obj = {
-                            headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "Opsi"],
-                            data: []
-                        };
+                        // let obj = {
+                        //     headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "_avatarId", "Opsi"],
+                        //     data: []
+                        // };
 
-                        for (let i = 0; i < result.data.length; i++) {
-                            obj.data[i] = [];
-                            for (let p in result.data[i]) {
-                                if (result.data[i].hasOwnProperty(p)) {
-                                    obj.data[i].push(result.data[i][p]);
-                                }
-                            }
-                            obj.data[i].push("");
+                        // for (let i = 0; i < result.data.length; i++) {
+                        //     obj.data[i] = [];
+                        //     for (let p in result.data[i]) {
+                        //         if (result.data[i].hasOwnProperty(p)) {
+                        //             obj.data[i].push(result.data[i][p]);
+                        //         }
+                        //     }
+                        //     obj.data[i].push("");
 
-                            obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", { style: "percent" })
+                        //     obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", { style: "percent" })
 
-                            let time = dayjs(obj.data[i][7]).fromNow();
-                            obj.data[i].splice(7, 1);
-                            obj.data[i].splice(0, 0, time);
-                        }
+                        //     let time = dayjs(obj.data[i][7]).fromNow();
+                        //     obj.data[i].splice(7, 1);
+                        //     obj.data[i].splice(0, 0, time);
+                        // }
 
 
                         function refreshHistoryTable() {
-                            fetch("../api/results")
+                            fetch("../api/results/" + username)
                                 .then(response => response.json())
                                 .then(result => {
 
@@ -237,7 +237,7 @@ function initHistoryModalEvent() {
                                         historyDataTable = undefined;
                                     }
                                     let obj = {
-                                        headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "Opsi"],
+                                        headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "_avatarId", "Opsi"],
                                         data: []
                                     };
 
@@ -255,17 +255,13 @@ function initHistoryModalEvent() {
                                         let time = dayjs(obj.data[i][7]).fromNow();
                                         obj.data[i].splice(7, 1);
                                         obj.data[i].splice(0, 0, time);
-
-
                                     }
-
-                                    console.log(obj.data);
 
                                     historyDataTable = new simpleDatatables.DataTable(historyTable, {
                                         columns: [
-                                            { select: [1, 2, 5], hidden: true },
+                                            { select: [1, 2, 5, 8], hidden: true },
                                             {
-                                                select: 8,
+                                                select: 9,
                                                 render: function (data, cell, row) {
                                                     return `
                                                         <td>
@@ -476,10 +472,7 @@ function initHistoryModalEvent() {
                         refreshHistoryTable()
                         historyModal.show()
                     } else {
-                        Swal.fire({
-                            icon: 'error',
-                            text: 'Data kosong'
-                        });
+                        showToast(404, "Data riwayat kosong")
                     }
                 })
         })
