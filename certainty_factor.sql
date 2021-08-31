@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2021 at 03:50 AM
+-- Generation Time: Aug 31, 2021 at 09:54 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -29,9 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `feedback` (
   `id` int(11) NOT NULL,
-  `username` varchar(5) NOT NULL,
-  `content` varchar(1000) NOT NULL
+  `user_id` varchar(5) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `user_id`, `content`, `datetime`) VALUES
+(4, 'U0001', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-30 14:25:11'),
+(5, 'U0003', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-31 14:49:38');
 
 -- --------------------------------------------------------
 
@@ -195,6 +204,19 @@ CREATE TABLE `results` (
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
+('R0001', NULL, 'T0005', 0.72, '2021-08-30 19:12:44'),
+('R0002', 'U0001', 'T0004', 0.7, '2021-08-31 13:10:37'),
+('R0003', 'U0001', 'T0001', 0.8, '2021-08-31 13:16:02'),
+('R0005', 'U0003', 'T0003', 0.72, '2021-08-31 13:30:26'),
+('R0008', 'U0003', 'T0007', 0.857, '2021-08-31 13:30:48'),
+('R0009', 'U0001', 'T0002', 0.79, '2021-08-31 14:30:14'),
+('R0010', 'U0001', 'T0001', 0.7, '2021-08-31 14:30:25');
+
 -- --------------------------------------------------------
 
 --
@@ -206,6 +228,47 @@ CREATE TABLE `results_details` (
   `interest_id` varchar(5) NOT NULL,
   `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `results_details`
+--
+
+INSERT INTO `results_details` (`result_id`, `interest_id`, `value`) VALUES
+('R0001', 'I0027', 0.4),
+('R0001', 'I0029', 0.6),
+('R0001', 'I0041', 0.2),
+('R0001', 'I0044', 0.8),
+('R0001', 'I0053', 1),
+('R0002', 'I0021', 0.6),
+('R0002', 'I0033', 1),
+('R0002', 'I0038', 0.8),
+('R0002', 'I0041', 0.4),
+('R0002', 'I0049', 0.2),
+('R0003', 'I0005', 0.4),
+('R0003', 'I0026', 1),
+('R0003', 'I0028', 0.2),
+('R0003', 'I0050', 1),
+('R0003', 'I0053', 1),
+('R0005', 'I0012', 0.2),
+('R0005', 'I0021', 0.8),
+('R0005', 'I0022', 1),
+('R0005', 'I0023', 0.6),
+('R0005', 'I0030', 0.8),
+('R0008', 'I0012', 0.2),
+('R0008', 'I0013', 1),
+('R0008', 'I0019', 0.2),
+('R0008', 'I0021', 0.8),
+('R0008', 'I0022', 1),
+('R0008', 'I0023', 0.8),
+('R0008', 'I0024', 1),
+('R0008', 'I0030', 0.8),
+('R0008', 'I0052', 1),
+('R0009', 'I0003', 1),
+('R0009', 'I0006', 1),
+('R0009', 'I0041', 1),
+('R0010', 'I0014', 0.6),
+('R0010', 'I0028', 0.8),
+('R0010', 'I0051', 1);
 
 -- --------------------------------------------------------
 
@@ -290,6 +353,7 @@ INSERT INTO `rules` (`id`, `type_id`, `interest_id`, `mb`, `md`) VALUES
 --
 
 CREATE TABLE `setting` (
+  `id` int(11) NOT NULL,
   `school_name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -298,8 +362,27 @@ CREATE TABLE `setting` (
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`school_name`, `address`) VALUES
-('SDN Kwaron I', 'Diwek, Jombang');
+INSERT INTO `setting` (`id`, `school_name`, `address`) VALUES
+(1, 'SDN Kwaron I', 'Jombang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `superuser`
+--
+
+CREATE TABLE `superuser` (
+  `username` varchar(50) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `superuser`
+--
+
+INSERT INTO `superuser` (`username`, `password`, `name`) VALUES
+('superuser', '$2y$10$i/acvAwJT0QbmstOfuOm/.S5REbSZvdP5Wy2FWlFg5hkzLltZtyzy', 'Superuser');
 
 -- --------------------------------------------------------
 
@@ -380,7 +463,7 @@ INSERT INTO `types_pictures` (`id`, `type_id`, `file_name`) VALUES
 CREATE TABLE `users` (
   `id` varchar(5) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
   `date_of_birth` date DEFAULT current_timestamp(),
@@ -395,8 +478,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_of_birth`, `address`, `privilege`, `avatar_id`, `last_login`) VALUES
-('U0001', '1001', '$2y$10$DYwZUHvSBPjCfQD.st7DhuzEMMd6/Andqb8BZ1r0TQ/uWobiYATuK', 'Yusuf Effendi', 'Laki-Laki', '1999-08-22', 'Diwek', 'Admin', 2, '2021-07-14 01:36:29'),
-('U0002', '2001', '$2y$10$poD7TkNcO1WcDJTKmk.mbOz05BQeM.98An3yHJKE3k5aLg1kbbMne', 'Aldi Kurniawan', 'Laki-Laki', '1999-08-22', 'Sugihwaras', 'User', 1, '2021-07-11 03:00:27');
+('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-08-31 13:03:08'),
+('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'Admin', 5, NULL),
+('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'Admin', 3, '2021-08-31 13:29:49');
 
 --
 -- Indexes for dumped tables
@@ -406,7 +490,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `feedback_ibfk_1` (`user_id`);
 
 --
 -- Indexes for table `interests_v2`
@@ -438,6 +523,18 @@ ALTER TABLE `rules`
   ADD KEY `type_id` (`type_id`);
 
 --
+-- Indexes for table `setting`
+--
+ALTER TABLE `setting`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `superuser`
+--
+ALTER TABLE `superuser`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indexes for table `types`
 --
 ALTER TABLE `types`
@@ -465,7 +562,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `setting`
+--
+ALTER TABLE `setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `types_pictures`
@@ -478,10 +581,16 @@ ALTER TABLE `types_pictures`
 --
 
 --
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `results`
 --
 ALTER TABLE `results`
-  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `results_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
 
 --
