@@ -36,6 +36,8 @@ function refreshFeedbackTable() {
                     }
                 }
                 obj.data[i].push("");
+                
+                obj.data[i][3] = obj.data[i][3].split(" ")[0]
 
                 let time = dayjs(obj.data[i][5]).fromNow();
                 obj.data[i].splice(5, 1);
