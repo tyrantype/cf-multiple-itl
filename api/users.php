@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 header('Content-Type: application/json');
 
@@ -26,11 +27,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "PATCH":
-            if (isset($_GET["username"]) && file_get_contents("php://input") !== null) {
-                $response = Users::update($_GET["username"], json_decode(file_get_contents("php://input")));
-            } else {
-                $response = Users::badRequest();
+        if (isset($_GET["username"]) && file_get_contents("php://input") !== null) {
+            $data = json_decode(file_get_contents("php://input"));
+            $response = Users::update($_GET["username"], $data);
+            if ($response->statusCode === 200 && $_SESSION["username"] === $_GET["username"]) {
+                $_SESSION["username"] = $data->username;
             }
+        } else {
+            $response = Users::badRequest();
+        }
         break;
 
     case "DELETE":
