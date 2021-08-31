@@ -314,7 +314,7 @@ fetch("../api/feedback")
                     <img src="../assets/images/faces/${v.avatarId}.jpg">
                 </div>
                 <div class="name ms-4">
-                    <h5 class="mb-1">${v.fullname}</h5>
+                    <h5 class="mb-1">${v.fullname.split(" ")[0]}</h5>
                     <h6 class="text-muted mb-0">@${v.username}</h6>
                 </div>
             </div>

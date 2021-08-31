@@ -2,16 +2,18 @@
 session_start();
 
 require_once "../api/classes/Users.php";
-
-if (!isset($_SESSION["username"])) {
-    header("Location: ..?login");
-} else {
+if (isset($_SESSION["username"])) {
     if ($_SESSION["username"] !== $superuser->username) {
         $response = Users::get($_SESSION["username"]);
         if ($response->statusCode === 200) {
-            if ($response->data[0]["Hak Akses"] !== "Admin") header("Location: ..");
+            if ($response->data[0]["Hak Akses"] !== "Admin") {
+                header("Location: ..");
+                die();
+            };
         }
     }
+} else {
+    header("Location: ..?login");
 }
 
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
