@@ -55,7 +55,7 @@ function refreshTypesDataTable() {
                             return `
                                 <td>
                                     <div class="d-flex">
-                                        <button id="btnPreview" class="btn btn-light-info d-grid place-items-center me-1" data-bs-toggle="modal" data-bs-target="#previewModal" data-bs-id="${row.children.item(1).innerText}" data-bs-name="${row.children.item(2).innerText}">Preview</i></button>
+                                        <button id="btnPreview" class="btn btn-light-info d-grid place-items-center me-1" data-bs-toggle="modal" data-bs-target="#previewModal" data-bs-id="${row.children.item(1).innerText}" data-bs-name="${row.children.item(2).innerText}">Lihat</i></button>
                                         <button class="popover-option btn btn-light-primary font-bold"  data-bs-id='${row.children.item(1).innerText}' data-bs-name='${row.children.item(2).innerText}'>...</button>
                                     </div>
                                 </td>

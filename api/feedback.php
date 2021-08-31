@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 header('Content-Type: application/json');
 
@@ -19,7 +20,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     case "POST":
             if (file_get_contents("php://input") !== null) {
-                $response = Feedback::create(json_decode(file_get_contents("php://input")));
+                $response = Feedback::create($_SESSION["username"], json_decode(file_get_contents("php://input")));
             } else {
                 $response = Feedback::badRequest();
             }

@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="../assets/vendors/simple-datatables/style.css">
+<link rel="stylesheet" href="../assets/vendors/toastify/toastify.css">
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Rules</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header float-start float-lg-end'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href=".">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Riwayat</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="card">
+        <div class="card-body">
+            <h6 id="emptyLabel" class="d-none">Data Kosong</h6>
+            <table class='table table-hover' id="historyTable">
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  Detail -->
+<div class="modal fade" id="resultModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Detail Riwayat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body mb-0">
+
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                            </div>
+                            <div class="carousel-inner">
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDetail" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselDetail" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="true">Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-calculate-tab" data-bs-toggle="pill" data-bs-target="#pills-calculate" type="button" role="tab" aria-controls="pills-calculate" aria-selected="false">Perhitungan</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                        <div class="card mb-0">
+                            <div class="card-content">
+                                <div class="card-body p-0">
+                                    <h4 id="name" class="card-title"></h4>
+                                    <h6 id="fields"></h6>
+                                </div>
+
+                                <div class="card-body px-0">
+                                    <h6 class="card-subtitle">Keterangan</h6>
+                                    <p id="detail" class="card-text"></p>
+                                </div>
+
+                                <div class="card-body px-0">
+                                    <h6 class="card-subtitle">Saran</h6>
+                                    <p id="advice" class="card-text"></p>
+                                </div>
+
+                                <div class="card-body px-0">
+                                    <h6 class="card-subtitle">Kemungkinan Lain</h6>
+                                    <ul id="otherPossibilities">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-calculate" role="tabpanel" aria-labelledby="pills-calculate-tab">
+                        <div class="card mb-0">
+                            <div class="card-header bg-light py-3">
+                                Rule yang dipilih
+                            </div>
+                            <div class="card-body">
+                                <table class='table' id="selectedRules">
+                                </table>
+                            </div>
+                        </div>
+    
+                        <div class="card">
+                            <div class="card-header bg-light py-3">
+                                Perhitungan Certainty Factor
+                            </div>
+                            <div class="card-body">
+                                <ul id="formula">
+                                </ul>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script src="../assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="../assets/vendors/toastify/toastify.js"></script>

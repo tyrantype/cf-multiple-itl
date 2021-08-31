@@ -1,6 +1,7 @@
 <?php
 
 require_once "Database.php";
+require_once "Users.php";
 
 class Feedback
 {
@@ -102,21 +103,23 @@ class Feedback
         return $response;
     }
 
-    public static function create($data): stdClass
+    public static function create($username, $data): stdClass
     {
         $response = new stdClass();
+        $user = Users::get($username);
+        $user = $user->data[0]["id"];
         $sql = "
             INSERT INTO 
                 feedback(user_id, content) 
             VALUES 
                 (
-                    '$data->userId',
+                    '$user',
                     '$data->content'
                 )
         ";
         $response = Database::query($sql);
         $response->statusCode = 200;
-        $response->message = "Berhasil menambah data";
+        $response->message = "Berhasil mengirim feedback";
         http_response_code(200);
 
         return $response;

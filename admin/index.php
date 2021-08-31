@@ -13,7 +13,8 @@ if (isset($_SESSION["username"])) {
         }
     }
 } else {
-    header("Location: ..?login");
+    header("Location: ..");
+    die();
 }
 
 if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !== "") {
