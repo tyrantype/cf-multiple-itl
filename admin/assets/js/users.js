@@ -42,10 +42,10 @@ function refreshUsersDataTable() {
                         select: 2,
                         render: function (data, cell, row) {
                             return `
-                            <div class="avatar avatar-sm bg-warning me-2">
+                            <div class="avatar avatar-sm me-2">
                                 <img src="../assets/images/faces/${row.children.item(9).innerText}.jpg">
+                                <span class="ms-2">${data}</span>
                             </div>
-                            <span>${data}</span>
                             `;
                         }
                     },
@@ -197,28 +197,6 @@ function initHistoryModalEvent() {
                 .then(response => response.json())
                 .then(result => {
                     if (result.statusCode === 200) {
-                        // let obj = {
-                        //     headings: ["Waktu", "_id", "_userId", "NIS", "Nama", "_typeid", "Tipe", "Nilai CF", "_avatarId", "Opsi"],
-                        //     data: []
-                        // };
-
-                        // for (let i = 0; i < result.data.length; i++) {
-                        //     obj.data[i] = [];
-                        //     for (let p in result.data[i]) {
-                        //         if (result.data[i].hasOwnProperty(p)) {
-                        //             obj.data[i].push(result.data[i][p]);
-                        //         }
-                        //     }
-                        //     obj.data[i].push("");
-
-                        //     obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", { style: "percent" })
-
-                        //     let time = dayjs(obj.data[i][7]).fromNow();
-                        //     obj.data[i].splice(7, 1);
-                        //     obj.data[i].splice(0, 0, time);
-                        // }
-
-
                         function refreshHistoryTable() {
                             fetch("../api/results/" + username)
                                 .then(response => response.json())

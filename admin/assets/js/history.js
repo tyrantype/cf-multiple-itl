@@ -55,10 +55,10 @@ function refreshHistoryTable() {
                         select: 4,
                         render: function (data, cell, row) {
                             return `
-                            <div class="avatar avatar-sm bg-warning me-2">
+                            <div class="avatar avatar-sm me-2">
                                 <img src="../assets/images/faces/${row.children.item(8).innerText}.jpg">
+                                <span class="ms-2">${data}</span>
                             </div>
-                            ${data}
                             `;
                         }
                     },

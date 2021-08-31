@@ -8,6 +8,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+ol li {
+  padding: 0 !important;
+}
+
+.card {
+  border: 0 !important;
+  padding: 2em;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -1282,6 +1292,12 @@ section {
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
+
+.contact {
+    background: linear-gradient(42deg, #5846f9 0%, #7b27d8 100%);
+
+}
+
 .contact .info-box {
   color: #444444;
   text-align: center;

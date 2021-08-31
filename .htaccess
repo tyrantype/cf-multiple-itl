@@ -1,5 +1,8 @@
 RewriteEngine on
 
+RewriteRule ^login$   ?page=login [NC,QSA,L]
+RewriteRule ^register$  ?page=register [NC,QSA,L]
+
 RewriteRule ^api/user$   api/users.php [NC,QSA,L]
 RewriteRule ^api/users$   api/users.php?view=all [NC,QSA,L]
 RewriteRule ^api/user/(.*)$   api/users.php?view=single&username=$1 [NC,QSA,L]
