@@ -32,7 +32,7 @@ function refreshUsersDataTable() {
                 if (data[7] !== null) {
                     data[7] = dayjs(data[7]).fromNow();
                 } else {
-                    data[7] = "---";
+                    data[7] = "-";
                 }
             }
 

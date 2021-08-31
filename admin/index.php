@@ -19,6 +19,18 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
 } else {
     $page = "dashboard";
 }
+
+$account = new stdClass();
+
+if ($_SESSION["username"] === $superuser->username) {
+    $account->data[0]["username"] = $superuser->username;
+    $account->data[0]["Nama Lengkap"] = $superuser->name;
+    $account->data[0]["Hak Akses"] = "Admin";
+    $account->data[0]["avatarId"] = "0";
+} else {
+    $account = Users::get($_SESSION["username"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +70,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="."><img src="../assets/images/logo/sistem-pakar.webp" alt="Logo" srcset=""></a>
+                            <a href="."><img src="../assets/images/logo/logo.png" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -119,13 +131,13 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                         </li>
 
                         <li class="sidebar-item sidebar-item-pengaturan ">
-                            <a href="?pengaturan" class='sidebar-link'>
+                            <a href="?setting" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item sidebar-item-pengaturan ">
+                        <li class="sidebar-item sidebar-item-logout ">
                             <a href="?logout" class='sidebar-link'>
                                 <i class="bi bi-box-arrow-left"></i>
                                 <span>Keluar</span>
@@ -162,17 +174,17 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">Yusuf Effendi</h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            <h6 class="mb-0 text-gray-600"><?= $account->data[0]["Nama Lengkap"] ?></h6>
+                                            <p class="mb-0 text-sm text-gray-600"><?= $account->data[0]["Hak Akses"] ?></p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="../assets/images/faces/2.jpg">
+                                                <img src="../assets/images/faces/<?= $account->data[0]["avatarId"] ?>.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+                                <!-- <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
                                     <li>
                                         <h6 class="dropdown-header">Halo, Yusuf!</h6>
                                     </li>
@@ -182,7 +194,7 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar</a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                     </div>
@@ -219,6 +231,15 @@ if (strpos($_SERVER["REQUEST_URI"], '?') !== false && $_SERVER['QUERY_STRING'] !
                 case "feedback":
                     include_once "pages/feedback.html";
                     $script = "feedback.js";
+                    break;
+                case "setting":
+                    if ($_SESSION["username"] === $superuser->username) {
+                        include_once "pages/setting-superuser.html";
+                        $script = "setting-superuser.js";
+                    } else {
+                        include_once "pages/setting.html";
+                        $script = "setting.js";
+                    }
                     break;
                 case "logout":
                     session_destroy();

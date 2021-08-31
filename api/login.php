@@ -7,9 +7,13 @@
 
         $data = json_decode(file_get_contents("php://input"));
 
-        if ($data->username === $superuser->username && $data->password === $superuser->password) {
-            $_SESSION["username"] = $superuser->username;
-            echo '{"loginStatus": "success"}';
+        if ($data->username === $superuser->username) {
+            if (password_verify($data->password, $superuser->password)) {
+                $_SESSION["username"] = $superuser->username;
+                echo '{"loginStatus": "success"}';
+            } else {
+                echo '{"loginStatus": "failed"}';
+            }
         } else {
             $response = Users::login($data->username, $data->password);
             if ($response->statusCode === 200) {

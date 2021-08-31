@@ -1,8 +1,4 @@
 <?php
-
-$superuser = new stdClass();
-$superuser->username = "superuser";
-$superuser->password = "superuser";
 class Database {
     private static function getConnection(): mysqli {
         return new mysqli("localhost", "root", "", "certainty_factor");
@@ -26,3 +22,10 @@ class Database {
         return $response;
     }
 }
+
+$su = Database::query("SELECT * FROM superuser");
+
+$superuser = new stdClass();
+$superuser->username = $su->data[0]["username"];
+$superuser->password = $su->data[0]["password"];
+$superuser->name = $su->data[0]["name"];

@@ -42,6 +42,11 @@ RewriteRule ^api/result-detail/(.*)$   api/results-details.php?view=single&id=$1
 RewriteRule ^api/feedback$   api/feedback.php?view=all [NC,QSA,L]
 RewriteRule ^api/feedback/(.*)$   api/feedback.php?view=single&id=$1 [NC,QSA,L]
 
+RewriteRule ^api/setting$   api/setting.php [NC,QSA,L]
+
+RewriteRule ^api/my-account$   api/my-account.php [NC,QSA,L]
+RewriteRule ^api/my-account/change-password$   api/my-account.php?change-password=1 [NC,QSA,L]
+
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php [NC,QSA,L]
 RewriteRule ^api/certainty-factor$   api/certainty-factor.php?view=all [NC,QSA,L]
 RewriteRule ^api/certainty-factor/(.*)$   api/certainty-factor.php?view=single&id=$1 [NC,QSA,L]
