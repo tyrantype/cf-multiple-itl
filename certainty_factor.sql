@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 09:54 AM
+-- Generation Time: Aug 31, 2021 at 06:31 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -209,13 +209,13 @@ CREATE TABLE `results` (
 --
 
 INSERT INTO `results` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
-('R0001', NULL, 'T0005', 0.72, '2021-08-30 19:12:44'),
 ('R0002', 'U0001', 'T0004', 0.7, '2021-08-31 13:10:37'),
 ('R0003', 'U0001', 'T0001', 0.8, '2021-08-31 13:16:02'),
 ('R0005', 'U0003', 'T0003', 0.72, '2021-08-31 13:30:26'),
 ('R0008', 'U0003', 'T0007', 0.857, '2021-08-31 13:30:48'),
 ('R0009', 'U0001', 'T0002', 0.79, '2021-08-31 14:30:14'),
-('R0010', 'U0001', 'T0001', 0.7, '2021-08-31 14:30:25');
+('R0010', 'U0001', 'T0001', 0.7, '2021-08-31 14:30:25'),
+('R0011', 'U0002', 'T0004', 0.844, '2021-08-31 20:56:28');
 
 -- --------------------------------------------------------
 
@@ -234,11 +234,6 @@ CREATE TABLE `results_details` (
 --
 
 INSERT INTO `results_details` (`result_id`, `interest_id`, `value`) VALUES
-('R0001', 'I0027', 0.4),
-('R0001', 'I0029', 0.6),
-('R0001', 'I0041', 0.2),
-('R0001', 'I0044', 0.8),
-('R0001', 'I0053', 1),
 ('R0002', 'I0021', 0.6),
 ('R0002', 'I0033', 1),
 ('R0002', 'I0038', 0.8),
@@ -268,7 +263,12 @@ INSERT INTO `results_details` (`result_id`, `interest_id`, `value`) VALUES
 ('R0009', 'I0041', 1),
 ('R0010', 'I0014', 0.6),
 ('R0010', 'I0028', 0.8),
-('R0010', 'I0051', 1);
+('R0010', 'I0051', 1),
+('R0011', 'I0003', 0.2),
+('R0011', 'I0031', 1),
+('R0011', 'I0032', 0.6),
+('R0011', 'I0038', 0.8),
+('R0011', 'I0052', 1);
 
 -- --------------------------------------------------------
 
@@ -478,9 +478,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_of_birth`, `address`, `privilege`, `avatar_id`, `last_login`) VALUES
-('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-08-31 13:03:08'),
-('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'Admin', 5, NULL),
-('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'Admin', 3, '2021-08-31 13:29:49');
+('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-08-31 23:29:17'),
+('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'User', 5, '2021-08-31 20:41:24'),
+('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-08-31 22:18:59');
 
 --
 -- Indexes for dumped tables
@@ -562,7 +562,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `setting`
