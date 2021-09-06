@@ -466,7 +466,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
-  `date_of_birth` date DEFAULT current_timestamp(),
+  `date_of_birth` date DEFAULT '2010-10-10',
   `address` varchar(100) DEFAULT NULL,
   `privilege` enum('User','Admin') NOT NULL DEFAULT 'User',
   `avatar_id` int(11) NOT NULL DEFAULT 1,
