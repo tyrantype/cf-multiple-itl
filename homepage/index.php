@@ -70,12 +70,12 @@ if (isset($_SESSION["username"])) {
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#teori">Teori</a></li>
           <li><a class="nav-link scrollto " href="#tipe">Tipe Minat Bakat</a></li>
-          <li><a class="nav-link scrollto " href="#demo">Demo</a></li>
-          <li><a class="nav-link scrollto" href="../login">Login</a></li>
-          <li><a class="nav-link scrollto" href="../register">Register</a></li>
+          <li><a class="nav-link scrollto " href="#demo">Tes</a></li>
+          <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
+          <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -92,7 +92,7 @@ if (isset($_SESSION["username"])) {
           <h1>Certainty Factor</h1>
           <h2>Sistem Pakar Untuk Mengidentifikasi Kepribadian Siswa Menggunakan Metode Certainty Factor Dalam Mendukung Pendekatan Guru
           </h2>
-          <div><a href="#demo" class="btn-get-started scrollto">Demo</a></div>
+          <div><a href="#demo" class="btn-get-started scrollto">Lakukan Tes</a></div>
         </div>
         <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
           <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
@@ -201,10 +201,10 @@ if (isset($_SESSION["username"])) {
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
                   <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></path>
                 </svg>
-                <i class="bx bx-user-voice"></i>
+                <i class="bx bx-user"></i>
               </div>
               <h4><a href="">Intra-personal</a></h4>
-              <p>Kecerdasan Intrapersonal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri</p>
+              <p>Kecerdasan Intra-personal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri</p>
             </div>
           </div>
 
@@ -214,10 +214,10 @@ if (isset($_SESSION["username"])) {
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
                   <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
                 </svg>
-                <i class="bx bx-user"></i>
+                <i class="bx bx-user-voice"></i>
               </div>
               <h4><a href="">Inter-personal</a></h4>
-              <p>Komunikasi interpersonal adalah komunikasi yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. Dalam komunikasi interpersonal, setiap partisipan menggunakan semua elemen dari proses komunikasi</p>
+              <p>Kecerdasan Inter-personal adalah Kecerdasan atau kemampuan memahami yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. </p>
             </div>
           </div>
 
@@ -229,8 +229,8 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-palette"></i>
               </div>
-              <h4><a href="">Visual Spasial</a></h4>
-              <p>Kecerdasan spasial - visual merupakan kemampuan seseorang untuk memahami, memproses dan berfikir ke dalam bentuk visual. Kecerdasan spasial - visual juga merupakan salah satu jenis kecerdasan majemuk. Seseorang yang memiliki kecerdasan ini mampu menerjemahkan gambaran dalam pikirannya sendiri ke dalam bentuk dua dimensi atau tiga dimensi</p>
+              <h4><a href="">Visual-Spasial</a></h4>
+              <p>Kecerdasan Visual-Spasial merupakan kemampuan seseorang untuk memahami, memproses dan berfikir ke dalam bentuk visual. Kecerdasan spasial - visual juga merupakan salah satu jenis kecerdasan majemuk. Seseorang yang memiliki kecerdasan ini mampu menerjemahkan gambaran dalam pikirannya sendiri ke dalam bentuk dua dimensi atau tiga dimensi</p>
             </div>
           </div>
 
@@ -257,7 +257,7 @@ if (isset($_SESSION["username"])) {
                   <i class="bx bx-calculator"></i>
                 </div>
                 <h4><a href="">Matematika-Logika</a></h4>
-                <p>Kecerdasan matematis logis ini adalah kemampuan untuk menangani bilangan dan perhitungan, pola berpikir logis dan ilmiah. Biasanya, kecerdasan ini dimiliki oleh para ilmuwan, filsuf, dan sebagainya</p>
+                <p>Kecerdasan matematis logis adalah kemampuan untuk menangani bilangan dan perhitungan, pola berpikir logis dan ilmiah. Biasanya, kecerdasan ini dimiliki oleh para ilmuwan, filsuf, dan sebagainya</p>
               </div>
             </div>
 
@@ -282,20 +282,20 @@ if (isset($_SESSION["username"])) {
     <!-- ======= Demo Section ======= -->
     <section id="demo" class="contact">
       <div class="section-title text-light">
-        <h2>Demo</h2>
+        <h2>Tes Minat dan Bakat</h2>
       </div>
 
       <div class="card ms-5 me-5 p-4">
-        <h6>Silahkan pilih tingkat kepercayaan yang sesuai dengan minat bakat anda</h6>
+        <h6>Silahkan pilih tingkat kepercayaan yang sesuai dengan diri anda</h6>
         <div class="card-body">
           <form id="demoForm">
             <table class='table table-hover' id="interestsTable">
             </table>
 
             <div class="d-flex justify-content-end">
-              <button type="reset" class="btn btn-danger d-flex justify-content-center align-items-center me-2">Reset</button>
-              <button type="button" name="filter" class="btn btn-warning d-flex justify-content-center align-items-center me-2">Filter</button>
-              <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center">Submit</button>
+              <button type="reset" class="btn btn-danger d-flex justify-content-center align-items-center me-2">Ulangi</button>
+              <button type="button" name="filter" class="btn btn-warning d-flex justify-content-center align-items-center me-2">Saring</button>
+              <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center">Hasil</button>
             </div>
           </form>
 
