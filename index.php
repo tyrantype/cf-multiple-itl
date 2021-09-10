@@ -29,6 +29,6 @@ if (isset($_SESSION["username"])) {
             break;
         }
       } else {
-        header("Location: homepage");
+        header("Location: home");
     }
 }
