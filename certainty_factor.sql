@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Sep 19, 2021 at 02:34 PM
+-- Generation Time: Sep 19, 2021 at 02:38 PM
 -- Server version: 5.7.35
 -- PHP Version: 7.4.23
 
@@ -251,19 +251,6 @@ INSERT INTO `interests_v2` (`id`, `name`, `type_id`, `mb`) VALUES
 ('I0054', 'Saya suka melakukan aktivitas di alam terbuka atau diluar ruangan', 'T0001', 0.7),
 ('I0055', 'Saya lebih suka praktek langsung ketika mempelajari sesuatu', 'T0001', 0.7),
 ('I0056', 'Saya suka bergerak dan cepat bosan ketika disuruh duduk dalam waktu yang lama', 'T0001', 0.2);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `minat_bakat`
--- (See below for the actual view)
---
-CREATE TABLE `minat_bakat` (
-`id` varchar(5)
-,`name` varchar(200)
-,`type_id` varchar(5)
-,`mb` float
-);
 
 -- --------------------------------------------------------
 
@@ -659,15 +646,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `hasil` 
 DROP TABLE IF EXISTS `indikator`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `indikator`  AS SELECT `interests`.`id` AS `id`, `interests`.`name` AS `name` FROM `interests` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `minat_bakat`
---
-DROP TABLE IF EXISTS `minat_bakat`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `minat_bakat`  AS SELECT `interests_v2`.`id` AS `id`, `interests_v2`.`name` AS `name`, `interests_v2`.`type_id` AS `type_id`, `interests_v2`.`mb` AS `mb` FROM `interests_v2` ;
 
 -- --------------------------------------------------------
 
