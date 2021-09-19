@@ -168,7 +168,7 @@ if (isset($_SESSION["username"])) {
           <h2>Tipe Minat Bakat</h2>
         </div>
 
-        <div class="row gy-4">
+        <div class="row gy-4" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0001">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box iconbox-blue">
               <div class="icon">
@@ -177,12 +177,12 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bxl-dribbble"></i>
               </div>
-              <h4><a href="">Kinesketik</a></h4>
+              <h4>Kinesketik</h4>
               <p>Kecerdasan Kinestetik merupakan salah satu jenis kecerdasan majemuk. Kecerdasan ini merupakan kemampuan seseorang untuk menggunakan seluruh tubuh atau fisiknya untuk mengekspresikan ide dan perasaan, serta keterampilan menggunakan tangan untuk mengubah atau menciptakan sesuatu</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0002">
             <div class="icon-box iconbox-orange ">
               <div class="icon">
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -190,12 +190,12 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-book-alt"></i>
               </div>
-              <h4><a href="">Linguistik</a></h4>
+              <h4>Linguistik</h4>
               <p>Kecerdasan Linguistik atau kecerdasan berbahasa adalah kemampuan seseorang untuk mengungkapkan pendapat atau pikirannya melalui bahasa verbal maupun non verbal secara jelas dan lugas dengan tatanan bahasa</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0003">
             <div class="icon-box iconbox-pink">
               <div class="icon">
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -203,12 +203,12 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-user"></i>
               </div>
-              <h4><a href="">Intra-personal</a></h4>
+              <h4>Intra-personal</h4>
               <p>Kecerdasan Intra-personal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0004">
             <div class="icon-box iconbox-yellow">
               <div class="icon">
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -216,12 +216,12 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-user-voice"></i>
               </div>
-              <h4><a href="">Inter-personal</a></h4>
+              <h4>Inter-personal</h4>
               <p>Kecerdasan Inter-personal adalah Kecerdasan atau kemampuan memahami yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. </p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0005">
             <div class="icon-box iconbox-red">
               <div class="icon">
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -229,12 +229,12 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-palette"></i>
               </div>
-              <h4><a href="">Visual-Spasial</a></h4>
+              <h4>Visual-Spasial</h4>
               <p>Kecerdasan Visual-Spasial merupakan kemampuan seseorang untuk memahami, memproses dan berfikir ke dalam bentuk visual. Kecerdasan spasial - visual juga merupakan salah satu jenis kecerdasan majemuk. Seseorang yang memiliki kecerdasan ini mampu menerjemahkan gambaran dalam pikirannya sendiri ke dalam bentuk dua dimensi atau tiga dimensi</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0006">
             <div class="icon-box iconbox-teal">
               <div class="icon">
                 <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -242,13 +242,13 @@ if (isset($_SESSION["username"])) {
                 </svg>
                 <i class="bx bx-music"></i>
               </div>
-              <h4><a href="">Musikal</a></h4>
+              <h4>Musikal</h4>
               <p>Kecerdasan musikal adalah kemampuan untuk menikmati, mengamati, membedakan, mengarang, membentuk, dan mengekspresikan bentuk-bentuk musik. Kecerdasan ini meliputi kepekaan terhadap ritme, melodi dan timbre dari musik yang didengar</p>
             </div>
           </div>
 
           <div class="row gy-4">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0007">
               <div class="icon-box iconbox-blue">
                 <div class="icon">
                   <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -256,12 +256,12 @@ if (isset($_SESSION["username"])) {
                   </svg>
                   <i class="bx bx-calculator"></i>
                 </div>
-                <h4><a href="">Matematika-Logika</a></h4>
+                <h4>Matematika-Logika</h4>
                 <p>Kecerdasan matematis logis adalah kemampuan untuk menangani bilangan dan perhitungan, pola berpikir logis dan ilmiah. Biasanya, kecerdasan ini dimiliki oleh para ilmuwan, filsuf, dan sebagainya</p>
               </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer" data-bs-id="T0008">
               <div class="icon-box iconbox-orange ">
                 <div class="icon">
                   <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -269,7 +269,7 @@ if (isset($_SESSION["username"])) {
                   </svg>
                   <i class="bx bx-spa"></i>
                 </div>
-                <h4><a href="">Naturalis</a></h4>
+                <h4>Naturalis</h4>
                 <p>Kecerdasan naturalis didefinisikan Howard Gardner sebagai kemampuan mengenali, melihat perbedaan, menggolongkan, dan mengkategorikan apa yang dilihat atau jumpai di alam atau di lingkungannya</p>
               </div>
             </div>
@@ -388,6 +388,68 @@ if (isset($_SESSION["username"])) {
                     </div>
                   </div>
 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal  Preview -->
+          <div class="modal fade" id="previewModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Detail</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-0">
+
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                        </div>
+                        <div class="carousel-inner">
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDetail" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselDetail" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Info</button>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="card mb-0">
+                        <div class="card-content">
+                          <div class="card-body p-0">
+                            <h4 id="namePreview" class="card-title"></h4>
+                            <h6 id="fieldsPreview"></h6>
+                          </div>
+
+                          <div class="card-body px-0">
+                            <h6 class="card-subtitle">Keterangan</h6>
+                            <p id="detailPreview" class="card-text"></p>
+                          </div>
+
+                          <div class="card-body px-0">
+                            <h6 class="card-subtitle">Saran</h6>
+                            <p id="advicePreview" class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

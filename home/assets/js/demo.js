@@ -287,3 +287,48 @@ function createElementFromHTML(htmlString) {
     div.innerHTML = htmlString.trim();
     return div.firstChild; 
   }
+
+  document.querySelector("#previewModal").addEventListener("show.bs.modal", evt => {
+    const button = evt.relatedTarget
+    const id = button.getAttribute('data-bs-id')
+
+    fetch("../api/type/" + id, {
+        headers: {
+            "ContentType": "application/json;charset=utf-8"
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        document.querySelector("#namePreview").textContent = result.data[0].name
+        document.querySelector("#fieldsPreview").textContent = result.data[0].fields
+        document.querySelector("#detailPreview").textContent = result.data[0].detail
+        document.querySelector("#advicePreview").textContent = result.data[0].advice
+
+        const carouselIndicators = document.querySelectorAll(".carousel-indicators")[1];
+        const carouselInner = document.querySelectorAll(".carousel-inner")[1];
+
+        carouselIndicators.innerHTML= "";
+        carouselInner.innerHTML = "";
+        
+        for (let i = 0; i < result.data[0].pictures.length; i++) {
+            const clone = createElementFromHTML(`
+                <button type="button" data-bs-target="#carouselDetail">
+            `);
+            const clone2 = createElementFromHTML(`
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="" class="d-block w-100" alt="...">
+                </div>
+            `);
+
+            if (i === 0) {
+                clone.classList.add("active");
+                clone2.classList.add("active");
+            }
+
+            clone2.querySelector("img").src = "../assets/images/types/" + result.data[0].pictures[i].fileName ;
+
+            carouselIndicators.appendChild(clone);
+            carouselInner.appendChild(clone2);
+        }
+    });
+})
