@@ -1,7 +1,7 @@
 <?php
 class Database {
     private static function getConnection(): mysqli {
-        return new mysqli("localhost", "root", "", "certainty_factor");
+        return new mysqli("mysql", "root", "root", "certainty_factor");
     }
 
     public static function query($sql):  stdClass {
