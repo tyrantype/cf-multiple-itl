@@ -71,6 +71,8 @@ class Results
                 t.id = r.type_id
             WHERE 
                 u.username = '$username'
+            ORDER BY
+                r.datetime DESC
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
