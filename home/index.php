@@ -48,7 +48,7 @@ require_once "../api/classes/Users.php";
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top " style="padding: 0">
+  <header id="header" class="fixed-top " style="padding: 6px">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><a href="index.html"></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
@@ -67,22 +67,18 @@ require_once "../api/classes/Users.php";
           
             echo '
               <li>
-                <div class="nav-link scrollto">
-                    <div>
-                    <a href="../login">
-                    <div class="user-menu d-flex">
-                        <div class="user-name text-end me-3 mt-2">
-                            <h6 class=" text-gray-600">' .  $account->data[0]["Nama Lengkap"] . '</h6>
-                        </div>
-                        <div class="user-img d-flex align-items-center">
-                            <div class="avatar avatar-md">
-                                <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $account->data[0]["avatarId"] . '.jpg">
-                            </div>
-                        </div>
-                    </div>
-                   </a>
-                    </div>
-                </div>
+                <a href="../login">
+                  <div class="user-menu d-flex">
+                      <div class="user-name text-end me-3 mt-2">
+                          <h6 class=" text-gray-600">' .  $account->data[0]["Nama Lengkap"] . '</h6>
+                      </div>
+                      <div class="user-img d-flex align-items-center">
+                          <div class="avatar avatar-md">
+                              <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $account->data[0]["avatarId"] . '.jpg">
+                          </div>
+                      </div>
+                  </div>
+                </a>
               </li>
               <script>
                 let save = "yes"
