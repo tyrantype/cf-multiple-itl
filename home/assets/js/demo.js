@@ -111,7 +111,7 @@ document.forms["demoForm"].addEventListener("submit", evt => {
 
     if (tempData.length !== 0) {
         let postData = {
-            saveHistory: "no",
+            saveHistory: save,
             userInterests: tempData
         };
 

@@ -3,20 +3,6 @@ session_start();
 
 require_once "../api/classes/Users.php";
 
-if (isset($_SESSION["username"])) {
-
-  if ($_SESSION["username"] === $superuser->username) {
-    header("Location: ./admin");
-  } else {
-    $response = Users::get($_SESSION["username"]);
-
-    if ($response->statusCode === 200) {
-      if ($response->data[0]["Hak Akses"] === "Admin") header("Location: ./admin");
-      else header("Location: ./user");
-    }
-    die();
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +48,7 @@ if (isset($_SESSION["username"])) {
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  <header id="header" class="fixed-top " style="padding: 0">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><a href="index.html"></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
@@ -74,8 +60,44 @@ if (isset($_SESSION["username"])) {
           <li><a class="nav-link scrollto" href="#teori">Teori</a></li>
           <li><a class="nav-link scrollto " href="#tipe">Tipe Minat Bakat</a></li>
           <li><a class="nav-link scrollto " href="#demo">Tes</a></li>
-          <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
-          <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
+          <?php
+          if (isset($_SESSION["username"])) {
+          $account = new stdClass();
+          $account = Users::get($_SESSION["username"]);
+          
+            echo '
+              <li>
+                <div class="nav-link scrollto">
+                    <div>
+                    <a href="../login">
+                    <div class="user-menu d-flex">
+                        <div class="user-name text-end me-3 mt-2">
+                            <h6 class=" text-gray-600">' .  $account->data[0]["Nama Lengkap"] . '</h6>
+                        </div>
+                        <div class="user-img d-flex align-items-center">
+                            <div class="avatar avatar-md">
+                                <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $account->data[0]["avatarId"] . '.jpg">
+                            </div>
+                        </div>
+                    </div>
+                   </a>
+                    </div>
+                </div>
+              </li>
+              <script>
+                let save = "yes"
+              </script>
+            ';
+          } else {
+            echo '
+              <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
+              <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
+              <script>
+                let save = "no"
+              </script>
+            ';
+          }
+          ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
