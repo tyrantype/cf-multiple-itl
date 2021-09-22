@@ -62,19 +62,28 @@ require_once "../api/classes/Users.php";
           <li><a class="nav-link scrollto " href="#demo">Tes</a></li>
           <?php
           if (isset($_SESSION["username"])) {
-          $account = new stdClass();
-          $account = Users::get($_SESSION["username"]);
+            $username = null;
+            $face = null;
+            if ($_SESSION["username"] == $superuser->username) {
+              $username = $superuser->username;
+              $face = 0;
+            } else {
+              $account = Users::get($_SESSION["username"]);
+
+              $username = $account->data[0]["Nama Lengkap"];
+              $face = $account->data[0]["avatarId"];
+            }
           
             echo '
               <li>
                 <a href="../login">
                   <div class="user-menu d-flex">
                       <div class="user-name text-end me-3 mt-2">
-                          <h6 class=" text-gray-600">' .  $account->data[0]["Nama Lengkap"] . '</h6>
+                          <h6 class=" text-gray-600">' . $username  . '</h6>
                       </div>
                       <div class="user-img d-flex align-items-center">
                           <div class="avatar avatar-md">
-                              <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $account->data[0]["avatarId"] . '.jpg">
+                              <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $face . '.jpg">
                           </div>
                       </div>
                   </div>
