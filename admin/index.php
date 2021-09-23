@@ -86,7 +86,7 @@ if ($_SESSION["username"] === $superuser->username) {
 
                         <li class="sidebar-item  sidebar-item-home">
                             <a href="../home" class='sidebar-link'>
-                                <i class="bi bi-house"></i>
+                                <i class="bi bi-house-fill"></i>
                                 <span>Home</span>
                             </a>
                         </li>
@@ -212,6 +212,11 @@ if ($_SESSION["username"] === $superuser->username) {
             </header>
 
             <?php
+            echo "
+                <script>
+                    const signed = true;
+                </script>
+            ";
             $pageFound = true;
             switch ($page) {
                 case "dashboard":

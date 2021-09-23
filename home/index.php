@@ -79,29 +79,35 @@ require_once "../api/classes/Users.php";
             echo '
               <li>
                 <div class="dropdown">
-                <a href="#">
-                    <div class="user-menu d-flex">
-                        <div class="user-name text-end me-3 mt-2">
-                          <h6 class=" text-gray-600">' . $username  . '</h6>
-                        </div>
-                        <div class="user-img d-flex align-items-center">
-                            <div class="avatar avatar-md">
-                            <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $face . '.jpg">
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" style="left: 0;" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="../' . strtolower($privilege) . '"><i class="icon-mid bi bi-grid-fill me-2"></i>Dashboard</a></li>
-                  <li><a class="dropdown-item" href="../?page=logout"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar</a></li>
-              </ul>
-          </div>
+                  <a href="#">
+                      <div class="user-menu d-flex">
+                          <div class="user-name text-end me-3 mt-2">
+                            <h6 class=" text-gray-600">' . $username  . '</h6>
+                          </div>
+                          <div class="user-img d-flex align-items-center">
+                              <div class="avatar avatar-md">
+                              <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $face . '.jpg">
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" style="left: 0;" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="../' . strtolower($privilege) . '"><i class="icon-mid bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                    <li><a class="dropdown-item" href="../?page=logout"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar</a></li>
+                  </ul>
+                </div>
               </li>
+              <script>
+                const signed = true;
+              </script>
             ';
           } else {
             echo '
               <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
               <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
+              <script>
+                const signed = false;
+              </script>
             ';
           }
           ?>
@@ -501,14 +507,14 @@ require_once "../api/classes/Users.php";
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
+  <script src="../assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="../assets/vendors/toastify/toastify.js"></script>
+  
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/demo.js"></script>
-
-  <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
-  <script src="../assets/vendors/toastify/toastify.js"></script>
-
 </body>
 
 </html>

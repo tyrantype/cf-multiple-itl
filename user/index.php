@@ -83,7 +83,7 @@ $account = Users::get($_SESSION["username"]);
 
                         <li class="sidebar-item  sidebar-item-home">
                             <a href="../home" class='sidebar-link'>
-                                <i class="bi bi-house"></i>
+                                <i class="bi bi-house-fill"></i>
                                 <span>Home</span>
                             </a>
                         </li>
@@ -112,7 +112,7 @@ $account = Users::get($_SESSION["username"]);
                         <li class="sidebar-item  sidebar-item-identifikasi-minat-bakat">
                             <a href="?demo" class='sidebar-link'>
                                 <i class="bi bi-upc-scan"></i>
-                                <span>Identifikasi</span>
+                                <span>Tes Minat Bakat</span>
                             </a>
                         </li>
 
@@ -191,6 +191,11 @@ $account = Users::get($_SESSION["username"]);
             </header>
 
             <?php
+            echo "
+                <script>
+                    const signed = true;
+                </script>
+            ";
             $pageFound = true;
             switch ($page) {
                 case "dashboard":

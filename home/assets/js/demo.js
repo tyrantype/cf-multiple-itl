@@ -109,7 +109,31 @@ let selectedInterestsDataTable;
 document.forms["demoForm"].addEventListener("submit", evt => {
     evt.preventDefault();
 
+    if (tempData.length === 0) return
+
+    if (signed) {
+        Swal.fire({
+            title: 'Simpan hasil tes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Simpan',
+            denyButtonText: `Tidak`,
+            cancelButtonText: `Batal`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                submitCertaintyFactor("yes")
+            } else if (result.isDenied) {
+                submitCertaintyFactor("no")
+            }
+          })
+    } else {
+        submitCertaintyFactor("no")
+    }
+});
+
+function submitCertaintyFactor(save) {
     if (tempData.length !== 0) {
+        document.querySelector("body").style.paddingRight = 0;
         let postData = {
             saveHistory: save,
             userInterests: tempData
@@ -229,9 +253,31 @@ document.forms["demoForm"].addEventListener("submit", evt => {
                 }
 
                 resultModal.show();
+                
+                if (save === "yes") {
+                    Toastify({
+                        text: "Hasil tes disimpan",
+                        duration: 2500,
+                        backgroundColor: "#5C7AEA"
+                    }).showToast();
+                } else {
+                    if (signed) {
+                        Toastify({
+                            text: "Hasil tes tidak disimpan",
+                            duration: 2500,
+                            backgroundColor: "#40514E"
+                        }).showToast();
+                    } else {
+                        Toastify({
+                            text: "Masuk untuk menyimpan riwayat tes",
+                            duration: 2500,
+                            backgroundColor: "#40514E"
+                        }).showToast();
+                    }
+                }
             });
     }
-});
+}
 
 function initOptionButton() {
     initChangeInterest();
