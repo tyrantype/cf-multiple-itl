@@ -269,7 +269,7 @@ function submitCertaintyFactor(save) {
                         }).showToast();
                     } else {
                         Toastify({
-                            text: "Masuk untuk menyimpan riwayat tes",
+                            text: "Masuk untuk menyimpan hasil tes",
                             duration: 2500,
                             backgroundColor: "#40514E"
                         }).showToast();
