@@ -109,7 +109,7 @@ $account = Users::get($_SESSION["username"]);
                             </a>
                         </li>
 
-                        <li class="sidebar-item  sidebar-item-identifikasi-minat-bakat">
+                        <li class="sidebar-item  sidebar-item-demo">
                             <a href="?demo" class='sidebar-link'>
                                 <i class="bi bi-upc-scan"></i>
                                 <span>Tes Minat Bakat</span>
@@ -130,7 +130,7 @@ $account = Users::get($_SESSION["username"]);
                             </a>
                         </li>
 
-                        <li class="sidebar-item sidebar-item-pengaturan ">
+                        <li class="sidebar-item sidebar-item-setting ">
                             <a href="?setting" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
