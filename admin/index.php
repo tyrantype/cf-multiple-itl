@@ -84,6 +84,13 @@ if ($_SESSION["username"] === $superuser->username) {
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
+                        <li class="sidebar-item  sidebar-item-home">
+                            <a href="../home" class='sidebar-link'>
+                                <i class="bi bi-house"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-item  sidebar-item-dashboard">
                             <a href="." class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>

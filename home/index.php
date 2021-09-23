@@ -64,6 +64,7 @@ require_once "../api/classes/Users.php";
           if (isset($_SESSION["username"])) {
             $username = null;
             $face = null;
+            $privilege = "admin";
             if ($_SESSION["username"] == $superuser->username) {
               $username = $superuser->username;
               $face = 0;
@@ -72,34 +73,35 @@ require_once "../api/classes/Users.php";
 
               $username = $account->data[0]["Nama Lengkap"];
               $face = $account->data[0]["avatarId"];
+              $privilege = $account->data[0]["Hak Akses"];
             }
-          
+
             echo '
               <li>
-                <a href="../login">
-                  <div class="user-menu d-flex">
-                      <div class="user-name text-end me-3 mt-2">
+                <div class="dropdown">
+                <a href="#">
+                    <div class="user-menu d-flex">
+                        <div class="user-name text-end me-3 mt-2">
                           <h6 class=" text-gray-600">' . $username  . '</h6>
-                      </div>
-                      <div class="user-img d-flex align-items-center">
-                          <div class="avatar avatar-md">
-                              <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $face . '.jpg">
-                          </div>
-                      </div>
-                  </div>
+                        </div>
+                        <div class="user-img d-flex align-items-center">
+                            <div class="avatar avatar-md">
+                            <img style="height: 39px; width: 39px; border-radius: 50%;" src="../assets/images/faces/' . $face . '.jpg">
+                            </div>
+                        </div>
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end" style="left: 0;" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="../' . strtolower($privilege) . '"><i class="icon-mid bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                  <li><a class="dropdown-item" href="../?page=logout"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar</a></li>
+              </ul>
+          </div>
               </li>
-              <script>
-                let save = "yes"
-              </script>
             ';
           } else {
             echo '
               <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
               <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
-              <script>
-                let save = "no"
-              </script>
             ';
           }
           ?>

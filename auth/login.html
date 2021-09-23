@@ -71,7 +71,7 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.loginStatus === "success") {
-                        window.location.reload();
+                        location.href= "./user";
                     } else {
                         Swal.fire({
                             icon: 'error',
