@@ -1,3 +1,26 @@
+label input[type="radio"] {
+  display: none;
+}
+
+label .avatar img {
+  cursor: pointer;
+  border: 4px solid transparent;
+}
+
+input:checked + .avatar img {
+  border: 4px solid lightgray;
+}
+
+
+.avatar img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+}
+img, svg {
+  vertical-align: middle;
+}
+
 /**
 * Template Name: Techie - v4.3.0
 * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
@@ -81,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #fff;
+  background: rgba(255,255,255,0.5);
 }
 
 #preloader:before {

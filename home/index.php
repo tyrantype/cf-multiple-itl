@@ -103,8 +103,8 @@ require_once "../api/classes/Users.php";
             ';
           } else {
             echo '
-              <li><a class="nav-link scrollto" href="../login">Masuk</a></li>
-              <li><a class="nav-link scrollto" href="../register">Daftar</a></li>
+              <li><a class="nav-link scrollto" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Masuk</a></li>
+              <li><a class="nav-link scrollto" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Daftar</a></li>
               <script>
                 const signed = false;
               </script>
@@ -399,6 +399,15 @@ require_once "../api/classes/Users.php";
                             <ul id="otherPossibilities">
                             </ul>
                           </div>
+                          <hr>
+                          <div class="card-body p-0 d-flex justify-content-between">
+                            <div class="d-flex my-auto" id="btnLoginOnResult">
+                              <span>Masuk untuk menyimpan hasil tes</span>
+                            </div>
+                            <div class="d-flex">
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Masuk</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -426,6 +435,206 @@ require_once "../api/classes/Users.php";
                     </div>
                   </div>
 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal  Login -->
+          <div class="modal fade" id="loginModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Masuk</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-0">
+                  <div id="bgModal"></div>
+                  <form class="form form-vertical" id="loginForm">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-12 mb-3">
+                          <div class="form-group has-icon-left">
+                            <label>NIS</label>
+                            <div class="position-relative">
+                              <input type="text" class="form-control" name="username" placeholder="NIS" required>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                          <div class="form-group has-icon-left">
+                            <label>Password</label>
+                            <div class="position-relative">
+                              <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between">
+                          <div class="d-flex my-auto">
+                            <span>Belum mempunyai akun? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Daftar</a></span>
+                          </div>
+                          <div class="d-flex">
+                            <button type="submit" class="btn btn-primary me-1 mb-1">Masuk</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            const form = document.forms["loginForm"];
+
+            form.addEventListener("submit", evt => {
+              evt.preventDefault();
+
+              const formData = new FormData(form);
+              const data = JSON.stringify(Object.fromEntries(formData))
+
+              fetch("../api/login.php", {
+                  method: "POST",
+                  headers: {
+                    "ContentType": "application/json;charset=utf-8"
+                  },
+                  body: data
+                })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.loginStatus === "success") {
+                      document.body.appendChild(createElementFromHTML(`<div id="preloader"></div>`))
+                      if (tempData.length === 0) {
+                        Toastify({
+                            text: "Berhasil masuk",
+                            duration: 500,
+                            backgroundColor: "#5C7AEA"
+                        }).showToast();
+                        setTimeout(() => {
+                          location.reload()
+                        }, 500)
+                      } else {
+                        Toastify({
+                            text: "Berhasil masuk dan menyimpan hasil tes",
+                            duration: 1500,
+                            backgroundColor: "#5C7AEA"
+                        }).showToast();
+                        setTimeout(() => {
+                          location.reload()
+                        }, 1500)
+                      }
+                  } else {
+                    Toastify({
+                            text: "NIS atau password salah",
+                            duration: 1500,
+                            backgroundColor: "linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113))"
+                    }).showToast();
+                  }
+                });
+            });
+          </script>
+
+          <!-- Modal  Register -->
+          <div class="modal fade" id="registerModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Daftar</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-0">
+                  <form id="registerForm">
+                    <label>Nama Lengkap</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="text" class="form-control form-control-xl" name="fullName" placeholder="Nama Lengkap" required>
+                    </div>
+
+                    <label>NIS</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="text" class="form-control form-control-xl" name="username" placeholder="NIS" required>
+                    </div>
+
+                    <label>Password</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="password" class="form-control form-control-xl" name="password" placeholder="Password" required>
+                    </div>
+
+                    <label>Ulangi Password</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="password" class="form-control form-control-xl" name="password2" placeholder="Ulangi Password" required>
+                    </div>
+
+                    <label>Jenis Kelamin</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <select class="form-control form-control-xl" name="gender" required>
+                        <option value="" disabled selected hidden>Jenis Kelamin</option>
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                      </select>
+                    </div>
+
+                    <label>Tanggal Lahir</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="date" class="form-control form-control-xl" name="dateOfBirth" required>
+                    </div>
+
+                    <label>Alamat</label>
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <input type="text" class="form-control form-control-xl" name="address" placeholder="Alamat" required>
+                    </div>
+
+                    <div class="form-group position-relative has-icon-left mb-3">
+                      <p class="mb-1">Avatar</p>
+                      <label>
+                        <input type="radio" name="avatarId" value="1" selected>
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/1.jpg" alt="avatar1">
+                        </div>
+                      </label>
+                      <label>
+                        <input type="radio" name="avatarId" value="2">
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/2.jpg" alt="avatar2">
+                        </div>
+                      </label>
+                      <label>
+                        <input type="radio" name="avatarId" value="3">
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/3.jpg" alt="avatar3">
+                        </div>
+                      </label>
+                      <label>
+                        <input type="radio" name="avatarId" value="4">
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/4.jpg" alt="avatar4">
+                        </div>
+                      </label>
+                      <label>
+                        <input type="radio" name="avatarId" value="5">
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/5.jpg" alt="avatar5">
+                        </div>
+                      </label>
+                      <label>
+                        <input type="radio" name="avatarId" value="6">
+                        <div class="avatar avatar-lg me-2">
+                          <img src="../assets/images/faces/6.jpg" alt="avatar6">
+                        </div>
+                      </label>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-between">
+                      <div class="d-flex my-auto">
+                        <span>Sudah mempunyai akun? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Masuk</a></span>
+                      </div>
+                      <div class="d-flex">
+                        <button class="btn btn-primary btn-block shadow-lg">Daftar</button>
+                      </div>
+                    </div>
+
+                  </form>
                 </div>
               </div>
             </div>
@@ -513,7 +722,7 @@ require_once "../api/classes/Users.php";
   <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
   <script src="../assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="../assets/vendors/toastify/toastify.js"></script>
-  
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

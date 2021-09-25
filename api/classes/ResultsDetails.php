@@ -15,7 +15,7 @@ class ResultsDetails
             FROM 
                 results_details rd
             INNER JOIN
-                 interests i
+                 interests_v2 i
                  ON
                  i.id = rd.interest_id
             WHERE 
@@ -45,7 +45,7 @@ class ResultsDetails
             FROM 
                 results_details rd
             INNER JOIN
-                interests i
+                interests_v2 i
                 ON
                 i.id = rd.interest_id
         ";

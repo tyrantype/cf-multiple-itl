@@ -100,14 +100,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 d-none">
                                     <div class="form-group has-icon-left">
                                         <label>Hak Akses</label>
                                         <div class="position-relative">
-                                            <select class="form-control" name="privilege" required>
-                                                <option value="" disabled selected hidden>Hak Akses</option>
-                                                <option value="User">User</option>
-                                                <option value="Admin">Admin</option>
+                                            <select class="form-control" name="privilege" required readonly>
+                                                <option value="User" selected >User</option>
                                             </select>
                                             <div class="form-control-icon">
                                                 <i class="bi bi-shield-lock"></i>

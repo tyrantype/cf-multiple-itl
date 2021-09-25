@@ -17,6 +17,15 @@ function getInterestsData() {
 
 getInterestsData();
 
+if (signed) {
+    document.getElementById("btnLoginOnResult").classList.add("d-none")
+}
+history.scrollRestoration = "manual";
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 
 function refreshInterestsTable(data, filter) {
     if (filter && tempData.length !== 0) {
@@ -119,19 +128,19 @@ document.forms["demoForm"].addEventListener("submit", evt => {
             confirmButtonText: 'Simpan',
             denyButtonText: `Tidak`,
             cancelButtonText: `Batal`,
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 submitCertaintyFactor("yes")
             } else if (result.isDenied) {
                 submitCertaintyFactor("no")
             }
-          })
+        })
     } else {
         submitCertaintyFactor("no")
     }
 });
 
-function submitCertaintyFactor(save) {
+function submitCertaintyFactor(save, showModal = 1) {
     if (tempData.length !== 0) {
         document.querySelector("body").style.paddingRight = 0;
         let postData = {
@@ -161,7 +170,7 @@ function submitCertaintyFactor(save) {
                 selectedRulesElement.innerHTML = "";
 
 
-                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
+                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", { style: "percent" })})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
                 fields.textContent = data[0].fields;
@@ -170,7 +179,7 @@ function submitCertaintyFactor(save) {
                     otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
-                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent"})})`
+                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", { style: "percent" })})`
                         otherPossibilities.appendChild(li);
                     }
                 }
@@ -228,7 +237,7 @@ function submitCertaintyFactor(save) {
                 const carouselIndicators = document.querySelector(".carousel-indicators");
                 const carouselInner = document.querySelector(".carousel-inner");
 
-                carouselIndicators.innerHTML= "";
+                carouselIndicators.innerHTML = "";
                 carouselInner.innerHTML = "";
 
                 for (let i = 0; i < data[0].pictures.length; i++) {
@@ -252,27 +261,25 @@ function submitCertaintyFactor(save) {
                     carouselInner.appendChild(clone2);
                 }
 
-                resultModal.show();
-                
-                if (save === "yes") {
-                    Toastify({
-                        text: "Hasil tes disimpan",
-                        duration: 2500,
-                        backgroundColor: "#5C7AEA"
-                    }).showToast();
-                } else {
-                    if (signed) {
+                if (showModal) {
+                    resultModal.show();
+
+                    if (save === "yes") {
                         Toastify({
-                            text: "Hasil tes tidak disimpan",
+                            text: "Hasil tes disimpan",
                             duration: 2500,
-                            backgroundColor: "#40514E"
+                            backgroundColor: "#5C7AEA"
                         }).showToast();
                     } else {
-                        Toastify({
-                            text: "Masuk untuk menyimpan hasil tes",
-                            duration: 2500,
-                            backgroundColor: "#40514E"
-                        }).showToast();
+                        if (signed) {
+                            Toastify({
+                                text: "Hasil tes tidak disimpan",
+                                duration: 2500,
+                                backgroundColor: "#40514E"
+                            }).showToast();
+                        } else {
+
+                        }
                     }
                 }
             });
@@ -331,10 +338,10 @@ let resultModal = new bootstrap.Modal(document.querySelector('#resultModal'), {
 function createElementFromHTML(htmlString) {
     let div = document.createElement('div');
     div.innerHTML = htmlString.trim();
-    return div.firstChild; 
-  }
+    return div.firstChild;
+}
 
-  document.querySelector("#previewModal").addEventListener("show.bs.modal", evt => {
+document.querySelector("#previewModal").addEventListener("show.bs.modal", evt => {
     const button = evt.relatedTarget
     const id = button.getAttribute('data-bs-id')
 
@@ -343,38 +350,38 @@ function createElementFromHTML(htmlString) {
             "ContentType": "application/json;charset=utf-8"
         }
     })
-    .then(response => response.json())
-    .then(result => {
-        document.querySelector("#namePreview").textContent = result.data[0].name
-        document.querySelector("#fieldsPreview").textContent = result.data[0].fields
-        document.querySelector("#detailPreview").textContent = result.data[0].detail
-        document.querySelector("#advicePreview").textContent = result.data[0].advice
+        .then(response => response.json())
+        .then(result => {
+            document.querySelector("#namePreview").textContent = result.data[0].name
+            document.querySelector("#fieldsPreview").textContent = result.data[0].fields
+            document.querySelector("#detailPreview").textContent = result.data[0].detail
+            document.querySelector("#advicePreview").textContent = result.data[0].advice
 
-        const carouselIndicators = document.querySelectorAll(".carousel-indicators")[1];
-        const carouselInner = document.querySelectorAll(".carousel-inner")[1];
+            const carouselIndicators = document.querySelectorAll(".carousel-indicators")[1];
+            const carouselInner = document.querySelectorAll(".carousel-inner")[1];
 
-        carouselIndicators.innerHTML= "";
-        carouselInner.innerHTML = "";
-        
-        for (let i = 0; i < result.data[0].pictures.length; i++) {
-            const clone = createElementFromHTML(`
+            carouselIndicators.innerHTML = "";
+            carouselInner.innerHTML = "";
+
+            for (let i = 0; i < result.data[0].pictures.length; i++) {
+                const clone = createElementFromHTML(`
                 <button type="button" data-bs-target="#carouselDetail">
             `);
-            const clone2 = createElementFromHTML(`
+                const clone2 = createElementFromHTML(`
                 <div class="carousel-item" data-bs-interval="2000">
                     <img src="" class="d-block w-100" alt="...">
                 </div>
             `);
 
-            if (i === 0) {
-                clone.classList.add("active");
-                clone2.classList.add("active");
+                if (i === 0) {
+                    clone.classList.add("active");
+                    clone2.classList.add("active");
+                }
+
+                clone2.querySelector("img").src = "../assets/images/types/" + result.data[0].pictures[i].fileName;
+
+                carouselIndicators.appendChild(clone);
+                carouselInner.appendChild(clone2);
             }
-
-            clone2.querySelector("img").src = "../assets/images/types/" + result.data[0].pictures[i].fileName ;
-
-            carouselIndicators.appendChild(clone);
-            carouselInner.appendChild(clone2);
-        }
-    });
+        });
 })
