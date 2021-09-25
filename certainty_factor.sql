@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2021 at 05:16 PM
+-- Generation Time: Sep 25, 2021 at 07:55 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -182,8 +182,11 @@ INSERT INTO `hasil` (`id_hasil`, `id_user`, `id_tipe`, `hasil_cf`, `tanggal`) VA
 ('R0029', 'U0003', 'T0006', 0.5, '2021-09-23 17:03:47'),
 ('R0030', 'U0003', 'T0008', 0.9, '2021-09-23 17:07:27'),
 ('R0031', 'U0003', 'T0004', 0.42, '2021-09-23 17:12:33'),
-('R0032', 'U0001', 'T0005', 0.85, '2021-09-25 20:23:51'),
-('R0033', 'U0001', 'T0001', 0.7, '2021-09-25 21:39:05');
+('R0032', 'U0003', 'T0003', 0.3, '2021-09-26 00:37:29'),
+('R0033', 'U0003', 'T0006', 0.2, '2021-09-26 00:37:55'),
+('R0034', 'U0003', 'T0002', 0.9, '2021-09-26 00:38:08'),
+('R0035', 'U0003', 'T0004', 0.6, '2021-09-26 00:38:42'),
+('R0036', 'U0003', 'T0007', 0.7, '2021-09-26 00:41:51');
 
 -- --------------------------------------------------------
 
@@ -277,7 +280,12 @@ INSERT INTO `hasil_detail` (`id_hasil`, `id_basis_pakar`, `nilai`) VALUES
 ('R0030', 'I0011', 1),
 ('R0031', 'I0024', 0.2),
 ('R0031', 'I0031', 0.6),
-('R0031', 'I0042', 1);
+('R0031', 'I0042', 1),
+('R0032', 'I0018', 1),
+('R0033', 'I0042', 1),
+('R0034', 'I0005', 1),
+('R0035', 'I0034', 1),
+('R0036', 'I0026', 1);
 
 -- --------------------------------------------------------
 
@@ -328,10 +336,10 @@ CREATE TABLE `results` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `results_detail`
+-- Stand-in structure for view `results_details`
 -- (See below for the actual view)
 --
-CREATE TABLE `results_detail` (
+CREATE TABLE `results_details` (
 `result_id` varchar(5)
 ,`interest_id` varchar(5)
 ,`value` float
@@ -481,9 +489,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `hak_akses`, `id_avatar`, `terakhir_login`) VALUES
-('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-09-25 21:36:50'),
+('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-09-26 00:54:54'),
 ('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'User', 5, '2021-08-31 20:41:24'),
-('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-09-25 20:13:38');
+('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-09-26 00:52:06');
 
 -- --------------------------------------------------------
 
@@ -525,11 +533,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `results_detail`
+-- Structure for view `results_details`
 --
-DROP TABLE IF EXISTS `results_detail`;
+DROP TABLE IF EXISTS `results_details`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results_detail`  AS SELECT `hasil_detail`.`id_hasil` AS `result_id`, `hasil_detail`.`id_basis_pakar` AS `interest_id`, `hasil_detail`.`nilai` AS `value` FROM `hasil_detail` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results_details`  AS SELECT `hasil_detail`.`id_hasil` AS `result_id`, `hasil_detail`.`id_basis_pakar` AS `interest_id`, `hasil_detail`.`nilai` AS `value` FROM `hasil_detail` ;
 
 -- --------------------------------------------------------
 
