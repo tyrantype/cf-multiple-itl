@@ -30,7 +30,7 @@ function refreshInterestsTable(data, filter) {
         interestsDataTable = undefined;
     }
     let obj = {
-        headings: ["No", "_id", "Minat Bakat", "Kepercayaan"],
+        headings: ["No", "_id", "Ciri-ciri", "Kepercayaan"],
         data: []
     };
 

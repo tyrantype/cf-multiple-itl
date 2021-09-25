@@ -125,9 +125,9 @@ require_once "../api/classes/Users.php";
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Certainty Factor</h1>
-          <h2>Sistem Pakar Untuk Mengidentifikasi Kepribadian Siswa Menggunakan Metode Certainty Factor Dalam Mendukung Pendekatan Guru
+          <h2>Sistem Pakar Untuk Mendukung Mengidentifikasi Minat & Bakat Siswa Menggunakan Metode Certainty Factor
           </h2>
-          <div><a href="#demo" class="btn-get-started scrollto">Lakukan Tes</a></div>
+          <div><a href="#demo" class="btn-get-started scrollto">Tes Sekarang</a></div>
         </div>
         <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
           <img src="assets/img/hero-img.png" class="img-fluid" alt="">
@@ -139,7 +139,7 @@ require_once "../api/classes/Users.php";
 
   <main id="main">
 
-    <!-- ======= teori Section ======= -->
+    <!-- ======= Teori Section ======= -->
     <section id="teori" class="about">
       <div class="container">
 
@@ -163,6 +163,9 @@ require_once "../api/classes/Users.php";
       <div class="container" data-aos="fade-up">
 
         <div class="faq-list">
+          <div class="section-title">
+            <h2>Certainty Factor ??</h2>
+          </div>
           <ul>
             <li data-aos="fade-up" data-aos="fade-up" data-aos-delay="100">
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Metode certainty factor cocok untuk kasus seperti apa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
