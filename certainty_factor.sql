@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Sep 19, 2021 at 02:38 PM
--- Server version: 5.7.35
--- PHP Version: 7.4.23
+-- Host: 127.0.0.1
+-- Generation Time: Sep 25, 2021 at 03:24 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,177 +24,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `admin`
--- (See below for the actual view)
+-- Table structure for table `admin`
 --
+
 CREATE TABLE `admin` (
-`username` varchar(50)
-,`password` varchar(200)
-,`name` varchar(100)
-);
+  `username` varchar(50) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`, `name`) VALUES
+('superuser', '$2y$10$i/acvAwJT0QbmstOfuOm/.S5REbSZvdP5Wy2FWlFg5hkzLltZtyzy', 'Superuser');
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `basis_pakar`
--- (See below for the actual view)
+-- Table structure for table `basis_pakar`
 --
+
 CREATE TABLE `basis_pakar` (
-`id` varchar(5)
-,`name` varchar(200)
-,`type_id` varchar(5)
-,`mb` float
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `detail_hasil`
--- (See below for the actual view)
---
-CREATE TABLE `detail_hasil` (
-`result_id` varchar(5)
-,`interest_id` varchar(5)
-,`value` float
-);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(5) NOT NULL,
-  `content` varchar(1000) NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`id`, `user_id`, `content`, `datetime`) VALUES
-(4, 'U0001', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-30 14:25:11'),
-(5, 'U0003', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-31 14:49:38');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `hasil`
--- (See below for the actual view)
---
-CREATE TABLE `hasil` (
-`id` varchar(5)
-,`user_id` varchar(5)
-,`type_id` varchar(5)
-,`cf_value` float
-,`datetime` datetime
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `indikator`
--- (See below for the actual view)
---
-CREATE TABLE `indikator` (
-`id` varchar(5)
-,`name` varchar(200)
-);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `interests`
---
-
-CREATE TABLE `interests` (
   `id` varchar(5) NOT NULL,
-  `name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `interests`
---
-
-INSERT INTO `interests` (`id`, `name`) VALUES
-('I0001', 'Suka membaca buku'),
-('I0002', 'Suka menulis'),
-('I0003', 'Suka bercerita / berbicara'),
-('I0004', 'Suka membuat atau mengarang cerita'),
-('I0005', 'Saya suka membahas ide-ide yang saya punya dengan teman'),
-('I0006', 'Saya suka teka teki huruf'),
-('I0007', 'Saya suka belajar Bahasa Indonesia atau Bahasa Asing'),
-('I0008', 'Saya menyukai flora dan fauna serta alam semesta'),
-('I0009', 'Saya suka tentang alam'),
-('I0010', 'Saya peduli dengan alam dan lingkungan sekitar'),
-('I0011', 'Saya suka mengunjungi taman atau berjalan jalan di alam bebas'),
-('I0012', 'Suka camping atau menjelajahi alam'),
-('I0013', 'Suka mengumpulkan serangga, batu, daun atau koleksi alam lainnya di dalam botol / suatu wadah'),
-('I0014', 'Saya menikmati ketika kegiatan memancing ikan'),
-('I0015', 'Saya suka memikirkan masa depan dan tujuan-tujuan yang ingin dicapai'),
-('I0016', 'Saya lebih senang di rumah dan menghabiskan waktu sendiri'),
-('I0017', 'Saya lebih suka bekerja atau belajar sendiri daripada bersama teman'),
-('I0018', 'Saya suka melamun atau berpikir tentang kehidupan dan diri saya'),
-('I0019', 'Saya mengetahui kelebihan dan kekurangan diri saya'),
-('I0020', 'Saya suka menulis catatan harian untuk menuangkan ide-ide, kenangan, perasaan, peristiwa yang terjadi, dll\r\n'),
-('I0021', 'Saya suka berpikir atau mempertimbangkan sisi positif atau negatif ketika menemui masalah atau mengambil keputusan'),
-('I0022', 'Saya suka pelajaran matematika'),
-('I0023', 'Saya suka permainan yang menggunakan strategi atau mengasah otak, seperti catur, permainan misteri, teka-teki logika'),
-('I0024', 'Saya suka menanyakan tentang bagaimana suatu benda bekerja'),
-('I0025', 'Saya suka mengerjakan atau menyelesaikan perhitungan matematika dalam pikiran saya'),
-('I0026', 'Saya suka mengatur berbagai hal dengan teratur, kategoris dan hieraekis (berurutan)'),
-('I0027', 'Saya mudah mengingat berkaitan dengan angka atau statistik, seperti skor sepak bola, tinggi gedung tertinggi di dunia, dll'),
-('I0028', 'Saya dapat berhitung dengan cepat'),
-('I0029', 'Saya suka bergaul dan berkumpul dengan orang lain'),
-('I0030', 'Saya mudah berteman dan berbicara dengan orang yang baru dikenal'),
-('I0031', 'Saya lebih suka belajar bersama dengan teman dibanding belajar sendiri'),
-('I0032', 'Saya suka menawarkan bantuan ketika orang lain membutuhkannya'),
-('I0033', 'Saya mudah menebak perasaan teman hanya dengan melihat ekspresinya'),
-('I0034', 'Saya tahu bagaimana cara membuat teman bersemangat'),
-('I0035', 'Teman saya sering datang  untuk curhat, mencari dukungan emosi atau meminta saran'),
-('I0036', 'Saya suka memainkan alat musik'),
-('I0037', 'Saya senang bernyanyi'),
-('I0038', 'Saya dapat mengingat melodi atau nada dari lagu'),
-('I0039', 'Saya mudah mengenali banyak lagu yang berbeda beda'),
-('I0040', 'Saya suka seperti bertepuk tangan, menjentikkan jari, menghentakkan kaki, memukul meja seperti drum, dll'),
-('I0041', 'Saya sering bernyanyi ketika sedang melakukan aktifitas'),
-('I0042', 'Saya suka mengarang atau menulis lagu'),
-('I0043', 'Saya suka merangkai puzzle atau lego'),
-('I0044', 'Saya suka aktifitas fotografi'),
-('I0045', 'Saya suka menggambar atau melukis'),
-('I0046', 'Saya suka belajar dengan mengamati orang sekitar mengerjakan sesuatu'),
-('I0047', 'Saya lebih cepat memahami sesuatu dalam bentuk gambar, grafik atau ilustrasi'),
-('I0048', 'Saya mudah mengenali atau mengingat tempat atau jalan, walaupun baru pertama kali mengunjunginya'),
-('I0049', 'Saya lebih mudah mengingat wajahnya dibandingkan mengingat namanya'),
-('I0050', 'Saya suka mata pelajaran olahraga'),
-('I0051', 'Saya suka mengetukkan jari, memainkan alat tulis atau menggoyangkan kaki saat belajar atau berpikir'),
-('I0052', 'Saya lebih suka bergerak ketika mempelajari sesuatu untuk lebih membantu saya mengingat'),
-('I0053', 'Saya suka bermain sandiwara (acting) atau menari'),
-('I0054', 'Saya suka melakukan aktivitas di alam terbuka atau diluar ruangan'),
-('I0055', 'Saya lebih suka praktek langsung ketika mempelajari sesuatu'),
-('I0056', 'Saya suka bergerak dan cepat bosan ketika disuruh duduk dalam waktu yang lama');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `interests_v2`
---
-
-CREATE TABLE `interests_v2` (
-  `id` varchar(5) NOT NULL,
-  `name` varchar(200) NOT NULL,
+  `indikator` varchar(200) NOT NULL,
   `type_id` varchar(5) NOT NULL,
   `mb` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `interests_v2`
+-- Dumping data for table `basis_pakar`
 --
 
-INSERT INTO `interests_v2` (`id`, `name`, `type_id`, `mb`) VALUES
+INSERT INTO `basis_pakar` (`id`, `indikator`, `type_id`, `mb`) VALUES
 ('I0001', 'Saya suka membaca buku', 'T0002', 0.3),
 ('I0002', 'Suka menulis', 'T0002', 0.2),
 ('I0003', 'Suka bercerita / berbicara', 'T0002', 0.7),
@@ -255,59 +118,89 @@ INSERT INTO `interests_v2` (`id`, `name`, `type_id`, `mb`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `pengaturan`
--- (See below for the actual view)
+-- Table structure for table `feedback`
 --
-CREATE TABLE `pengaturan` (
-`id` int(11)
-,`school_name` varchar(100)
-,`address` varchar(100)
-);
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(5) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `user_id`, `content`, `datetime`) VALUES
+(4, 'U0001', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-30 14:25:11'),
+(5, 'U0003', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2021-08-31 14:49:38');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results`
+-- Table structure for table `hasil`
 --
 
-CREATE TABLE `results` (
+CREATE TABLE `hasil` (
   `id` varchar(5) NOT NULL,
   `user_id` varchar(5) DEFAULT NULL,
   `type_id` varchar(5) DEFAULT NULL,
   `cf_value` float DEFAULT NULL,
-  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `results`
+-- Dumping data for table `hasil`
 --
 
-INSERT INTO `results` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
+INSERT INTO `hasil` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
 ('R0002', 'U0001', 'T0004', 0.7, '2021-08-31 13:10:37'),
 ('R0003', 'U0001', 'T0001', 0.8, '2021-08-31 13:16:02'),
 ('R0005', 'U0003', 'T0003', 0.72, '2021-08-31 13:30:26'),
 ('R0008', 'U0003', 'T0007', 0.857, '2021-08-31 13:30:48'),
 ('R0009', 'U0001', 'T0002', 0.79, '2021-08-31 14:30:14'),
 ('R0010', 'U0001', 'T0001', 0.7, '2021-08-31 14:30:25'),
-('R0011', 'U0002', 'T0004', 0.844, '2021-08-31 20:56:28');
+('R0011', 'U0002', 'T0004', 0.844, '2021-08-31 20:56:28'),
+('R0012', 'U0003', 'T0002', 0.2, '2021-09-22 09:20:11'),
+('R0013', 'U0001', 'T0007', 0.58, '2021-09-23 16:31:22'),
+('R0014', 'U0001', 'T0007', 0.58, '2021-09-23 16:31:42'),
+('R0015', 'U0001', 'T0006', 0.76, '2021-09-23 16:38:25'),
+('R0016', 'U0001', 'T0007', 0.42, '2021-09-23 16:39:03'),
+('R0017', 'U0001', 'T0008', 0.72, '2021-09-23 16:40:18'),
+('R0018', 'U0001', 'T0008', 0.72, '2021-09-23 16:40:43'),
+('R0019', 'U0001', 'T0003', 0.9, '2021-09-23 16:41:59'),
+('R0020', 'U0001', 'T0003', 0.9, '2021-09-23 16:42:06'),
+('R0021', 'U0001', 'T0006', 0.748, '2021-09-23 16:50:33'),
+('R0022', 'U0001', 'T0006', 0.748, '2021-09-23 16:50:48'),
+('R0023', 'U0001', 'T0004', 0.7, '2021-09-23 16:52:08'),
+('R0024', 'U0003', 'T0003', 0.9, '2021-09-23 16:54:08'),
+('R0025', 'U0003', 'T0003', 0.9, '2021-09-23 16:54:11'),
+('R0026', 'U0003', 'T0007', 0.56, '2021-09-23 16:59:22'),
+('R0027', 'U0003', 'T0003', 0.9, '2021-09-23 16:59:32'),
+('R0028', 'U0001', 'T0004', 0.7, '2021-09-23 17:00:16'),
+('R0029', 'U0003', 'T0006', 0.5, '2021-09-23 17:03:47'),
+('R0030', 'U0003', 'T0008', 0.9, '2021-09-23 17:07:27'),
+('R0031', 'U0003', 'T0004', 0.42, '2021-09-23 17:12:33'),
+('R0032', 'U0001', 'T0005', 0.85, '2021-09-25 20:23:51');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results_details`
+-- Table structure for table `hasil_detail`
 --
 
-CREATE TABLE `results_details` (
+CREATE TABLE `hasil_detail` (
   `result_id` varchar(5) NOT NULL,
   `interest_id` varchar(5) NOT NULL,
   `value` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `results_details`
+-- Dumping data for table `hasil_detail`
 --
 
-INSERT INTO `results_details` (`result_id`, `interest_id`, `value`) VALUES
+INSERT INTO `hasil_detail` (`result_id`, `interest_id`, `value`) VALUES
 ('R0002', 'I0021', 0.6),
 ('R0002', 'I0033', 1),
 ('R0002', 'I0038', 0.8),
@@ -342,143 +235,138 @@ INSERT INTO `results_details` (`result_id`, `interest_id`, `value`) VALUES
 ('R0011', 'I0031', 1),
 ('R0011', 'I0032', 0.6),
 ('R0011', 'I0038', 0.8),
-('R0011', 'I0052', 1);
+('R0011', 'I0052', 1),
+('R0012', 'I0007', 1),
+('R0013', 'I0022', 1),
+('R0013', 'I0023', 1),
+('R0014', 'I0022', 1),
+('R0014', 'I0023', 1),
+('R0015', 'I0037', 1),
+('R0015', 'I0040', 1),
+('R0015', 'I0043', 0.8),
+('R0016', 'I0004', 1),
+('R0016', 'I0025', 0.6),
+('R0017', 'I0011', 0.8),
+('R0017', 'I0034', 1),
+('R0018', 'I0011', 0.8),
+('R0018', 'I0034', 1),
+('R0019', 'I0015', 1),
+('R0020', 'I0015', 1),
+('R0020', 'I0023', 0.8),
+('R0021', 'I0037', 1),
+('R0021', 'I0038', 0.8),
+('R0022', 'I0037', 1),
+('R0022', 'I0038', 0.8),
+('R0023', 'I0031', 1),
+('R0023', 'I0051', 0.8),
+('R0024', 'I0015', 1),
+('R0024', 'I0055', 0.8),
+('R0025', 'I0015', 1),
+('R0025', 'I0055', 0.8),
+('R0026', 'I0017', 0.8),
+('R0026', 'I0024', 0.8),
+('R0026', 'I0048', 1),
+('R0027', 'I0015', 1),
+('R0027', 'I0044', 0.8),
+('R0028', 'I0017', 0.8),
+('R0028', 'I0030', 1),
+('R0029', 'I0013', 0.6),
+('R0029', 'I0041', 1),
+('R0029', 'I0049', 0.8),
+('R0030', 'I0011', 1),
+('R0031', 'I0024', 0.2),
+('R0031', 'I0031', 0.6),
+('R0031', 'I0042', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rules`
+-- Stand-in structure for view `interests_v2`
+-- (See below for the actual view)
 --
-
-CREATE TABLE `rules` (
-  `id` varchar(10) NOT NULL,
-  `type_id` varchar(5) NOT NULL,
-  `interest_id` varchar(5) NOT NULL,
-  `mb` float NOT NULL,
-  `md` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `rules`
---
-
-INSERT INTO `rules` (`id`, `type_id`, `interest_id`, `mb`, `md`) VALUES
-('RL0001', 'T0001', 'I0050', 0.6, NULL),
-('RL0002', 'T0001', 'I0051', 0.4, NULL),
-('RL0003', 'T0001', 'I0052', 1, NULL),
-('RL0004', 'T0001', 'I0053', 0.6, NULL),
-('RL0005', 'T0001', 'I0054', 0.8, NULL),
-('RL0006', 'T0001', 'I0055', 0.4, NULL),
-('RL0007', 'T0001', 'I0056', 0.4, NULL),
-('RL0008', 'T0002', 'I0001', 0.6, NULL),
-('RL0009', 'T0002', 'I0002', 0.4, NULL),
-('RL0010', 'T0002', 'I0003', 1, NULL),
-('RL0011', 'T0002', 'I0004', 0.6, NULL),
-('RL0012', 'T0002', 'I0005', 0.8, NULL),
-('RL0013', 'T0002', 'I0006', 0.4, NULL),
-('RL0014', 'T0002', 'I0007', 0.4, NULL),
-('RL0015', 'T0008', 'I0008', 0.6, NULL),
-('RL0016', 'T0008', 'I0009', 0.4, NULL),
-('RL0017', 'T0008', 'I0010', 1, NULL),
-('RL0018', 'T0008', 'I0011', 0.6, NULL),
-('RL0019', 'T0008', 'I0012', 0.8, NULL),
-('RL0020', 'T0008', 'I0013', 0.4, NULL),
-('RL0021', 'T0008', 'I0014', 0.4, NULL),
-('RL0022', 'T0003', 'I0015', 0.6, NULL),
-('RL0023', 'T0003', 'I0016', 0.4, NULL),
-('RL0024', 'T0003', 'I0017', 1, NULL),
-('RL0025', 'T0003', 'I0018', 0.6, NULL),
-('RL0026', 'T0003', 'I0019', 0.8, NULL),
-('RL0027', 'T0003', 'I0020', 0.4, NULL),
-('RL0028', 'T0003', 'I0021', 0.4, NULL),
-('RL0029', 'T0007', 'I0022', 0.6, NULL),
-('RL0030', 'T0007', 'I0023', 0.4, NULL),
-('RL0031', 'T0007', 'I0024', 1, NULL),
-('RL0032', 'T0007', 'I0025', 0.6, NULL),
-('RL0033', 'T0007', 'I0026', 0.8, NULL),
-('RL0034', 'T0007', 'I0027', 0.4, NULL),
-('RL0035', 'T0007', 'I0028', 0.4, NULL),
-('RL0036', 'T0004', 'I0029', 0.6, NULL),
-('RL0037', 'T0004', 'I0030', 0.4, NULL),
-('RL0038', 'T0004', 'I0031', 1, NULL),
-('RL0039', 'T0004', 'I0032', 0.6, NULL),
-('RL0040', 'T0004', 'I0033', 0.8, NULL),
-('RL0041', 'T0004', 'I0034', 0.4, NULL),
-('RL0042', 'T0004', 'I0035', 0.4, NULL),
-('RL0043', 'T0006', 'I0036', 0.6, NULL),
-('RL0044', 'T0006', 'I0037', 0.4, NULL),
-('RL0045', 'T0006', 'I0038', 1, NULL),
-('RL0046', 'T0006', 'I0039', 0.6, NULL),
-('RL0047', 'T0006', 'I0040', 0.8, NULL),
-('RL0048', 'T0006', 'I0041', 0.4, NULL),
-('RL0049', 'T0006', 'I0042', 0.4, NULL),
-('RL0050', 'T0005', 'I0036', 0.6, NULL),
-('RL0051', 'T0005', 'I0037', 0.4, NULL),
-('RL0052', 'T0005', 'I0038', 1, NULL),
-('RL0053', 'T0005', 'I0039', 0.6, NULL),
-('RL0054', 'T0005', 'I0040', 0.8, NULL),
-('RL0055', 'T0005', 'I0041', 0.4, NULL),
-('RL0056', 'T0005', 'I0042', 0.4, NULL);
+CREATE TABLE `interests_v2` (
+`id` varchar(5)
+,`name` varchar(200)
+,`type_id` varchar(5)
+,`mb` float
+);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `setting`
+-- Table structure for table `pengaturan`
 --
 
-CREATE TABLE `setting` (
+CREATE TABLE `pengaturan` (
   `id` int(11) NOT NULL,
   `school_name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `setting`
+-- Dumping data for table `pengaturan`
 --
 
-INSERT INTO `setting` (`id`, `school_name`, `address`) VALUES
+INSERT INTO `pengaturan` (`id`, `school_name`, `address`) VALUES
 (1, 'SDN Kwaron I', 'Jombang');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `superuser`
---
-
-CREATE TABLE `superuser` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `superuser`
---
-
-INSERT INTO `superuser` (`username`, `password`, `name`) VALUES
-('superuser', '$2y$10$i/acvAwJT0QbmstOfuOm/.S5REbSZvdP5Wy2FWlFg5hkzLltZtyzy', 'Superuser');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `tipe_minat_bakat`
+-- Stand-in structure for view `results`
 -- (See below for the actual view)
 --
-CREATE TABLE `tipe_minat_bakat` (
+CREATE TABLE `results` (
 `id` varchar(5)
-,`name` varchar(50)
-,`detail` varchar(1000)
-,`advice` varchar(1000)
-,`fields` varchar(1000)
+,`user_id` varchar(5)
+,`type_id` varchar(5)
+,`cf_value` float
+,`datetime` datetime
 );
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types`
+-- Stand-in structure for view `results_detail`
+-- (See below for the actual view)
+--
+CREATE TABLE `results_detail` (
+`result_id` varchar(5)
+,`interest_id` varchar(5)
+,`value` float
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `setting`
+-- (See below for the actual view)
+--
+CREATE TABLE `setting` (
+`id` int(11)
+,`school_name` varchar(100)
+,`address` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `superuser`
+-- (See below for the actual view)
+--
+CREATE TABLE `superuser` (
+`username` varchar(50)
+,`password` varchar(200)
+,`name` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipe_minat_bakat`
 --
 
-CREATE TABLE `types` (
+CREATE TABLE `tipe_minat_bakat` (
   `id` varchar(5) NOT NULL,
   `name` varchar(50) NOT NULL,
   `detail` varchar(1000) NOT NULL,
@@ -487,14 +375,14 @@ CREATE TABLE `types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `types`
+-- Dumping data for table `tipe_minat_bakat`
 --
 
-INSERT INTO `types` (`id`, `name`, `detail`, `advice`, `fields`) VALUES
+INSERT INTO `tipe_minat_bakat` (`id`, `name`, `detail`, `advice`, `fields`) VALUES
 ('T0001', 'Kinestetik', 'Kecerdasan Kinestetik merupakan salah satu jenis kecerdasan majemuk. Kecerdasan ini merupakan kemampuan seseorang untuk menggunakan seluruh tubuh atau fisiknya untuk mengekspresikan ide dan perasaan, serta keterampilan menggunakan tangan untuk mengubah atau menciptakan sesuatu.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Atlet Olahraga, Model, Aktor, Penari'),
 ('T0002', 'Linguistik', 'Kecerdasan Linguistik atau kecerdasan berbahasa adalah kemampuan seseorang untuk mengungkapkan pendapat atau pikirannya melalui bahasa verbal maupun non verbal secara jelas dan lugas dengan tatanan bahasa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Penulis, Wartawan'),
 ('T0003', 'Intra-personal', 'Kecerdasan Intrapersonal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Motivator, Pelatih'),
-('T0004', 'Inter-personal', 'Komunikasi interpersonal adalah komunikasi yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. Dalam komunikasi interpersonal, setiap partisipan menggunakan semua elemen dari proses komunikasi.', 'Test', 'Psikolog, Pengusaha'),
+('T0004', 'Inter-personal', 'Komunikasi interpersonal adalah komunikasi yang terjadi antara dua orang atau lebih, yang biasanya tidak diatur secara formal. Dalam komunikasi interpersonal, setiap partisipan menggunakan semua elemen dari proses komunikasi.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Psikolog, Pengusaha'),
 ('T0005', 'Visual Spasial', 'Kecerdasan spasial - visual merupakan kemampuan seseorang untuk memahami, memproses dan berfikir ke dalam bentuk visual. Kecerdasan spasial - visual juga merupakan salah satu jenis kecerdasan majemuk. Seseorang yang memiliki kecerdasan ini mampu menerjemahkan gambaran dalam pikirannya sendiri ke dalam bentuk dua dimensi atau tiga dimensi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Desain Grafis, Arsitek, Pelukis'),
 ('T0006', 'Musikal', 'Kecerdasan musikal adalah kemampuan untuk menikmati, mengamati, membedakan, mengarang, membentuk, dan mengekspresikan bentuk-bentuk musik. Kecerdasan ini meliputi kepekaan terhadap ritme, melodi dan timbre dari musik yang didengar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Musisi Musik, Budayawan'),
 ('T0007', 'Matematika-Logika', 'Kecerdasan matematis logis ini adalah kemampuan untuk menangani bilangan dan perhitungan, pola berpikir logis dan ilmiah. Biasanya, kecerdasan ini dimiliki oleh para ilmuwan, filsuf, dan sebagainya', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Programmer, Guru Matematika, Teknisi'),
@@ -503,20 +391,20 @@ INSERT INTO `types` (`id`, `name`, `detail`, `advice`, `fields`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types_pictures`
+-- Table structure for table `tipe_minat_bakat_gambar`
 --
 
-CREATE TABLE `types_pictures` (
+CREATE TABLE `tipe_minat_bakat_gambar` (
   `id` int(11) NOT NULL,
   `type_id` varchar(5) NOT NULL,
   `file_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `types_pictures`
+-- Dumping data for table `tipe_minat_bakat_gambar`
 --
 
-INSERT INTO `types_pictures` (`id`, `type_id`, `file_name`) VALUES
+INSERT INTO `tipe_minat_bakat_gambar` (`id`, `type_id`, `file_name`) VALUES
 (1, 'T0001', 'T0001-1.svg'),
 (2, 'T0001', 'T0001-3.svg'),
 (3, 'T0001', 'T0001-2.svg'),
@@ -545,33 +433,27 @@ INSERT INTO `types_pictures` (`id`, `type_id`, `file_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `umpan_balik`
+-- Stand-in structure for view `types`
 -- (See below for the actual view)
 --
-CREATE TABLE `umpan_balik` (
-`id` int(11)
-,`user_id` varchar(5)
-,`content` varchar(1000)
-,`datetime` datetime
+CREATE TABLE `types` (
+`id` varchar(5)
+,`name` varchar(50)
+,`detail` varchar(1000)
+,`advice` varchar(1000)
+,`fields` varchar(1000)
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `user`
+-- Stand-in structure for view `types_pictures`
 -- (See below for the actual view)
 --
-CREATE TABLE `user` (
-`id` varchar(5)
-,`username` varchar(50)
-,`password` varchar(100)
-,`full_name` varchar(100)
-,`gender` enum('Laki-Laki','Perempuan')
-,`date_of_birth` date
-,`address` varchar(100)
-,`privilege` enum('User','Admin')
-,`avatar_id` int(11)
-,`last_login` datetime
+CREATE TABLE `types_pictures` (
+`id` int(11)
+,`type_id` varchar(5)
+,`file_name` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -586,10 +468,10 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
-  `date_of_birth` date DEFAULT '2010-10-10',
+  `date_of_birth` date DEFAULT current_timestamp(),
   `address` varchar(100) DEFAULT NULL,
   `privilege` enum('User','Admin') NOT NULL DEFAULT 'User',
-  `avatar_id` int(11) NOT NULL DEFAULT '1',
+  `avatar_id` int(11) NOT NULL DEFAULT 1,
   `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -598,94 +480,88 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_of_birth`, `address`, `privilege`, `avatar_id`, `last_login`) VALUES
-('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-08-31 23:29:17'),
+('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-09-25 20:22:57'),
 ('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'User', 5, '2021-08-31 20:41:24'),
-('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-08-31 22:18:59');
+('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-09-25 20:13:38');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `admin`
+-- Structure for view `interests_v2`
 --
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `interests_v2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `admin`  AS SELECT `superuser`.`username` AS `username`, `superuser`.`password` AS `password`, `superuser`.`name` AS `name` FROM `superuser` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `interests_v2`  AS SELECT `basis_pakar`.`id` AS `id`, `basis_pakar`.`indikator` AS `name`, `basis_pakar`.`type_id` AS `type_id`, `basis_pakar`.`mb` AS `mb` FROM `basis_pakar` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `basis_pakar`
+-- Structure for view `results`
 --
-DROP TABLE IF EXISTS `basis_pakar`;
+DROP TABLE IF EXISTS `results`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `basis_pakar`  AS SELECT `interests_v2`.`id` AS `id`, `interests_v2`.`name` AS `name`, `interests_v2`.`type_id` AS `type_id`, `interests_v2`.`mb` AS `mb` FROM `interests_v2` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results`  AS SELECT `hasil`.`id` AS `id`, `hasil`.`user_id` AS `user_id`, `hasil`.`type_id` AS `type_id`, `hasil`.`cf_value` AS `cf_value`, `hasil`.`datetime` AS `datetime` FROM `hasil` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `detail_hasil`
+-- Structure for view `results_detail`
 --
-DROP TABLE IF EXISTS `detail_hasil`;
+DROP TABLE IF EXISTS `results_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `detail_hasil`  AS SELECT `results_details`.`result_id` AS `result_id`, `results_details`.`interest_id` AS `interest_id`, `results_details`.`value` AS `value` FROM `results_details` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results_detail`  AS SELECT `hasil_detail`.`result_id` AS `result_id`, `hasil_detail`.`interest_id` AS `interest_id`, `hasil_detail`.`value` AS `value` FROM `hasil_detail` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `hasil`
+-- Structure for view `setting`
 --
-DROP TABLE IF EXISTS `hasil`;
+DROP TABLE IF EXISTS `setting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `hasil`  AS SELECT `results`.`id` AS `id`, `results`.`user_id` AS `user_id`, `results`.`type_id` AS `type_id`, `results`.`cf_value` AS `cf_value`, `results`.`datetime` AS `datetime` FROM `results` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `setting`  AS SELECT `pengaturan`.`id` AS `id`, `pengaturan`.`school_name` AS `school_name`, `pengaturan`.`address` AS `address` FROM `pengaturan` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `indikator`
+-- Structure for view `superuser`
 --
-DROP TABLE IF EXISTS `indikator`;
+DROP TABLE IF EXISTS `superuser`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `indikator`  AS SELECT `interests`.`id` AS `id`, `interests`.`name` AS `name` FROM `interests` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `superuser`  AS SELECT `admin`.`username` AS `username`, `admin`.`password` AS `password`, `admin`.`name` AS `name` FROM `admin` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `pengaturan`
+-- Structure for view `types`
 --
-DROP TABLE IF EXISTS `pengaturan`;
+DROP TABLE IF EXISTS `types`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `pengaturan`  AS SELECT `setting`.`id` AS `id`, `setting`.`school_name` AS `school_name`, `setting`.`address` AS `address` FROM `setting` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `types`  AS SELECT `tipe_minat_bakat`.`id` AS `id`, `tipe_minat_bakat`.`name` AS `name`, `tipe_minat_bakat`.`detail` AS `detail`, `tipe_minat_bakat`.`advice` AS `advice`, `tipe_minat_bakat`.`fields` AS `fields` FROM `tipe_minat_bakat` ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `tipe_minat_bakat`
+-- Structure for view `types_pictures`
 --
-DROP TABLE IF EXISTS `tipe_minat_bakat`;
+DROP TABLE IF EXISTS `types_pictures`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `tipe_minat_bakat`  AS SELECT `types`.`id` AS `id`, `types`.`name` AS `name`, `types`.`detail` AS `detail`, `types`.`advice` AS `advice`, `types`.`fields` AS `fields` FROM `types` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `umpan_balik`
---
-DROP TABLE IF EXISTS `umpan_balik`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `umpan_balik`  AS SELECT `feedback`.`id` AS `id`, `feedback`.`user_id` AS `user_id`, `feedback`.`content` AS `content`, `feedback`.`datetime` AS `datetime` FROM `feedback` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `user`
---
-DROP TABLE IF EXISTS `user`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `user`  AS SELECT `users`.`id` AS `id`, `users`.`username` AS `username`, `users`.`password` AS `password`, `users`.`full_name` AS `full_name`, `users`.`gender` AS `gender`, `users`.`date_of_birth` AS `date_of_birth`, `users`.`address` AS `address`, `users`.`privilege` AS `privilege`, `users`.`avatar_id` AS `avatar_id`, `users`.`last_login` AS `last_login` FROM `users` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `types_pictures`  AS SELECT `tipe_minat_bakat_gambar`.`id` AS `id`, `tipe_minat_bakat_gambar`.`type_id` AS `type_id`, `tipe_minat_bakat_gambar`.`file_name` AS `file_name` FROM `tipe_minat_bakat_gambar` ;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `basis_pakar`
+--
+ALTER TABLE `basis_pakar`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `feedback`
@@ -695,62 +571,36 @@ ALTER TABLE `feedback`
   ADD KEY `feedback_ibfk_1` (`user_id`);
 
 --
--- Indexes for table `interests`
+-- Indexes for table `hasil`
 --
-ALTER TABLE `interests`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `interests_v2`
---
-ALTER TABLE `interests_v2`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `results`
---
-ALTER TABLE `results`
+ALTER TABLE `hasil`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `type_id` (`type_id`);
 
 --
--- Indexes for table `results_details`
+-- Indexes for table `hasil_detail`
 --
-ALTER TABLE `results_details`
+ALTER TABLE `hasil_detail`
   ADD PRIMARY KEY (`result_id`,`interest_id`),
   ADD KEY `interests_id` (`interest_id`);
 
 --
--- Indexes for table `rules`
+-- Indexes for table `pengaturan`
 --
-ALTER TABLE `rules`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `interest_id` (`interest_id`),
-  ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `setting`
---
-ALTER TABLE `setting`
+ALTER TABLE `pengaturan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `superuser`
+-- Indexes for table `tipe_minat_bakat`
 --
-ALTER TABLE `superuser`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `types`
---
-ALTER TABLE `types`
+ALTER TABLE `tipe_minat_bakat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `types_pictures`
+-- Indexes for table `tipe_minat_bakat_gambar`
 --
-ALTER TABLE `types_pictures`
+ALTER TABLE `tipe_minat_bakat_gambar`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type_id` (`type_id`);
 
@@ -769,19 +619,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `setting`
+-- AUTO_INCREMENT for table `pengaturan`
 --
-ALTER TABLE `setting`
+ALTER TABLE `pengaturan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `types_pictures`
+-- AUTO_INCREMENT for table `tipe_minat_bakat_gambar`
 --
-ALTER TABLE `types_pictures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+ALTER TABLE `tipe_minat_bakat_gambar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -794,31 +644,24 @@ ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `results`
+-- Constraints for table `hasil`
 --
-ALTER TABLE `results`
-  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `results_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
+ALTER TABLE `hasil`
+  ADD CONSTRAINT `hasil_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hasil_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `tipe_minat_bakat` (`id`);
 
 --
--- Constraints for table `results_details`
+-- Constraints for table `hasil_detail`
 --
-ALTER TABLE `results_details`
-  ADD CONSTRAINT `results_details_ibfk_2` FOREIGN KEY (`interest_id`) REFERENCES `interests_v2` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `results_details_ibfk_3` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE;
+ALTER TABLE `hasil_detail`
+  ADD CONSTRAINT `hasil_detail_ibfk_2` FOREIGN KEY (`interest_id`) REFERENCES `basis_pakar` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hasil_detail_ibfk_3` FOREIGN KEY (`result_id`) REFERENCES `hasil` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `rules`
+-- Constraints for table `tipe_minat_bakat_gambar`
 --
-ALTER TABLE `rules`
-  ADD CONSTRAINT `rules_ibfk_1` FOREIGN KEY (`interest_id`) REFERENCES `interests_v2` (`id`),
-  ADD CONSTRAINT `rules_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
-
---
--- Constraints for table `types_pictures`
---
-ALTER TABLE `types_pictures`
-  ADD CONSTRAINT `types_pictures_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
+ALTER TABLE `tipe_minat_bakat_gambar`
+  ADD CONSTRAINT `tipe_minat_bakat_gambar_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `tipe_minat_bakat` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
