@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2021 at 03:24 PM
+-- Generation Time: Sep 25, 2021 at 04:50 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `username` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `nama_lengkap` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`, `password`, `name`) VALUES
+INSERT INTO `admin` (`username`, `password`, `nama_lengkap`) VALUES
 ('superuser', '$2y$10$i/acvAwJT0QbmstOfuOm/.S5REbSZvdP5Wy2FWlFg5hkzLltZtyzy', 'Superuser');
 
 -- --------------------------------------------------------
@@ -49,7 +49,7 @@ INSERT INTO `admin` (`username`, `password`, `name`) VALUES
 CREATE TABLE `basis_pakar` (
   `id` varchar(5) NOT NULL,
   `indikator` varchar(200) NOT NULL,
-  `type_id` varchar(5) NOT NULL,
+  `id_tipe` varchar(5) NOT NULL,
   `mb` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -57,7 +57,7 @@ CREATE TABLE `basis_pakar` (
 -- Dumping data for table `basis_pakar`
 --
 
-INSERT INTO `basis_pakar` (`id`, `indikator`, `type_id`, `mb`) VALUES
+INSERT INTO `basis_pakar` (`id`, `indikator`, `id_tipe`, `mb`) VALUES
 ('I0001', 'Saya suka membaca buku', 'T0002', 0.3),
 ('I0002', 'Suka menulis', 'T0002', 0.2),
 ('I0003', 'Suka bercerita / berbicara', 'T0002', 0.7),
@@ -144,17 +144,17 @@ INSERT INTO `feedback` (`id`, `user_id`, `content`, `datetime`) VALUES
 
 CREATE TABLE `hasil` (
   `id` varchar(5) NOT NULL,
-  `user_id` varchar(5) DEFAULT NULL,
-  `type_id` varchar(5) DEFAULT NULL,
-  `cf_value` float DEFAULT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
+  `id_user` varchar(5) DEFAULT NULL,
+  `id_tipe` varchar(5) DEFAULT NULL,
+  `hasil_cf` float DEFAULT NULL,
+  `tanggal` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hasil`
 --
 
-INSERT INTO `hasil` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
+INSERT INTO `hasil` (`id`, `id_user`, `id_tipe`, `hasil_cf`, `tanggal`) VALUES
 ('R0002', 'U0001', 'T0004', 0.7, '2021-08-31 13:10:37'),
 ('R0003', 'U0001', 'T0001', 0.8, '2021-08-31 13:16:02'),
 ('R0005', 'U0003', 'T0003', 0.72, '2021-08-31 13:30:26'),
@@ -182,7 +182,8 @@ INSERT INTO `hasil` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
 ('R0029', 'U0003', 'T0006', 0.5, '2021-09-23 17:03:47'),
 ('R0030', 'U0003', 'T0008', 0.9, '2021-09-23 17:07:27'),
 ('R0031', 'U0003', 'T0004', 0.42, '2021-09-23 17:12:33'),
-('R0032', 'U0001', 'T0005', 0.85, '2021-09-25 20:23:51');
+('R0032', 'U0001', 'T0005', 0.85, '2021-09-25 20:23:51'),
+('R0033', 'U0001', 'T0001', 0.7, '2021-09-25 21:39:05');
 
 -- --------------------------------------------------------
 
@@ -191,16 +192,16 @@ INSERT INTO `hasil` (`id`, `user_id`, `type_id`, `cf_value`, `datetime`) VALUES
 --
 
 CREATE TABLE `hasil_detail` (
-  `result_id` varchar(5) NOT NULL,
-  `interest_id` varchar(5) NOT NULL,
-  `value` float NOT NULL
+  `id_hasil` varchar(5) NOT NULL,
+  `id_basis_pakar` varchar(5) NOT NULL,
+  `nilai` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hasil_detail`
 --
 
-INSERT INTO `hasil_detail` (`result_id`, `interest_id`, `value`) VALUES
+INSERT INTO `hasil_detail` (`id_hasil`, `id_basis_pakar`, `nilai`) VALUES
 ('R0002', 'I0021', 0.6),
 ('R0002', 'I0033', 1),
 ('R0002', 'I0038', 0.8),
@@ -299,15 +300,15 @@ CREATE TABLE `interests_v2` (
 
 CREATE TABLE `pengaturan` (
   `id` int(11) NOT NULL,
-  `school_name` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL
+  `nama_sekolah` varchar(100) NOT NULL,
+  `alamat` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pengaturan`
 --
 
-INSERT INTO `pengaturan` (`id`, `school_name`, `address`) VALUES
+INSERT INTO `pengaturan` (`id`, `nama_sekolah`, `alamat`) VALUES
 (1, 'SDN Kwaron I', 'Jombang');
 
 -- --------------------------------------------------------
@@ -369,16 +370,16 @@ CREATE TABLE `superuser` (
 CREATE TABLE `tipe_minat_bakat` (
   `id` varchar(5) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `detail` varchar(1000) NOT NULL,
-  `advice` varchar(1000) DEFAULT NULL,
-  `fields` varchar(1000) DEFAULT NULL
+  `info` varchar(1000) NOT NULL,
+  `saran` varchar(1000) DEFAULT NULL,
+  `bidang_pekerjaan` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tipe_minat_bakat`
 --
 
-INSERT INTO `tipe_minat_bakat` (`id`, `name`, `detail`, `advice`, `fields`) VALUES
+INSERT INTO `tipe_minat_bakat` (`id`, `name`, `info`, `saran`, `bidang_pekerjaan`) VALUES
 ('T0001', 'Kinestetik', 'Kecerdasan Kinestetik merupakan salah satu jenis kecerdasan majemuk. Kecerdasan ini merupakan kemampuan seseorang untuk menggunakan seluruh tubuh atau fisiknya untuk mengekspresikan ide dan perasaan, serta keterampilan menggunakan tangan untuk mengubah atau menciptakan sesuatu.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Atlet Olahraga, Model, Aktor, Penari'),
 ('T0002', 'Linguistik', 'Kecerdasan Linguistik atau kecerdasan berbahasa adalah kemampuan seseorang untuk mengungkapkan pendapat atau pikirannya melalui bahasa verbal maupun non verbal secara jelas dan lugas dengan tatanan bahasa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Penulis, Wartawan'),
 ('T0003', 'Intra-personal', 'Kecerdasan Intrapersonal adalah kemampuan memahami diri sendiri dan bertindak berdasarkan pemahaman tersebut. Komponen inti dari Kecerdasan Intrapersonal kemampuan memahami diri yang akurat meliputi kekuatan dan keterbatasan diri, kecerdasan akan suasana hati, maksud, motivasi, temperamen dan keinginan, serta kemampuan berdisiplin diri, memahami dan menghargai diri', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Motivator, Pelatih'),
@@ -459,30 +460,49 @@ CREATE TABLE `types_pictures` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` varchar(5) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `gender` enum('Laki-Laki','Perempuan') DEFAULT NULL,
-  `date_of_birth` date DEFAULT current_timestamp(),
-  `address` varchar(100) DEFAULT NULL,
-  `privilege` enum('User','Admin') NOT NULL DEFAULT 'User',
-  `avatar_id` int(11) NOT NULL DEFAULT 1,
-  `last_login` datetime DEFAULT NULL
+  `nama_lengkap` varchar(100) NOT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan') DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT current_timestamp(),
+  `alamat` varchar(100) DEFAULT NULL,
+  `hak_akses` enum('User','Admin') NOT NULL DEFAULT 'User',
+  `id_avatar` int(11) NOT NULL DEFAULT 1,
+  `terakhir_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_of_birth`, `address`, `privilege`, `avatar_id`, `last_login`) VALUES
-('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-09-25 20:22:57'),
+INSERT INTO `user` (`id`, `username`, `password`, `nama_lengkap`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `hak_akses`, `id_avatar`, `terakhir_login`) VALUES
+('U0001', '123', '$2y$10$o/K/1WJlDFvZL8iufI6pXOaDqb/zLugFJFBl5nZvTzmL.RG0qrcbS', 'Yusuf Effendi', 'Laki-Laki', '2010-01-01', 'Diwek', 'Admin', 2, '2021-09-25 21:36:50'),
 ('U0002', '456', '$2y$10$cm2RBAGbLD4HMsKXA3KkD.YMhlvNDWjW5oSSX6hrPd72BL8i.oHdy', 'Aldi Kurniawan', 'Laki-Laki', '2021-08-31', 'Ngoro', 'User', 5, '2021-08-31 20:41:24'),
 ('U0003', '222', '$2y$10$yPEt1ZJZRCUe5KZS6kiIOeJ.r/IpR17NpVe3R9jx1MDYZlYhRXSny', 'Bunga', 'Perempuan', '2021-08-31', 'Jombang', 'User', 3, '2021-09-25 20:13:38');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `users`
+-- (See below for the actual view)
+--
+CREATE TABLE `users` (
+`id` varchar(5)
+,`username` varchar(50)
+,`password` varchar(100)
+,`full_name` varchar(100)
+,`gender` enum('Laki-Laki','Perempuan')
+,`date_of_birth` date
+,`address` varchar(100)
+,`privilege` enum('User','Admin')
+,`avatar_id` int(11)
+,`last_login` datetime
+);
 
 -- --------------------------------------------------------
 
@@ -491,7 +511,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `date_
 --
 DROP TABLE IF EXISTS `interests_v2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `interests_v2`  AS SELECT `basis_pakar`.`id` AS `id`, `basis_pakar`.`indikator` AS `name`, `basis_pakar`.`type_id` AS `type_id`, `basis_pakar`.`mb` AS `mb` FROM `basis_pakar` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `interests_v2`  AS SELECT `basis_pakar`.`id` AS `id`, `basis_pakar`.`indikator` AS `name`, `basis_pakar`.`id_tipe` AS `type_id`, `basis_pakar`.`mb` AS `mb` FROM `basis_pakar` ;
 
 -- --------------------------------------------------------
 
@@ -500,7 +520,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `results`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results`  AS SELECT `hasil`.`id` AS `id`, `hasil`.`user_id` AS `user_id`, `hasil`.`type_id` AS `type_id`, `hasil`.`cf_value` AS `cf_value`, `hasil`.`datetime` AS `datetime` FROM `hasil` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results`  AS SELECT `hasil`.`id` AS `id`, `hasil`.`id_user` AS `user_id`, `hasil`.`id_tipe` AS `type_id`, `hasil`.`hasil_cf` AS `cf_value`, `hasil`.`tanggal` AS `datetime` FROM `hasil` ;
 
 -- --------------------------------------------------------
 
@@ -509,7 +529,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `results_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results_detail`  AS SELECT `hasil_detail`.`result_id` AS `result_id`, `hasil_detail`.`interest_id` AS `interest_id`, `hasil_detail`.`value` AS `value` FROM `hasil_detail` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `results_detail`  AS SELECT `hasil_detail`.`id_hasil` AS `result_id`, `hasil_detail`.`id_basis_pakar` AS `interest_id`, `hasil_detail`.`nilai` AS `value` FROM `hasil_detail` ;
 
 -- --------------------------------------------------------
 
@@ -518,7 +538,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `setting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `setting`  AS SELECT `pengaturan`.`id` AS `id`, `pengaturan`.`school_name` AS `school_name`, `pengaturan`.`address` AS `address` FROM `pengaturan` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `setting`  AS SELECT `pengaturan`.`id` AS `id`, `pengaturan`.`nama_sekolah` AS `school_name`, `pengaturan`.`alamat` AS `address` FROM `pengaturan` WHERE 1 ;
 
 -- --------------------------------------------------------
 
@@ -527,7 +547,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `superuser`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `superuser`  AS SELECT `admin`.`username` AS `username`, `admin`.`password` AS `password`, `admin`.`name` AS `name` FROM `admin` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `superuser`  AS SELECT `admin`.`username` AS `username`, `admin`.`password` AS `password`, `admin`.`nama_lengkap` AS `name` FROM `admin` ;
 
 -- --------------------------------------------------------
 
@@ -536,7 +556,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `types`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `types`  AS SELECT `tipe_minat_bakat`.`id` AS `id`, `tipe_minat_bakat`.`name` AS `name`, `tipe_minat_bakat`.`detail` AS `detail`, `tipe_minat_bakat`.`advice` AS `advice`, `tipe_minat_bakat`.`fields` AS `fields` FROM `tipe_minat_bakat` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `types`  AS SELECT `tipe_minat_bakat`.`id` AS `id`, `tipe_minat_bakat`.`name` AS `name`, `tipe_minat_bakat`.`info` AS `detail`, `tipe_minat_bakat`.`saran` AS `advice`, `tipe_minat_bakat`.`bidang_pekerjaan` AS `fields` FROM `tipe_minat_bakat` ;
 
 -- --------------------------------------------------------
 
@@ -546,6 +566,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `types_pictures`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `types_pictures`  AS SELECT `tipe_minat_bakat_gambar`.`id` AS `id`, `tipe_minat_bakat_gambar`.`type_id` AS `type_id`, `tipe_minat_bakat_gambar`.`file_name` AS `file_name` FROM `tipe_minat_bakat_gambar` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `users`
+--
+DROP TABLE IF EXISTS `users`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users`  AS SELECT `user`.`id` AS `id`, `user`.`username` AS `username`, `user`.`password` AS `password`, `user`.`nama_lengkap` AS `full_name`, `user`.`jenis_kelamin` AS `gender`, `user`.`tanggal_lahir` AS `date_of_birth`, `user`.`alamat` AS `address`, `user`.`hak_akses` AS `privilege`, `user`.`id_avatar` AS `avatar_id`, `user`.`terakhir_login` AS `last_login` FROM `user` WHERE 1 ;
 
 --
 -- Indexes for dumped tables
@@ -575,15 +604,15 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `hasil`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `type_id` (`type_id`);
+  ADD KEY `user_id` (`id_user`),
+  ADD KEY `type_id` (`id_tipe`);
 
 --
 -- Indexes for table `hasil_detail`
 --
 ALTER TABLE `hasil_detail`
-  ADD PRIMARY KEY (`result_id`,`interest_id`),
-  ADD KEY `interests_id` (`interest_id`);
+  ADD PRIMARY KEY (`id_hasil`,`id_basis_pakar`),
+  ADD KEY `interests_id` (`id_basis_pakar`);
 
 --
 -- Indexes for table `pengaturan`
@@ -605,9 +634,9 @@ ALTER TABLE `tipe_minat_bakat_gambar`
   ADD KEY `type_id` (`type_id`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
@@ -641,21 +670,21 @@ ALTER TABLE `tipe_minat_bakat_gambar`
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `hasil`
 --
 ALTER TABLE `hasil`
-  ADD CONSTRAINT `hasil_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `hasil_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `tipe_minat_bakat` (`id`);
+  ADD CONSTRAINT `hasil_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hasil_ibfk_2` FOREIGN KEY (`id_tipe`) REFERENCES `tipe_minat_bakat` (`id`);
 
 --
 -- Constraints for table `hasil_detail`
 --
 ALTER TABLE `hasil_detail`
-  ADD CONSTRAINT `hasil_detail_ibfk_2` FOREIGN KEY (`interest_id`) REFERENCES `basis_pakar` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `hasil_detail_ibfk_3` FOREIGN KEY (`result_id`) REFERENCES `hasil` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `hasil_detail_ibfk_2` FOREIGN KEY (`id_basis_pakar`) REFERENCES `basis_pakar` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hasil_detail_ibfk_3` FOREIGN KEY (`id_hasil`) REFERENCES `hasil` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tipe_minat_bakat_gambar`
