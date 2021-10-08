@@ -102,12 +102,12 @@ $account = Users::get($_SESSION["username"]);
                             </a>
                         </li>
 
-                        <li class="sidebar-item  sidebar-item-rules">
+                        <!-- <li class="sidebar-item  sidebar-item-rules">
                             <a href="?rules" class='sidebar-link'>
                                 <i class="bi bi-rulers"></i>
                                 <span>Basis Pakar</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="sidebar-item  sidebar-item-demo">
                             <a href="?demo" class='sidebar-link'>
