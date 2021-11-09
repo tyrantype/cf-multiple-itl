@@ -87,7 +87,7 @@ if ($_SESSION["username"] === $superuser->username) {
                         <li class="sidebar-item  sidebar-item-home">
                             <a href="../home" class='sidebar-link'>
                                 <i class="bi bi-house-fill"></i>
-                                <span>Home</span>
+                                <span>Halaman Utama</span>
                             </a>
                         </li>
 
@@ -136,14 +136,14 @@ if ($_SESSION["username"] === $superuser->username) {
                         <li class="sidebar-item  sidebar-item-feedback ">
                             <a href="?feedback" class='sidebar-link'>
                                 <i class="bi bi-chat-left-text-fill"></i>
-                                <span>Feedback</span>
+                                <span>Saran & Komentar</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item sidebar-item-setting ">
                             <a href="?setting" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
-                                <span>Pengaturan</span>
+                                <span>Profil</span>
                             </a>
                         </li>
 
