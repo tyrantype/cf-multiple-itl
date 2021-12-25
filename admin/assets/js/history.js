@@ -37,7 +37,7 @@ function refreshHistoryTable() {
                 }
                 obj.data[i].push("");
 
-                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent"})
+                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})
 
                 let time = dayjs(obj.data[i][7]).fromNow();
                 obj.data[i].splice(7, 1);
@@ -145,7 +145,7 @@ function initDetailHistory() {
                     otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
-                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent"})})`
+                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`
                         otherPossibilities.appendChild(li);
                     }
                 }

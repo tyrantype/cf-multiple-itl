@@ -160,7 +160,7 @@ function submitCertaintyFactor(save) {
                 selectedRulesElement.innerHTML = "";
 
 
-                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
+                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
                 fields.textContent = data[0].fields;
@@ -169,7 +169,7 @@ function submitCertaintyFactor(save) {
                     otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
-                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent"})})`
+                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`
                         otherPossibilities.appendChild(li);
                     }
                 }

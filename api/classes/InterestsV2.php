@@ -14,7 +14,7 @@ class InterestsV2
                 t.name typeName,
                 i.mb mb
             FROM 
-                Interests_v2 i
+                interests_v2 i
             INNER JOIN
                 types t
             ON
@@ -45,7 +45,7 @@ class InterestsV2
                 t.name typeName,
                 i.mb mb
             FROM 
-                Interests_v2 i
+                interests_v2 i
             INNER JOIN
                 types t
             ON
@@ -70,12 +70,12 @@ class InterestsV2
     {
         $response = new stdClass();
 
-        $countName = (int) Database::query("SELECT COUNT(*) count FROM Interests_v2 WHERE name = '$data->name'")->data[0]["count"];
+        $countName = (int) Database::query("SELECT COUNT(*) count FROM interests_v2 WHERE name = '$data->name'")->data[0]["count"];
         if ($countName < 1) {
             $newID = InterestsV2::getNewID();
             $sql = "
             INSERT INTO 
-                Interests_v2(id, name, type_id, mb) 
+                interests_v2(id, name, type_id, mb) 
             VALUES 
                 (
                     '$newID', 
@@ -99,7 +99,7 @@ class InterestsV2
 
     private static function getLastID(): string
     {
-        $sql = "SELECT id FROM Interests_v2 ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT id FROM interests_v2 ORDER BY id DESC LIMIT 1";
         $response = Database::query($sql);
         if (isset($response->data[0])) {
             return $response->data[0]["id"];
@@ -139,7 +139,7 @@ class InterestsV2
             SELECT
                 COUNT(*) count
             FROM 
-                Interests_v2
+                interests_v2
             WHERE
                 name = '$data->name'
             AND
@@ -150,7 +150,7 @@ class InterestsV2
         if ($countName < 1) {
             $sql = "
                 UPDATE
-                    Interests_v2
+                    interests_v2
                 SET
                     name = '$data->name',
                     mb = '$data->typeId',
@@ -184,7 +184,7 @@ class InterestsV2
         } else {
             $sql = "
                 DELETE FROM
-                    Interests_v2
+                    interests_v2
                 WHERE 
                     id = '$id'
             ";

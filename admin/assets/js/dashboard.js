@@ -39,7 +39,7 @@ function refreshHistoryTable() {
                 
                 obj.data[i][3] = obj.data[i][3].split(" ")[0]
 
-                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent"})
+                obj.data[i][6] = parseFloat(obj.data[i][6]).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})
 
                 let time = dayjs(obj.data[i][7]).fromNow();
                 obj.data[i].splice(7, 1);
@@ -136,7 +136,7 @@ function initDetailHistory() {
                 selectedRulesElement.innerHTML = "";
 
 
-                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
+                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
                 fields.textContent = data[0].fields;
@@ -145,7 +145,7 @@ function initDetailHistory() {
                     otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
-                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent"})})`
+                        li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`
                         otherPossibilities.appendChild(li);
                     }
                 }
