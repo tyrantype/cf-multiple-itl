@@ -9,21 +9,21 @@ class Feedback
     {
         $sql = "
             SELECT 
-                f.id id, 
-                f.user_id userId,
+                f.id_feedback id, 
+                f.id_user userId,
                 u.username username,
-                u.full_name fullname,
-                f.content content,
-                f.datetime datetime,
-                u.avatar_id avatarId
+                u.nama_lengkap fullname,
+                f.isi_feedback content,
+                f.tanggal datetime,
+                u.id_avatar avatarId
                 FROM 
                 feedback f
             INNER JOIN
-                users u
+                user u
                 ON
-                u.id = f.user_id
+                u.id_user = f.id_user
             WHERE 
-                f.id = '$id'
+                f.id_feedback = '$id'
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
@@ -42,21 +42,21 @@ class Feedback
     {
         $sql = "
             SELECT 
-                f.id id, 
-                f.user_id userId,
+                f.id_feedback id, 
+                f.id_user userId,
                 u.username username,
-                u.fullname fullname,
-                f.content content,
-                f.datetime datetime,
-                u.avatar_id avatarId
+                u.nama_lengkap fullname,
+                f.isi_feedback content,
+                f.tanggal datetime,
+                u.id_avatar avatarId
                 FROM 
                 feedback f
             INNER JOIN
-                users u
+                user u
                 ON
-                u.id = f.user_id
+                u.id_user = f.id_user
             WHERE 
-                f.user_id = '$id'
+                f.id_user = '$id'
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
@@ -75,20 +75,20 @@ class Feedback
     {
         $sql = "
             SELECT 
-                f.id id, 
-                f.user_id userId,
+                f.id_feedback id, 
+                f.id_user userId,
                 u.username username,
-                u.full_name fullname,
-                f.content content,
-                f.datetime datetime,
-                u.avatar_id avatarId
+                u.nama_lengkap fullname,
+                f.isi_feedback content,
+                f.tanggal datetime,
+                u.id_avatar avatarId
                 FROM 
                 feedback f
             INNER JOIN
-                users u
+                user u
                 ON
-                u.id = f.user_id
-            ORDER BY f.datetime DESC
+                u.id_user = f.id_user
+            ORDER BY f.tanggal DESC
         ";
         $response = Database::query($sql);
         if (isset($response->data)) {
@@ -110,7 +110,7 @@ class Feedback
         $user = $user->data[0]["id"];
         $sql = "
             INSERT INTO 
-                feedback(user_id, content) 
+                feedback(id_user, isi_feedback) 
             VALUES 
                 (
                     '$user',
@@ -138,7 +138,7 @@ class Feedback
                 DELETE FROM
                     feedback
                 WHERE 
-                    id = '$id'
+                    id_feedback = '$id'
             ";
             $response = Database::query($sql);
             $response->statusCode = 200;

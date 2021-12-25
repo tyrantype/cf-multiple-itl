@@ -49,6 +49,10 @@ table td:last-child {
   display: none;
 }
 
+.navbar-toggler {
+  display: none;
+} 
+
 body {
     overflow-x: hidden;
   }
