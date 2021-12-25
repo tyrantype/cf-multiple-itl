@@ -66,6 +66,10 @@ table td:last-child {
   overflow-x: scroll;
   padding-bottom: 0.8rem;
 }
+
+.avatar.avatar-md {
+  display: none;
+}
 }
 
 .dataTable-bottom .dataTable-info {
