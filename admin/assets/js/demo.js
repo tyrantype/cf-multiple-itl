@@ -48,7 +48,7 @@ function refreshInterestsTable(data, filter) {
         perPageSelect: [7, 14, 21],
         perPage: 7,
         columns: [
-            { select: 1, hidden: true },
+            { select: [0,1], hidden: true },
             {
                 select: 3,
                 render: function (data, cell, row) {

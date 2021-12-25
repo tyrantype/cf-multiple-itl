@@ -21,6 +21,57 @@ img, svg {
   vertical-align: middle;
 }
 
+.dataTable-dropdown label {
+  display: none !important;
+}
+@media screen and (max-width: 600px) {
+.dataTable-search input {
+  width: 120px;
+}
+table thead {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+table tr {
+  border-bottom: 3px solid #ddd;
+  display: block;
+  margin-bottom: .625em;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  display: block;
+}
+
+table td::before {
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table td:last-child {
+  border-bottom: 0;
+}
+
+.dataTable-bottom ul.pagination {
+  float: none !important;
+  overflow-x: scroll;
+  padding-bottom: 0.8rem;
+}
+}
+
+.dataTable-bottom .dataTable-info {
+  display: none;
+}
+
 /**
 * Template Name: Techie - v4.3.0
 * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
@@ -210,7 +261,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3px;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   font-weight: 600;

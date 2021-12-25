@@ -323,7 +323,7 @@ require_once "../api/classes/Users.php";
         <h2>Tes Minat dan Bakat</h2>
       </div>
 
-      <div class="card ms-5 me-5 p-4">
+      <div class="card ms-3 me-3 py-4 px-3">
         <h6>Silahkan pilih tingkat kepercayaan yang sesuai dengan diri anda</h6>
         <div class="card-body">
           <form id="demoForm">
