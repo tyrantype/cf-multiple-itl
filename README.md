@@ -1,2 +1,2 @@
 # CERTAINTY FACTOR
-**Sistem Pakar Untuk Mengidentifikasi Kepribadian Siswa Menggunakan Metode Certainty Factor Dalam Mendukung Pendekatan Guru**
+**Sistem Pakar Untuk Mengidentifikasi Minat dan Bakat Siswa Menggunakan Metode Certainty Factor**
