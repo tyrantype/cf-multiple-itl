@@ -79,7 +79,6 @@ function initPopoverEvent() {
     let popoverTriggerList = [].slice.call(document.querySelectorAll('.popover-option'))
     let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl, {
-            trigger: "keydown",
             placement: "bottom",
             html: true,
             sanitize: false,
@@ -95,6 +94,11 @@ function initPopoverEvent() {
         el.addEventListener("click", evt => {
             initDeleteTypeEvent();
         })
+    });
+    $('body').on('click', function(e) {
+        if (typeof $(e.target).data('bs-original-title') == 'undefined' && !$(e.target).parents().is('.popover.in')) {
+            $('[data-bs-original-title]').popover('hide');
+        }
     });
 }
 
