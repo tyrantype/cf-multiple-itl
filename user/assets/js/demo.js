@@ -158,6 +158,7 @@ function submitCertaintyFactor(save) {
 
                 formula.innerHTML = "";
                 selectedRulesElement.innerHTML = "";
+                otherPossibilities.innerHTML = "";
 
 
                 name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`;
@@ -166,7 +167,6 @@ function submitCertaintyFactor(save) {
                 fields.textContent = data[0].fields;
 
                 if (data.length > 1) {
-                    otherPossibilities.innerHTML = "";
                     for (let i = 1; i < data.length; i++) {
                         const li = document.createElement("li");
                         li.textContent = `${data[i].name} (${(data[i].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`
