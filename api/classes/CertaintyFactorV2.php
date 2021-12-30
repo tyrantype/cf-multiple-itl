@@ -62,13 +62,25 @@ class CertaintyFactorV2 {
 
     private static function groupInterestsByType($userInterests): array {
         $temp = [];
-        foreach ($userInterests as $userInterest) {
-            $temp[$userInterest["typeId"]] = [
-                "name" => $userInterest["typeName"],
-                "detail" => $userInterest["typeDetail"],
-                "advice" => $userInterest["typeAdvice"],
-                "fields" => $userInterest["typeFields"]
+        $sql = "
+            SELECT
+                id_tipe typeId,
+                name typeName,
+                info typeDetail,
+                saran typeAdvice,
+                bidang_pekerjaan typeFields
+            FROM
+                tipe_minat_bakat
+            ";
+        $data = Database::query($sql)->data;
+        foreach ($data as $elm) {
+            $temp[$elm["typeId"]] = [
+                "name" => $elm["typeName"],
+                "detail" => $elm["typeDetail"],
+                "advice" => $elm["typeAdvice"],
+                "fields" => $elm["typeFields"]
             ];
+
         }
 
         $types = [];
@@ -108,6 +120,7 @@ class CertaintyFactorV2 {
 
             $types[] = $tempType;
         }
+
         return $types;
     }
 
@@ -115,7 +128,12 @@ class CertaintyFactorV2 {
         $result = [];
         foreach ($types as $type) {
             $combination = [];
-            if (count($type["rules"]) <= 1) {
+            if (count($type["rules"]) == 0) {
+                $combination[] = [
+                    "formula" => "-",
+                    "cf" => 0
+                ];
+            } elseif (count($type["rules"]) <= 1) {
                 $combination[] = [
                     "formula" => "-",
                     "cf" => floatval($type["rules"][0]["cf"])
@@ -148,6 +166,7 @@ class CertaintyFactorV2 {
             $type["cf"] = end($combination)["cf"];
             $result[] = $type;
         }
+        
         return $result;
     }
 
