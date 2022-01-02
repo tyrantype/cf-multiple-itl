@@ -130,7 +130,7 @@ $account = Users::get($_SESSION["username"]);
                             </a>
                         </li>
 
-                        <li class="sidebar-item sidebar-item-setting ">
+                        <!-- <li class="sidebar-item sidebar-item-setting ">
                             <a href="?setting" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Profil</span>
@@ -142,7 +142,7 @@ $account = Users::get($_SESSION["username"]);
                                 <i class="bi bi-box-arrow-left"></i>
                                 <span>Keluar</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="sidebar-item sidebar-item-<?= $page ?> d-none">
                         </li>
@@ -184,6 +184,17 @@ $account = Users::get($_SESSION["username"]);
                                         </div>
                                     </div>
                                 </a>
+                                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+                                    <!-- <li>
+                                        <h6 class="dropdown-header">Halo, Yusuf!</h6>
+                                    </li> -->
+                                    <li><a class="dropdown-item" href="?setting"><i class="icon-mid bi bi-person me-2"></i> Profil</a></li>
+                                    <!-- <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
+                                            Pengaturan</a></li>
+                                        <hr class="dropdown-divider">
+                                    </li> -->
+                                    <li><a class="dropdown-item" href="?logout"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
