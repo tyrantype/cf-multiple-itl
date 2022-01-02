@@ -207,7 +207,7 @@ function initDetailHistory() {
 
                 for (let i = 0; i < data[0].pictures.length; i++) {
                     const clone = createElementFromHTML(`
-                        <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="${i}>
+                        <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="${i}">
                     `);
                     const clone2 = createElementFromHTML(`
                         <div class="carousel-item" data-bs-interval="2000">

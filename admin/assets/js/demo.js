@@ -309,7 +309,7 @@ function initChangeInterest() {
         });
     });
     function checkData() {
-        if (tempData.length < 5) {
+        if (tempData.length < 7) {
             document.querySelector("#demoForm button[type=submit]").disabled = true;
         } else {
             document.querySelector("#demoForm button[type=submit]").disabled = false;
