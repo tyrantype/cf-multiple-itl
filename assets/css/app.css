@@ -94,6 +94,11 @@ body {
   .ql-editor {
     min-height: 100px;
   }
+
+  button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
   
   .alert {
     border: none;

@@ -76,6 +76,11 @@ table td:last-child {
   display: none;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
 /**
 * Template Name: Techie - v4.3.0
 * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/

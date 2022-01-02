@@ -314,8 +314,19 @@ function initChangeInterest() {
                     tempData = tempData.filter(item => item.id !== id);
                 }
             }
+            checkData();
         });
     });
+
+    function checkData() {
+        if (tempData.length < 5) {
+            document.querySelector("#demoForm button[type=submit]").disabled = true;
+        } else {
+            document.querySelector("#demoForm button[type=submit]").disabled = false;
+        }
+    }
+
+    checkData();
 }
 
 function initClearInterest() {
