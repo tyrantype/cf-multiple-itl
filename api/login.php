@@ -10,18 +10,26 @@
         if ($data->username === $superuser->username) {
             if (password_verify($data->password, $superuser->password)) {
                 $_SESSION["username"] = $superuser->username;
-                echo '{"loginStatus": "success"}';
+                echo <<<HEREDOC
+                    {"loginStatus": "success", "message": "Berhasil masuk"}
+                HEREDOC;
             } else {
-                echo '{"loginStatus": "failed"}';
+                echo <<<HEREDOC
+                    {"loginStatus": "failed", "message": "Username atau password salah"}
+                HEREDOC;
             }
         } else {
             $response = Users::login($data->username, $data->password);
             if ($response->statusCode === 200) {
                 $_SESSION["username"] = $data->username;
                 Users::updateLastLogin($data->username);
-                echo '{"loginStatus": "success"}';
+                echo <<<HEREDOC
+                    {"loginStatus": "success", "message": "$response->message"}
+                HEREDOC;
             } else {
-                echo '{"loginStatus": "failed"}';
+                echo <<<HEREDOC
+                    {"loginStatus": "failed", "message": "$response->message"}
+                HEREDOC;
             }
         }
     }

@@ -11,7 +11,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             if ($_GET["view"] == "single") {
                 $response = Users::get($_GET["username"]);
             } else {
-                $response = Users::getAll();
+                if (isset($_GET["approval"])) {
+                    if ($_GET["approval"]) {
+                        $response = Users::getAllByApproval($_GET["approval"]);
+                    } else {
+                        $response = Users::getAllByApproval($_GET["approval"]);
+                    }
+                } else {
+                    $response = Users::getAll();
+                }
             }
         } else {
             $response = Users::badRequest();

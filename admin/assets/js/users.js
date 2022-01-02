@@ -1,9 +1,11 @@
 // Add simple datatable +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 let usersDataTable;
+let approvalDataTable;
 refreshUsersDataTable();
+refreshApprovalDataTable();
 
 function refreshUsersDataTable() {
-    fetch("../api/users")
+    fetch("../api/users?approval=Ya")
         .then(response => response.json())
         .then(result => {
             let usersTable = document.querySelector('#usersTable');
@@ -14,7 +16,7 @@ function refreshUsersDataTable() {
                 usersDataTable = undefined;
             }
             let obj = {
-                headings: ["No", "id", "Nama Lengkap", "NIS", "Jenis Kelamin", "Tanggal Lahir", "Alamat", "Terakhir Login", "Hak Akses", "avatarId", "Opsi"],
+                headings: ["No", "id", "Nama Lengkap", "NIS", "Jenis Kelamin", "Tanggal Lahir", "Alamat", "Terakhir Login", "Hak Akses", "avatarId", "Terverifikasi", "Opsi"],
                 data: []
             };
 
@@ -49,9 +51,9 @@ function refreshUsersDataTable() {
                             `;
                         }
                     },
-                    { select: [1, 9], hidden: true },
+                    { select: [1, 9, 10], hidden: true },
                     {
-                        select: 10,
+                        select: 11,
                         render: function (data, cell, row) {
                             return `
                                 <td>
@@ -70,6 +72,159 @@ function refreshUsersDataTable() {
             usersDataTable.on('datatable.update', initOptionButton);
             usersDataTable.on('datatable.page', initOptionButton);
         });
+}
+
+function refreshApprovalDataTable() {
+    fetch("../api/users?approval=Tidak")
+        .then(response => response.json())
+        .then(result => {
+            let approvalTable = document.querySelector('#approvalTable');
+            approvalTable.innerHTML = "";
+
+            if (typeof approvalDataTable !== "undefined") {
+                approvalDataTable.destroy();
+                approvalDataTable = undefined;
+            }
+            let obj = {
+                headings: ["No", "id", "Nama Lengkap", "NIS", "Jenis Kelamin", "Tanggal Lahir", "Alamat", "Terakhir Login", "Hak Akses", "avatarId", "Terverifikasi", "Opsi"],
+                data: []
+            };
+
+            for (let i = 0; i < result.data.length; i++) {
+                obj.data[i] = [i + 1];
+                for (let p in result.data[i]) {
+                    if (result.data[i].hasOwnProperty(p)) {
+                        obj.data[i].push(result.data[i][p]);
+                    }
+                }
+                obj.data[i].push("");
+            }
+
+            for (data of obj.data) {
+                if (data[7] !== null) {
+                    data[7] = dayjs(data[7]).fromNow();
+                } else {
+                    data[7] = "-";
+                }
+            }
+
+            approvalDataTable = new simpleDatatables.DataTable(approvalTable, {
+                columns: [
+                    {
+                        select: 2,
+                        render: function (data, cell, row) {
+                            return `
+                            <div class="avatar avatar-sm me-2">
+                                <img src="../assets/images/faces/${row.children.item(9).innerText}.jpg">
+                                <span class="ms-2">${data}</span>
+                            </div>
+                            `;
+                        }
+                    },
+                    { select: [1, 8, 7, 9, 10], hidden: true },
+                    {
+                        select: 11,
+                        render: function (data, cell, row) {
+                            return `
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-light-success d-grid place-items-center me-1 terimaButton" data-bs-username="${row.children.item(3).innerText}" data-bs-fullname="${row.children.item(2).innerText}">Terima</button>
+                                        <button class="btn btn-light-danger d-grid place-items-center me-1 tolakButton" data-bs-username="${row.children.item(3).innerText}" data-bs-fullname="${row.children.item(2).innerText}">Tolak</button>
+                                    </div>
+                                </td>
+                            `;
+                        }
+                    }
+                ],
+                data: obj
+            });
+            approvalDataTable.on('datatable.init', initApprovalButtons);
+            approvalDataTable.on('datatable.update', initApprovalButtons);
+            approvalDataTable.on('datatable.page', initApprovalButtons);
+        });
+}
+
+function initApprovalButtons() {
+    initTerimaButton();
+    initTolakButton();
+}
+
+function initTerimaButton() {
+    document.querySelectorAll(".terimaButton").forEach(e => {
+        e.addEventListener("click", evt => {
+            const fullname = evt.currentTarget.getAttribute("data-bs-fullname");
+            const username = evt.currentTarget.getAttribute("data-bs-username");
+            Swal.fire({
+                title: `Yakin menerima ${fullname}`,
+                showCancelButton: true,
+                confirmButtonText: 'Ya ',
+                cancelButtonText: 'Batal',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    return fetch(`../api/terima-user.php?username=${username}`, {
+                        method: "GET",
+                        headers: {
+                            "ContentType": "application/json;charset=utf-8"
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .then(result => {
+                        showToast(result.statusCode, result.message);
+                        refreshUsersDataTable();
+                        refreshApprovalDataTable();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        });
+    });
+}
+
+function initTolakButton() {
+    document.querySelectorAll(".tolakButton").forEach(e => {
+        e.addEventListener("click", evt => {
+            const fullname = evt.currentTarget.getAttribute("data-bs-fullname");
+            const username = evt.currentTarget.getAttribute("data-bs-username");
+            Swal.fire({
+                title: 'Yakin menolak ' + fullname,
+                showCancelButton: true,
+                confirmButtonText: 'Ya ',
+                cancelButtonText: 'Batal',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    return fetch(`../api/tolak-user.php?username=${username}`, {
+                        method: "GET",
+                        headers: {
+                            "ContentType": "application/json;charset=utf-8"
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .then(result => {
+                        showToast(result.statusCode, result.message);
+                        refreshUsersDataTable();
+                        refreshApprovalDataTable();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        });
+    });
 }
 
 function initOptionButton() {
@@ -538,6 +693,7 @@ document.querySelector("#editUserModal").addEventListener("show.bs.modal", evt =
             editForm["address"].value = result.data[0]["Alamat"]
             editForm["privilege"].value = result.data[0]["Hak Akses"]
             editForm["avatarId"].value = result.data[0]["avatarId"]
+            editForm["terverifikasi"].value = result.data[0]["terverifikasi"]
         })
 
 });

@@ -486,55 +486,6 @@ require_once "../api/classes/Users.php";
               </div>
             </div>
           </div>
-          <script>
-            const form = document.forms["loginForm"];
-
-            form.addEventListener("submit", evt => {
-              evt.preventDefault();
-
-              const formData = new FormData(form);
-              const data = JSON.stringify(Object.fromEntries(formData))
-
-              fetch("../api/login.php", {
-                  method: "POST",
-                  headers: {
-                    "ContentType": "application/json;charset=utf-8"
-                  },
-                  body: data
-                })
-                .then(response => response.json())
-                .then(result => {
-                  if (result.loginStatus === "success") {
-                      document.body.appendChild(createElementFromHTML(`<div id="preloader"></div>`))
-                      if (tempData.length === 0) {
-                        Toastify({
-                            text: "Berhasil masuk",
-                            duration: 500,
-                            backgroundColor: "#5C7AEA"
-                        }).showToast();
-                        setTimeout(() => {
-                          location.reload()
-                        }, 500)
-                      } else {
-                        Toastify({
-                            text: "Berhasil masuk dan menyimpan hasil tes",
-                            duration: 1500,
-                            backgroundColor: "#5C7AEA"
-                        }).showToast();
-                        setTimeout(() => {
-                          location.reload()
-                        }, 1500)
-                      }
-                  } else {
-                    Toastify({
-                            text: "NIS atau password salah",
-                            duration: 1500,
-                            backgroundColor: "linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113))"
-                    }).showToast();
-                  }
-                });
-            });
-          </script>
 
           <!-- Modal  Register -->
           <div class="modal fade" id="registerModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -545,7 +496,7 @@ require_once "../api/classes/Users.php";
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body mb-0">
-                  <form id="registerForm">
+                  <form class="form form-vertical" id="registerForm">
                     <label>Nama Lengkap</label>
                     <div class="form-group position-relative has-icon-left mb-3">
                       <input type="text" class="form-control form-control-xl" name="fullName" placeholder="Nama Lengkap" required>
@@ -630,7 +581,7 @@ require_once "../api/classes/Users.php";
                         <span>Sudah mempunyai akun? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Masuk</a></span>
                       </div>
                       <div class="d-flex">
-                        <button class="btn btn-primary btn-block shadow-lg">Daftar</button>
+                        <button type="submit" class="btn btn-primary me-1 mb-1">Daftar</button>
                       </div>
                     </div>
 
@@ -727,6 +678,106 @@ require_once "../api/classes/Users.php";
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/demo.js"></script>
+
+  <script>
+    const loginForm = document.forms["loginForm"];
+    loginForm.addEventListener("submit", evt => {
+      evt.preventDefault();
+
+      const formData = new FormData(loginForm);
+      const data = JSON.stringify(Object.fromEntries(formData))
+
+      fetch("../api/login.php", {
+          method: "POST",
+          headers: {
+            "ContentType": "application/json;charset=utf-8"
+          },
+          body: data
+        })
+        .then(response => response.json())
+        .then(result => {
+          if (result.loginStatus === "success") {
+            document.body.appendChild(createElementFromHTML(`<div id="preloader"></div>`))
+            if (tempData.length === 0) {
+              Toastify({
+                text: result.message,
+                duration: 500,
+                backgroundColor: "#5C7AEA"
+              }).showToast();
+              setTimeout(() => {
+                location.reload()
+              }, 500)
+            } else {
+              Toastify({
+                text: result.message + " dan menyimpan hasil tes",
+                duration: 1500,
+                backgroundColor: "#5C7AEA"
+              }).showToast();
+              setTimeout(() => {
+                location.reload()
+              }, 1500)
+            }
+          } else {
+            Toastify({
+              text: result.message,
+              duration: 1500,
+              backgroundColor: "linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113))"
+            }).showToast();
+          }
+        });
+    });
+
+    const registerForm = document.forms["registerForm"];
+    registerForm.addEventListener("submit", evt => {
+      evt.preventDefault()
+
+      if (registerForm["password"].value !== registerForm["password2"].value) {
+        Swal.fire({
+          icon: 'error',
+          text: 'Password tidak sama'
+        });
+        return;
+      }
+
+      if (registerForm["avatarId"].value === "") {
+        Swal.fire({
+          icon: 'error',
+          text: 'Pilih salah satu avatar'
+        });
+        return;
+      }
+
+      const formData = new FormData(registerForm)
+      const data = JSON.stringify(Object.fromEntries(formData))
+
+      fetch("../api/register.php", {
+          method: "POST",
+          headers: {
+            "ContentType": "application/json;charset=utf-8"
+          },
+          body: data
+        })
+        .then(response => response.json())
+        .then(result => {
+          if (result.statusCode === 200) {
+            Swal.fire({
+              text: 'Berhasil membuat akun',
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ok'
+            }).then((result) => {
+               location.reload();
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              text: result.message
+            });
+          }
+        });
+    })
+  </script>
 </body>
 
 </html>

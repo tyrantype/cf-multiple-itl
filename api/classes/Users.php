@@ -16,7 +16,8 @@ class Users
                 address 'Alamat', 
                 last_login 'Terakhir Login',
                 privilege 'Hak Akses',
-                avatar_id 'avatarId'
+                avatar_id 'avatarId',
+                terverifikasi
             FROM 
                 users 
             WHERE 
@@ -47,7 +48,8 @@ class Users
                 address 'Alamat', 
                 last_login 'Terakhir Login',
                 privilege 'Hak Akses',
-                avatar_id 'avatarId'
+                avatar_id 'avatarId',
+                terverifikasi
             FROM 
                 users
         ";
@@ -65,6 +67,71 @@ class Users
         return $response;
     }
 
+    public static function getAllByApproval($approval): stdClass
+    {
+        $sql = "
+            SELECT 
+                id 'id', 
+                full_name 'Nama Lengkap',
+                username 'Username', 
+                gender 'Jenis Kelamin',
+                date_of_birth 'Tanggal Lahir',
+                address 'Alamat', 
+                last_login 'Terakhir Login',
+                privilege 'Hak Akses',
+                avatar_id 'avatarId',
+                terverifikasi
+            FROM 
+                users
+            WHERE
+                terverifikasi = '$approval'
+        ";
+        $response = Database::query($sql);
+        if (isset($response->data)) {
+            http_response_code(200);
+            $response->statusCode = 200;
+            $response->message = "Berhasil mendapatkan data user";
+        } else {
+            http_response_code(200);
+            $response->statusCode = 200;
+            $response->data = [];
+            $response->message = "Data user kosong";
+        }
+        return $response;
+    }
+
+    public static function terimaUser($username) {
+        $sql = "
+            UPDATE
+                users
+            SET
+                terverifikasi = 'Ya'
+            WHERE
+                username = '$username'
+
+        ";
+
+        $response = Database::query($sql);
+        $response->statusCode = 200;
+        $response->message = "Berhasil menerima pengguna";
+        http_response_code(200);
+        return $response;
+    }
+
+    public static function tolakUser($username) {
+        $sql = "
+            DELETE FROM
+                users
+            WHERE 
+                username = '$username'
+        ";
+        $response = Database::query($sql);
+        $response->statusCode = 200;
+        $response->message = "Berhasil menolak pengguna";
+        http_response_code(200);
+        return $response;
+    }
+
     public static function create($data): stdClass
     {
         $response = new stdClass();
@@ -73,9 +140,10 @@ class Users
             $newID = Users::getNewID();
             $hashedPassword = password_hash($data->password, PASSWORD_DEFAULT);
             if (!isset($data->privilege)) $data->privilege = "User";
+            if (!isset($data->terverifikasi)) $data->terverifikasi = "Tidak";
             $sql = "
             INSERT INTO 
-                users(id, username, password, full_name, gender, date_of_birth, address, privilege, avatar_id) 
+                users(id, username, password, full_name, gender, date_of_birth, address, privilege, avatar_id, terverifikasi) 
             VALUES 
                 (
                     '$newID', 
@@ -86,7 +154,8 @@ class Users
                     '$data->dateOfBirth',
                     '$data->address',
                     '$data->privilege',
-                    '$data->avatarId'
+                    '$data->avatarId',
+                    '$data->terverifikasi'
                 )
         ";
             $response = Database::query($sql);
@@ -161,7 +230,8 @@ class Users
                     date_of_birth = '$data->dateOfBirth',
                     address = '$data->address',
                     privilege = '$data->privilege',
-                    avatar_id = '$data->avatarId'
+                    avatar_id = '$data->avatarId',
+                    terverifikasi = '$data->terverifikasi'
                 WHERE
                     id = '". $userData->data[0]["id"] ."'
 
@@ -252,7 +322,8 @@ class Users
         $sql = "
             SELECT 
                 password,
-                privilege
+                privilege,
+                terverifikasi
             FROM 
                 users 
             WHERE 
@@ -261,18 +332,24 @@ class Users
         $response = Database::query($sql);
         if (isset($response->data)) {
             if (password_verify($password, $response->data[0]["password"])) {
-                http_response_code(200);
-                $response->statusCode = 200;
-                $response->message = "Login berhasil";
+                if ($response->data[0]["terverifikasi"] == 'Ya') {
+                    http_response_code(200);
+                    $response->statusCode = 200;
+                    $response->message = "Login berhasil";
+                } else {
+                    http_response_code(404);
+                    $response->statusCode = 404;
+                    $response->message = "Akun belum disetujui";
+                }
             } else {
                 http_response_code(404);
                 $response->statusCode = 404;
-                $response->message = "Login gagal";
+                $response->message = "Username atau password salah";
             }
         } else {
             http_response_code(404);
             $response->statusCode = 404;
-            $response->message = "Login gagal";
+            $response->message = "Username atau password salah";
         }
         return $response;
     }

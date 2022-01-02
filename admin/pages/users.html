@@ -21,12 +21,30 @@
 
 <div class="page-content">
     <div class="card">
-        <div class="card-header">
-            <button class="btn btn-light-primary" id="addUserButton">Tambah data</button>
-        </div>
         <div class="card-body">
-            <table class='table table-hover' id="usersTable">
-            </table>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="pengguna-tab" data-bs-toggle="tab" href="#pengguna" role="tab" aria-controls="pengguna" aria-selected="true">Pengguna</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="approval-tab" data-bs-toggle="tab" href="#approval" role="tab" aria-controls="approval" aria-selected="false">Menunggu persetujuan</a>
+                    </li>
+                    
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pengguna" role="tabpanel" aria-labelledby="pengguna-tab">
+                        <div class="mb-3"></div>
+                        <button class="btn btn-light-primary" id="addUserButton">Tambah data</button>
+                        <table class='table table-hover' id="usersTable">
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="approval" role="tabpanel" aria-labelledby="approval-tab">
+                        <div class="mb-3"></div>
+                        <table class='table table-hover' id="approvalTable">
+                        </table>
+                    </div>
+                    
+                </div>
         </div>
     </div>
 </div>
@@ -133,6 +151,22 @@
                                                     </select>
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-shield-lock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 d-none">
+                                            <div class="form-group has-icon-left">
+                                                <label>Terverifikasi</label>
+                                                <div class="position-relative">
+                                                    <select class="form-control" name="terverifikasi" required>
+                                                        <option value="" disabled selected hidden>Terverifikasi</option>
+                                                        <option value="Ya">Ya</option>
+                                                        <option value="Tidak">Tidak</option>
+                                                    </select>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-check-circle"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -285,6 +319,22 @@
                                                     </select>
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-shield-lock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 d-none">
+                                            <div class="form-group has-icon-left">
+                                                <label>Terverifikasi</label>
+                                                <div class="position-relative">
+                                                    <select class="form-control" name="terverifikasi" required>
+                                                        <option value="" disabled selected hidden>Terverifikasi</option>
+                                                        <option value="Ya">Ya</option>
+                                                        <option value="Tidak">Tidak</option>
+                                                    </select>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-check-circle"></i>
                                                     </div>
                                                 </div>
                                             </div>
