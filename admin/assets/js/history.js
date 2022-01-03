@@ -136,7 +136,7 @@ function initDetailHistory() {
                 selectedRulesElement.innerHTML = "";
 
 
-                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent"})})`;
+                name.textContent = `${data[0].name} (${(data[0].cf).toLocaleString("en", {style: "percent", maximumSignificantDigits: 3})})`;
                 detail.textContent = data[0].detail;
                 advice.textContent = data[0].advice;
                 fields.textContent = data[0].fields;
