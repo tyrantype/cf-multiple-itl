@@ -130,7 +130,7 @@ $account = Users::get($_SESSION["username"]);
                             </a>
                         </li>
 
-                        <!-- <li class="sidebar-item sidebar-item-setting ">
+                        <li class="sidebar-item sidebar-item-setting ">
                             <a href="?setting" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Profil</span>
@@ -142,7 +142,7 @@ $account = Users::get($_SESSION["username"]);
                                 <i class="bi bi-box-arrow-left"></i>
                                 <span>Keluar</span>
                             </a>
-                        </li> -->
+                        </li>
 
                         <li class="sidebar-item sidebar-item-<?= $page ?> d-none">
                         </li>
