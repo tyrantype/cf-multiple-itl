@@ -57,7 +57,7 @@ require_once "../api/classes/Users.php";
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
-          <li><a class="nav-link scrollto" href="#teori">Teori</a></li>
+          <li><a class="nav-link scrollto" href="#teori">Tentang</a></li>
           <li><a class="nav-link scrollto " href="#tipe">Tipe Minat Bakat</a></li>
           <li><a class="nav-link scrollto " href="#demo">Tes</a></li>
           <?php
@@ -124,7 +124,7 @@ require_once "../api/classes/Users.php";
     <div class="container-fluid" data-aos="fade-up">
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Certainty Factor</h1>
+          <h1>SISMULMIKAT</h1>
           <h2>Sistem Pakar Untuk Mendukung Mengidentifikasi Minat & Bakat Siswa Menggunakan Metode Certainty Factor
           </h2>
           <div><a href="#demo" class="btn-get-started scrollto">Tes Sekarang</a></div>
