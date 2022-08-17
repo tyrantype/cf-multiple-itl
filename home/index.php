@@ -399,14 +399,20 @@ require_once "../api/classes/Users.php";
                             <ul id="otherPossibilities">
                             </ul>
                           </div>
-                          <hr>
+                          <?php
+                            if (!isset($_SESSION["username"])) echo "<hr>";
+                          ?>
                           <div class="card-body p-0 d-flex justify-content-between">
                             <div class="d-flex my-auto" id="btnLoginOnResult">
                               <span>Masuk untuk menyimpan hasil tes</span>
                             </div>
+                            <?php
+                            if (!isset($_SESSION["username"])) {
+                            ?>
                             <div class="d-flex">
                               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Masuk</button>
                             </div>
+                            <?php } ?>
                           </div>
                         </div>
                       </div>
